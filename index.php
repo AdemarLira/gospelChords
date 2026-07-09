@@ -10,7 +10,7 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
-  <link href="assets/css/index1.css" rel="stylesheet">
+  <link href="assets/css/index.css" rel="stylesheet">
 </head>
 <body>
 
@@ -23,16 +23,21 @@
 <!-- HEADER SOCIAL __________________________________________________________________________-->
 <div class="header">
   <div class="navigation_social">
+    <a href="https://wa.me/5583998603238" target="_blank">
+      <i class="fab fa-whatsapp"></i>
+    </a>
     <a href="https://www.instagram.com/ademarlneto" target="_blank">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"> 
-        <path fill="#EDF1F7" d="..."></path>                        <!-- instagram svg -->
-      </svg>
+      <i class="fab fa-instagram"></i>
     </a>
-    <a href="https://wa.me/83998603238" target="_blank">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256">   <!-- whatsapp svg -->
-        <path fill="#ffffff" d="..."></path>
-      </svg>
+    <a href="https://www.youtube.com/@ademarlneto" target="_blank">
+      <i class="fab fa-youtube"></i>
     </a>
+     <a href="https://www.tiktok.com/@ademarliraneto" target="_blank">
+      <i class="fab fa-tiktok"></i> 
+    </a>
+    <!-- <a href="https://www.facebook.com/ademarliraneto" target="_blank">
+      <i class="fab fa-facebook"></i>
+    </a> -->
   </div>
 </div>
 <!--_________________________________________________________________________________________-->
