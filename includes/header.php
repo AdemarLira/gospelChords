@@ -19,10 +19,10 @@ $imagemPerfil = isset($_SESSION['img']) && !empty($_SESSION['img'])
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<link rel="icon" href="./img/logo_amarela.png">
+<link rel="icon" href="assets/img/logo_amarela.png">
 <script src="https://kit.fontawesome.com/328073035f.js" crossorigin="anonymous"></script>
 
-<link rel="stylesheet" href="css/dashboard.css">
+<link rel="stylesheet" href="assets/css/dashboard.css">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
 <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">

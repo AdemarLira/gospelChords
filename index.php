@@ -7,57 +7,45 @@
   <title>Gospel Chords</title>
 
   <link rel="icon" type="image/x-icon" href="./img/logo_amarela.png">
-
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
-
-  <link href="css/index1.css" rel="stylesheet">
+  <link href="assets/css/index1.css" rel="stylesheet">
 </head>
-
 <body>
 
-<!-- BACKGROUND -->
+<!-- BACKGROUND _____________________________________________________________________________-->
 <div id="background">
   <video loop autoplay muted>
-    <source src="./mp4/violao.mp4" type="video/mp4">
+    <source src="assets/mp4/violao.mp4" type="video/mp4">
   </video>
 </div>
-
-<!-- HEADER SOCIAL -->
+<!-- HEADER SOCIAL __________________________________________________________________________-->
 <div class="header">
   <div class="navigation_social">
-
     <a href="https://www.instagram.com/ademarlneto" target="_blank">
-      <!-- instagram svg -->
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
-        <path fill="#EDF1F7" d="..."></path>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"> 
+        <path fill="#EDF1F7" d="..."></path>                        <!-- instagram svg -->
       </svg>
     </a>
-
     <a href="https://wa.me/83998603238" target="_blank">
-      <!-- whatsapp svg -->
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256">   <!-- whatsapp svg -->
         <path fill="#ffffff" d="..."></path>
       </svg>
     </a>
-
   </div>
 </div>
+<!--_________________________________________________________________________________________-->
 
 <!-- CONTEÚDO PRINCIPAL -->
 <div class="pagina">
-
-  <!-- INFO -->
   <div class="coluna-infos">
     <div class="main_info">
 
       <p style="font-size: 25pt;">
         <strong>Bem-vindo ao Gospel Chord!</strong>
       </p>
-
       <p>Que você possa ser abençoado e abençoar vidas.</p>
-
       <p>Funcionalidades disponíveis:</p>
 
       <div class="container">
@@ -68,58 +56,49 @@
       <button class="verificar-planos" onclick="verificarPlanos()">
         Conheça nossos planos
       </button>
-
     </div>
   </div>
 
-  <!-- LOGIN -->
+  <!-- LOGIN _______________________________________________________________________-->
   <div class="coluna-formulario">
-
     <form class="form-login" action="api/login.php" method="POST">
-
       <h3 class="mb-4">Login</h3>
-
       <div class="mb-3">
         <label>E-mail</label>
-        <input type="email" class="form-control" name="email" required>
+        <input type="email" class="form-control" name="email" value="<?= isset($_GET['email']) ? htmlspecialchars($_GET['email']) : '' ?>" required>
       </div>
-
       <div class="mb-3">
         <label>Senha</label>
         <input type="password" class="form-control" name="senha" required>
       </div>
-
       <button type="submit" class="btn btn-primary w-100">
         Entrar
       </button>
-
       <div class="text-center mt-3">
         <a href="esqueci_senha.php">Esqueceu a senha?</a>
       </div>
-
       <div class="text-center mt-2">
         <a href="cadastrar_usuario.php">Criar conta</a>
       </div>
     </form>
   </div>
 </div>
+<!-- LOGIN _______________________________________________________________________-->
 
----
-
-#MODAL DE ERRO NO LOGIN
+<!--MODAL DE ERRO NO LOGIN________________________________________________________-->
 <div class="modal fade" id="modalErroLogin" tabindex="-1">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title">
 
-<?php 
-  if(isset($_GET['erro']) && $_GET['erro'] == 'logout'){
-      echo "Sessão encerrada";
-    }else{
-      echo "Erro no login";
-  }
-?>
+      <?php 
+        if(isset($_GET['erro']) && $_GET['erro'] == 'logout'){
+            echo "Sessão encerrada";
+          }else{
+            echo "Erro no login";
+        }
+      ?>
 
       </h5>
         <button class="btn-close" data-bs-dismiss="modal"></button>
@@ -166,7 +145,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 <?php endif; ?>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-<script src="js/functions.js"></script>
+<script src="assets/js/functions.js"></script>
 
 </body>
 </html>
