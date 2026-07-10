@@ -1,41 +1,199 @@
 <?php
-    include_once('conexao.php');
 
-    if ($_SERVER["REQUEST_METHOD"] === "POST") {
-      $nome = trim($_POST["nome"]);
-      $email = trim($_POST["email"]);
-      $senha = trim($_POST["senha"]);
-      $celular = trim($_POST["celular"]);
-      $cidade = trim($_POST["cidade"]);
-      $estado = trim($_POST["estado"]);
-  
-      $senhaCriptografada = password_hash($senha, PASSWORD_DEFAULT);
-  
-      // Upload da imagem
-      $diretorio = "../assets/";
-      $nomeArquivo = basename($_FILES["foto"]["name"]);
-      $caminhoCompleto = $diretorio . $nomeArquivo;
-  
-      if (move_uploaded_file($_FILES["foto"]["tmp_name"], $caminhoCompleto)) {
-          echo "Foto enviada com sucesso!<br>";
-      } else {
-          echo "Erro ao enviar a foto.<br>";
-          $caminhoCompleto = ""; // ou defina um valor padrão
-      }
-  
-      $sql = "INSERT INTO usuarios (nome, email, senha, celular, status, cidade, estado, tipo_cadastro, datahora_cadastro, img) 
-              VALUES ('$nome', '$email', '$senhaCriptografada', '$celular', 'ativo', '$cidade', '$estado', 'free', now(), '$caminhoCompleto')";
-  
-      if (mysqli_query($conn, $sql)) {
-        echo "<script>
-                alert('Usuário cadastrado com sucesso!');
-                window.location.href = '../index.html';
-            </script>";
-          exit;
-      } else {
-          echo "Erro ao cadastrar: " . mysqli_error($conn);
-      }
-  }  
+include_once("conexao.php");
+
+if ($_SERVER["REQUEST_METHOD"] !== "POST") {
+    exit("Acesso inválido.");
+}
+
+mysqli_begin_transaction($conn);
+
+try {
+
+    // ==========================
+    // Dados do formulário
+    // ==========================
+    $nome     = trim($_POST["nome"]);
+    $email    = trim($_POST["email"]);
+    $senha    = $_POST["senha"];
+    $celular  = trim($_POST["celular"]);
+    $cidade   = trim($_POST["cidade"]);
+    $estado   = trim($_POST["estado"]);
+    $plano    = (int) $_POST["plano"];
+
+    // ==========================
+    // Verifica se email existe
+    // ==========================
+
+    $sql = "SELECT id FROM usuarios WHERE email = ?";
+
+    $stmt = mysqli_prepare($conn, $sql);
+
+    mysqli_stmt_bind_param($stmt, "s", $email);
+
+    mysqli_stmt_execute($stmt);
+
+    mysqli_stmt_store_result($stmt);
+
+    if (mysqli_stmt_num_rows($stmt) > 0) {
+
+        throw new Exception("Este e-mail já está cadastrado.");
+
+    }
+
+    mysqli_stmt_close($stmt);
+
+    // ==========================
+    // Criptografar senha
+    // ==========================
+
+    $senhaHash = password_hash($senha, PASSWORD_DEFAULT);
+
+    // ==========================
+    // Upload da foto
+    // ==========================
+
+    $imagem = "assets/img/perfil/avatar.png";
+
+    if (
+        isset($_FILES["foto"]) &&
+        $_FILES["foto"]["error"] == 0
+    ) {
+
+        $diretorio = "../assets/img/perfil/";
+
+        if (!is_dir($diretorio)) {
+            mkdir($diretorio, 0777, true);
+        }
+
+        $extensao = pathinfo($_FILES["foto"]["name"], PATHINFO_EXTENSION);
+
+        $novoNome = uniqid() . "." . $extensao;
+
+        $destino = $diretorio . $novoNome;
+
+        if (move_uploaded_file($_FILES["foto"]["tmp_name"], $destino)) {
+
+						// Caminho salvo no banco
+						$imagem = "assets/img/perfil/" . $novoNome;
+
+				}
+
+    }
+
+    // ==========================
+    // Inserir usuário
+    // ==========================
+
+    $status = 1;
+    $tipoUsuario = "aluno";
+
+    $sql = "INSERT INTO usuarios
+    (
+        nome,
+        email,
+        senha,
+        celular,
+        cidade,
+        estado,
+        status,
+        tipo_usuario,
+        datahora_cadastro,
+        img
+    )
+    VALUES
+    (
+        ?,?,?,?,?,?,?,?,NOW(),?
+    )";
+
+    $stmt = mysqli_prepare($conn, $sql);
+
+    mysqli_stmt_bind_param(
+        $stmt,
+        "ssssssiss",
+        $nome,
+        $email,
+        $senhaHash,
+        $celular,
+        $cidade,
+        $estado,
+        $status,
+        $tipoUsuario,
+        $imagem
+    );
+
+    if (!mysqli_stmt_execute($stmt)) {
+
+        throw new Exception(mysqli_error($conn));
+
+    }
+
+    mysqli_stmt_close($stmt);
+
+    // ==========================
+    // ID do usuário criado
+    // ==========================
+
+    $idUsuario = mysqli_insert_id($conn);
+
+    // ==========================
+    // Criar assinatura
+    // ==========================
+
+    $statusAssinatura = "ativa";
+
+    $sql = "INSERT INTO assinaturas
+    (
+        id_usuario,
+        id_plano,
+        data_inicio,
+        status
+    )
+    VALUES
+    (
+        ?,?,NOW(),?
+    )";
+
+    $stmt = mysqli_prepare($conn, $sql);
+
+    mysqli_stmt_bind_param(
+        $stmt,
+        "iis",
+        $idUsuario,
+        $plano,
+        $statusAssinatura
+    );
+
+    if (!mysqli_stmt_execute($stmt)) {
+
+        throw new Exception(mysqli_error($conn));
+
+    }
+
+    mysqli_stmt_close($stmt);
+
+    // ==========================
+    // Finaliza
+    // ==========================
+
+    mysqli_commit($conn);
+
+    echo "<script>
+            alert('Cadastro realizado com sucesso!');
+            window.location.href='../index.php';
+          </script>";
+
+} catch (Exception $e) {
+
+    mysqli_rollback($conn);
+
+    echo "<script>
+            alert('".$e->getMessage()."');
+            history.back();
+          </script>";
+
+}
+
+mysqli_close($conn);
+
 ?>
-  
-<script src="js/functions.js"></script>  

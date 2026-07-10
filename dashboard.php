@@ -7,10 +7,9 @@
      exit();
    }
 
-  $imagemPerfil = isset($_SESSION['img']) && !empty($_SESSION['img']) 
-    ? 'assets/' . basename($_SESSION['img']) 
-    : 'assets/images.jpg';
-
+  $imagemPerfil = !empty($_SESSION['img'])
+      ? $_SESSION['img']
+      : 'assets/img/perfil/avatar.png';
 
 include("includes/header.php");
 include("includes/menu.php");
