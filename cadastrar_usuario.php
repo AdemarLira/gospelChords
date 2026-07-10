@@ -4,98 +4,116 @@ include_once("api/conexao.php");
 
 <!DOCTYPE html>
 <html lang="pt-br">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="assets/css/cadastro1.css">
-  <title>Cadastrar Usuário</title>
-</head>
-<body>
-    <div id="background">
-      <video loop autoplay muted>
-        <source src="mp4/cadastrar.mp4" type="video/mp4">
-      </video>
-    </div>
-<!-- CABEÇALHO -->
-      <div class="custom-container">
-        <div id="cabecalho">
-          <div id="conteudo-cabecalho">
-            <h1>Cadastrar usuário</h1>
-          </div>
-        </div>
-<!-- COLUNA DO FORMULÁRIO -->
-      <div class="coluna-formulario">
-        <div class="coluna-formulario">
-        <form class="form-login" action="api/cadastrarUsuario.php" method="POST" enctype="multipart/form-data" onsubmit="return validarFormulario();">
-            <div class="form-group">
-              <label for="nome">Nome</label>
-              <input type="text" id="nome" name="nome" placeholder="Digite seu nome">
-            </div>
-            <div class="form-group">
-              <label for="email">Email</label>
-              <input type="email" id="email" name="email" placeholder="Digite seu e-mail">
-            </div>
-            <div class="form-group">
-              <label for="senha">Senha</label>
-              <input type="password" id="senha" name="senha" placeholder="Digite sua senha">
-            </div>
-            <div class="form-group">
-              <label for="celular">Celular</label>
-              <input type="tel" id="celular" name="celular" maxlength="15" placeholder="(11) 91234-5678" required>
-            </div>
-            <div class="form-group">
-              <label for="cidade">Cidade</label>
-              <input type="text" id="cidade" name="cidade" placeholder="Digite sua cidade">
-            </div>
-            <div class="form-group">
-              <label for="estado">Estado</label>
-              <input type="text" id="estado" name="estado" placeholder="Digite seu estado">
-            </div>
-            <div class="form-group">
-              <label for="foto">Foto</label>
-              <input type="file" id="foto" name="foto" accept="image/*">
-            </div>
 
-            <div class="form-actions">
-              <button type="submit" class="custom-save-button">Salvar</button>
-              <button type="button" class="custom-cancel-button" onclick="voltarIndex()">Retornar</button>
-            </div>
-          </form>
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Criar conta | Gospel Chords</title>
+<link rel="stylesheet" href="assets/css/cadastro.css">
+</head>
+
+<body>
+
+<div class="background-logo"></div>
+
+<div class="pagina">
+  <header class="topo">
+
+    <img src="assets/img/logo_amarela.png" class="logo">
+    <a href="index.php" class="btn-voltar">
+      Voltar
+    </a>
+
+  </header>
+
+<div class="cadastro-box">
+
+  <div class="titulo">
+
+    <h1>Crie sua conta</h1>
+      <p>
+       Faça parte da comunidade Gospel Chords 🎸
+      </p>
+  </div>
+
+  <form class="form-cadastro" action="api/cadastrarUsuario.php" method="POST" enctype="multipart/form-data">
+
+
+
+  <div class="campos">
+
+    <div class="campo">
+      <label>
+        Nome
+      </label>
+      <input type="text" name="nome" placeholder="Digite seu nome" required>
+    </div>
+
+      <div class="campo">
+        <label>
+        Email
+        </label>
+        <input type="email" name="email" placeholder="Digite seu e-mail" required>
+      </div>
+
+      <div class="campo">
+        <label>
+        Senha
+        </label>
+        <input 
+          type="password" name="senha" placeholder="Crie uma senha" required>
+      </div>
+
+    <div class="campo">
+      <label>
+      Celular
+      </label>
+      <input 
+        type="tel" id="celular" name="celular" maxlength="15" placeholder="(83) 99999-9999" required>
+      </div>
+
+      <div class="campo">
+        <label>
+          Cidade
+        </label>
+        <input type="text" name="cidade" placeholder="Sua cidade">
+      </div>
+
+
+
+    <div class="campo">
+      <label>
+        Estado
+      </label>
+        <input type="text" name="estado" placeholder="Seu estado">
+      </div>
+
+
+      <div class="campo foto">
+          <label>
+          Foto de perfil
+          </label>
+
+          <input type="file" name="foto"accept="image/*">
         </div>
       </div>
-    <script src="js/functions.js"></script>
-    <script>
-      document.addEventListener('DOMContentLoaded', function () {
-        const celularInput = document.getElementById('celular');
 
-        celularInput.addEventListener('input', function (e) {
-          let valor = e.target.value.replace(/\D/g, ''); // só números
+    <div class="acoes">
+        <button class="btn-criar">
+          Criar conta
+        </button>
 
-          if (valor.length > 11) valor = valor.slice(0, 11);
+          <a href="index.php" class="btn-cancelar">
+            Cancelar
+          </a>
+        </div>
+      </form>
+    </div>
+  </div>
 
-          let formatado = '';
-          if (valor.length > 0) {
-            formatado += '(' + valor.substring(0, 2);
-          }
-          if (valor.length >= 3) {
-            formatado += ') ' + valor.substring(2, 7);
-          }
-          if (valor.length >= 8) {
-            formatado += '-' + valor.substring(7, 11);
-          }
-          e.target.value = formatado;
-        });
+  <script src="js/functions.js"></script>
 
-        // Validação ao tentar enviar o formulário
-        const form = document.querySelector('.form-login');
-        form.addEventListener('submit', function (e) {
-          const celular = celularInput.value.replace(/\D/g, ''); // remove máscara
-          if (celular.length !== 11) {
-            alert('Por favor, insira um número de celular válido com DDD (ex: (11) 98765-4321)');
-            e.preventDefault(); // impede o envio
-          }
-        });
-      });
-    </script>
 </body>
 </html>
