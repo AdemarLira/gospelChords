@@ -19,8 +19,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $_SESSION['usuario_id'] = $usuario['id'];
             $_SESSION['usuario_email'] = $usuario['email'];
             $_SESSION['img'] = $usuario['img'];
-            header("Location: ../dashboard.php");
+            $_SESSION['tipo_usuario'] = $usuario['tipo_usuario'];
+
+            if ($usuario['tipo_usuario'] == 'admin') {
+                header("Location: ../admin/dashboard_adm.php");
+            } else {
+                header("Location: ../dashboard.php");
+            }
             exit();
+
         } else {
             header("Location: ../index.php?erro=senha&email=" . urlencode($email));
             exit();
