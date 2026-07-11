@@ -1,5 +1,7 @@
 <?php
-session_start();
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 
 if (!isset($_SESSION['usuario_id'])) {
     header("Location: ../index.php");
@@ -14,7 +16,6 @@ if ($_SESSION['tipo_usuario'] != 'admin') {
 
 <?php
   include_once("../api/conexao.php");
-  session_start();
   
    if (!isset($_SESSION['usuario_id'])) {
     header("Location: index.php?erro=naoautorizado");
@@ -25,8 +26,8 @@ if ($_SESSION['tipo_usuario'] != 'admin') {
       ? $_SESSION['img']
       : 'assets/img/perfil/avatar.png';
 
-include("../includes/header.php");
-include("../includes/menu.php");
+  include("../includes/header.php");
+  include("../includes/menu.php");
 ?>
     
 <!DOCTYPE html>
