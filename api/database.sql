@@ -89,3 +89,6 @@ ALTER TABLE `assinaturas`
   ADD CONSTRAINT `fk_assinatura_usuario` FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
+UPDATE usuarios
+SET status = 'ativo'
+WHERE id = 5;

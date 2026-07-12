@@ -4,7 +4,7 @@
 <nav class="navbar navbar-expand-lg custom-navbar" id="painel-navegacao">
     <div class="container-fluid">
 
-    <a class="navbar-brand" href="dashboard.php">
+    <a class="navbar-brand" href="dashboard_assinante.php">
       <img src="assets/img/logo_azul.png" height="40" alt="Logo Gospel Chords">
     </a>
 

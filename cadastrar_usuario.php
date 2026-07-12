@@ -73,20 +73,18 @@
 
     <div class="campo">
     <label>Escolha seu plano</label>
-      <div class="planos">
-        <label class="plano">
-          <input type="radio" name="plano" value="1" required>
-            <span>
-                Básico
-            </span>
-        </label>
+      <div class="mb-3">
+        <label class="form-label">Tipo de acesso</label>
 
-        <label class="plano">
-          <input type="radio" name="plano" value="2">
-            <span>
-                Curso Completo
-            </span>
-        </label>
+        <select name="tipo_usuario" class="form-select" required>
+
+            <option value="">Selecione</option>
+
+            <option name="tipo_usuario" value="aluno" >Curso Completo</option>
+     
+            <option name="tipo_usuario" value="assinante">Assinante (R$ 7,00/mês)</option>
+
+        </select>
       </div>
     </div>
 

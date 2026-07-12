@@ -2,23 +2,21 @@
 
 session_start();
 
-if (!isset($_SESSION['usuario_id'])) {
+	if (!isset($_SESSION['usuario_id'])) {
 
     header("Location: ../index.php");
     exit();
+	}	
 
-}
-
-if ($_SESSION['tipo_usuario'] != 'admin') {
+	if ($_SESSION['tipo_usuario'] != 'admin') {
 
     header("Location: ../index.php");
     exit();
+	}
 
-}
+	require_once(__DIR__ . "/../../api/conexao.php");
 
-require_once(__DIR__ . "/../../api/conexao.php");
-
-$imagemPerfil = !empty($_SESSION['img'])
+	$imagemPerfil = !empty($_SESSION['img'])
 
     ? $_SESSION['img']
 

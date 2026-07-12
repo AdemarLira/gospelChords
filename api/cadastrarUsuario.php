@@ -10,20 +10,33 @@ mysqli_begin_transaction($conn);
 
 try {
 
-    // ==========================
+  
     // Dados do formulário
-    // ==========================
     $nome     = trim($_POST["nome"]);
     $email    = trim($_POST["email"]);
     $senha    = $_POST["senha"];
     $celular  = trim($_POST["celular"]);
     $cidade   = trim($_POST["cidade"]);
     $estado   = trim($_POST["estado"]);
-    $plano    = (int) $_POST["plano"];
+    $tipoUsuario = $_POST["tipo_usuario"];
 
-    // ==========================
+    switch ($tipoUsuario) {
+
+    case "aluno":
+        $plano = 1;          // ID do plano Curso Completo
+        $status = "ativo";
+        break;
+
+    case "assinante":
+        $plano = 2;          // ID do plano Assinante
+        $status = "ativo";
+        break;
+
+    default:
+        throw new Exception("Tipo de usuário inválido.");
+}
+
     // Verifica se email existe
-    // ==========================
 
     $sql = "SELECT id FROM usuarios WHERE email = ?";
 
@@ -43,16 +56,10 @@ try {
 
     mysqli_stmt_close($stmt);
 
-    // ==========================
     // Criptografar senha
-    // ==========================
-
     $senhaHash = password_hash($senha, PASSWORD_DEFAULT);
 
-    // ==========================
     // Upload da foto
-    // ==========================
-
     $imagem = "assets/img/perfil/avatar.png";
 
     if (
@@ -67,27 +74,21 @@ try {
         }
 
         $extensao = pathinfo($_FILES["foto"]["name"], PATHINFO_EXTENSION);
-
         $novoNome = uniqid() . "." . $extensao;
-
         $destino = $diretorio . $novoNome;
 
         if (move_uploaded_file($_FILES["foto"]["tmp_name"], $destino)) {
 
 						// Caminho salvo no banco
 						$imagem = "assets/img/perfil/" . $novoNome;
-
 				}
-
     }
 
-    // ==========================
     // Inserir usuário
-    // ==========================
-
     $status = 1;
     $tipoUsuario = "aluno";
 
+    
     $sql = "INSERT INTO usuarios
     (
         nome,
@@ -110,7 +111,7 @@ try {
 
     mysqli_stmt_bind_param(
         $stmt,
-        "ssssssiss",
+        "sssssssss",
         $nome,
         $email,
         $senhaHash,
@@ -130,16 +131,10 @@ try {
 
     mysqli_stmt_close($stmt);
 
-    // ==========================
     // ID do usuário criado
-    // ==========================
-
     $idUsuario = mysqli_insert_id($conn);
 
-    // ==========================
     // Criar assinatura
-    // ==========================
-
     $statusAssinatura = "ativa";
 
     $sql = "INSERT INTO assinaturas
@@ -172,9 +167,8 @@ try {
 
     mysqli_stmt_close($stmt);
 
-    // ==========================
+   
     // Finaliza
-    // ==========================
 
     mysqli_commit($conn);
 

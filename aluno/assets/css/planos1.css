@@ -1,0 +1,185 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    background: #121212;
+    color: #fff;
+    font-family: Segoe UI, sans-serif;
+    position: relative;
+    overflow-x: hidden;
+}
+
+body::before{
+    content: "";
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 700px;
+    height: 700px;
+    background: url("../img/logo_amarela.png") no-repeat center;
+    background-size: contain;
+    opacity: 0.04;
+    z-index: -1;
+    pointer-events: none;
+}
+.texto-preco{
+    color: #afafafb4;
+    font-size: 17px;
+    font-weight: 500;
+    margin-top: -10px;
+}
+
+/* HERO */
+.hero{
+    position: relative;
+    overflow: hidden; /* importante */
+}
+
+.overlay{
+    z-index:2;
+}
+
+.container{
+    position:relative;
+    z-index:3;
+}
+
+
+.navbar-custom{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:30px 0;
+}
+
+.logo{
+    width: 90px !important;
+    height:auto;
+}
+
+.hero-content{
+    max-width:700px;
+    margin-top:120px;
+}
+
+.hero-content h1{
+    font-size:60px;
+    font-weight:bold;
+    margin-bottom:25px;
+}
+
+.hero-content p{
+    font-size:22px;
+    color:#d4d4d4;
+}
+
+.hero-content .btn{
+    border-radius:40px;
+    padding:15px 40px;
+    font-weight:bold;
+
+}
+
+/* PLANOS */
+.planos{
+    padding:100px 0;
+}
+
+.card-plano{
+    background:#181818;
+    border-radius:20px;
+    padding:40px;
+    transition:.4s;
+    height:100%;
+    border:1px solid #2a2a2a;
+}
+
+.card-plano:hover{
+    transform:translateY(-10px);
+    box-shadow:0 20px 50px rgba(255,193,7,.25);
+}
+
+.card-plano h5{
+    color:#ffc107;
+}
+
+.card-plano h2{
+    font-size:45px;
+    margin:20px 0;
+}
+
+.card-plano ul{
+    list-style:none;
+    padding:0;
+    margin:30px 0;
+}
+
+.card-plano li{
+    margin:18px 0;
+    font-size:18px;
+}
+
+.card-plano i{
+    color:#ffc107;
+    margin-right:10px;
+}
+
+.destaque{
+    border:2px solid #ffc107;
+    position:relative;
+}
+
+.tag{
+    position:absolute;
+    top:-15px;
+    right:30px;
+    background:#ffc107;
+    color:#000;
+    padding:8px 18px;
+    border-radius:30px;
+    font-weight:bold;
+}
+
+.btn{
+    border-radius:40px;
+    padding:14px;
+    font-weight:bold;
+}
+
+/* RESPONSIVO */
+@media(max-width:768px){
+
+    .hero-content{
+        text-align:center;
+    }
+
+    .hero-content h1{
+        font-size:38px;
+    }
+
+    .hero-content p{
+        font-size:18px;
+    }
+
+    .logo{
+        width:130px;
+    }
+
+}
+
+.btn-curso{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    font-weight: 600;
+}
+
+.btn-curso i{
+    font-size: 22px;
+    color:  #8f7013;   /* cinza quase preto */
+}
