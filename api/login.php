@@ -27,9 +27,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             if ($usuario['tipo_usuario'] == 'admin') {
                 header("Location: ../admin/dashboard_adm.php");
-            } else {
+            } elseif ($usuario['tipo_usuario'] == 'aluno') {
+                header("Location: ../aluno/dashboard_aluno.php");   
+            } elseif ($usuario['tipo_usuario'] == 'assinante') {
                 header("Location: ../assinante/dashboard_assinante.php");
-            }
+            } 
             exit();
 
         } else {

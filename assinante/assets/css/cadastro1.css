@@ -100,27 +100,64 @@ body{
 	gap:20px;
 	}
 
+.campo input,
+.campo select{
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 15px;
+    background: #fff;
+    outline: none;
+}
+
 .campo{
-	display:flex;
-	flex-direction:column;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
 }
 
 .campo label{
-	margin-bottom:8px;
-	font-weight:600;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #fff;
 }
 
-.campo input{
-	background:#242424;
-	border:1px solid #444;
-	padding:13px;
-	border-radius:10px;
-	color:white;
+.campo input,
+.campo select{
+    width: 100%;
+    background: #242424;
+    border: 1px solid #444;
+    padding: 13px;
+    border-radius: 10px;
+    color: #fff;
+    font-size: 15px;
+    font-family: inherit;
+    outline: none;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    box-sizing: border-box;
 }
 
-.campo input:focus{
-	outline:none;
-	border-color:#ffc107;
+.campo input:focus,
+.campo select:focus{
+    border-color: #FFD54A;
+}
+
+.linha{
+    display:flex;
+    gap:20px;
+    margin-bottom:20px;
+}
+
+.linha .campo{
+    flex:1;
+}
+
+.campo select option{
+    background: #242424;
+    color: #fff;
 }
 
 .foto{

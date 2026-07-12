@@ -18,21 +18,21 @@ try {
     $celular  = trim($_POST["celular"]);
     $cidade   = trim($_POST["cidade"]);
     $estado   = trim($_POST["estado"]);
-    $tipoUsuario = $_POST["tipo_usuario"];
+    $tipoUsuario = trim($_POST["tipo_usuario"]);
 
     switch ($tipoUsuario) {
 
     case "aluno":
-        $plano = 1;          // ID do plano Curso Completo
+        $plano = 1;      // Curso Completo
         $status = "ativo";
         break;
 
     case "assinante":
-        $plano = 2;          // ID do plano Assinante
+        $plano = 2;      // Plano Mensal
         $status = "ativo";
         break;
-
     default:
+
         throw new Exception("Tipo de usuário inválido.");
 }
 
@@ -85,8 +85,7 @@ try {
     }
 
     // Inserir usuário
-    $status = 1;
-    $tipoUsuario = "aluno";
+
 
     
     $sql = "INSERT INTO usuarios
