@@ -1,4 +1,4 @@
-# GospelChords
+<!-- # GospelChords
 Plataforma de cifras para o público cristão
 
 C:.
@@ -93,4 +93,4 @@ C:.
     └───includes
             footer.php
             header.php
-            menu.php
+            menu.php -->
