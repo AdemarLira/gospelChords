@@ -117,7 +117,6 @@
                 /^(\d{2})(\d{5})(\d{4}).*/,
                 "($1) $2-$3"
             );
-
         } else if (valor.length > 6) {
             valor = valor.replace(
                 /^(\d{2})(\d{4})(\d+).*/,
@@ -152,10 +151,10 @@
             estado.innerHTML = '<option value="">Selecione um estado</option>';
             estados.forEach(item => {
 
-                estado.innerHTML += `
-                    <option value="${item.sigla}">
-                        ${item.nome}
-                    </option>`;
+            estado.innerHTML += `
+                <option value="${item.sigla}">
+                    ${item.nome}
+                </option>`;
             });
           })
 

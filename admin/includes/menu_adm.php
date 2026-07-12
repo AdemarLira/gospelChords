@@ -1,3 +1,11 @@
+<?php
+  if (!empty($_SESSION['img']) && file_exists("../assets/img/perfil/" . $_SESSION['img'])) {
+      $imagemPerfil = "../assets/img/perfil/" . $_SESSION['img'];
+  } else {
+      $imagemPerfil = "../assets/img/images.jpg";
+  }
+?>
+
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <div class="container-fluid">
     <a class="navbar-brand" href="dashboard_adm.php">

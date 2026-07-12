@@ -22,20 +22,20 @@ try {
 
     switch ($tipoUsuario) {
 
-    case "aluno":
-        $plano = 1;      // Curso Completo
-        $status = "ativo";
-        break;
+        case "aluno":
+            $plano = 1;
+            break;
 
-    case "assinante":
-        $plano = 2;      // Plano Mensal
-        $status = "ativo";
-        break;
-    default:
+        case "assinante":
+            $plano = 2;
+            break;
 
-        throw new Exception("Tipo de usuário inválido.");
-}
+        default:
+            throw new Exception("Tipo de usuário inválido.");
+        }
 
+     $status = "pendente";
+     
     // Verifica se email existe
 
     $sql = "SELECT id FROM usuarios WHERE email = ?";
@@ -43,9 +43,7 @@ try {
     $stmt = mysqli_prepare($conn, $sql);
 
     mysqli_stmt_bind_param($stmt, "s", $email);
-
     mysqli_stmt_execute($stmt);
-
     mysqli_stmt_store_result($stmt);
 
     if (mysqli_stmt_num_rows($stmt) > 0) {
@@ -60,7 +58,7 @@ try {
     $senhaHash = password_hash($senha, PASSWORD_DEFAULT);
 
     // Upload da foto
-    $imagem = "assets/img/perfil/avatar.png";
+    $imagem = "avatar.png";
 
     if (
         isset($_FILES["foto"]) &&
@@ -80,7 +78,7 @@ try {
         if (move_uploaded_file($_FILES["foto"]["tmp_name"], $destino)) {
 
 						// Caminho salvo no banco
-						$imagem = "assets/img/perfil/" . $novoNome;
+						$imagem = $novoNome;
 				}
     }
 
