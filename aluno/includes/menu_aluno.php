@@ -1,5 +1,3 @@
-<html>
-<body>  
  
 <nav class="navbar navbar-expand-lg custom-navbar" id="painel-navegacao">
     <div class="container-fluid">
@@ -76,9 +74,5 @@
     </div>
   </div>
 </nav>
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-<script src="assets/js/functions.js"></script>
-
 </body>
 </html>
