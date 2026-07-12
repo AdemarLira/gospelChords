@@ -28,7 +28,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             if ($usuario['tipo_usuario'] == 'admin') {
                 header("Location: ../admin/dashboard_adm.php");
             } else {
-                header("Location: ../dashboard.php");
+                header("Location: ../assinante/dashboard.php");
             }
             exit();
 
@@ -37,7 +37,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             exit();
         }
     } else {
-        header("Location: index.php?erro=usuario");
+        header("Location: ../index.php?erro=usuario");
         exit();
     }
 }

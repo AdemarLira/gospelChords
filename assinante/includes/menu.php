@@ -5,7 +5,7 @@
     <div class="container-fluid">
 
     <a class="navbar-brand" href="dashboard.php">
-      <img src="img/logo_azul.png" height="40">
+      <img src="assets/img/logo_azul.png" height="40" alt="Logo Gospel Chords">
     </a>
 
     <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar">
@@ -65,7 +65,7 @@
               <hr class="dropdown-divider">
             </li>
             <li>
-              <a class="dropdown-item text-danger" href="logout.php">
+              <a class="dropdown-item text-danger" href="../api/logout.php">
                 <i class="bi bi-box-arrow-right"></i>
                   Sair
               </a>
@@ -78,7 +78,7 @@
 </nav>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-<script src="js/functions.js"></script>
+<script src="assets/js/functions.js"></script>
 
 </body>
 </html>

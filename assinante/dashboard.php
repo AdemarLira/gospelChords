@@ -1,5 +1,5 @@
 <?php
-  include_once("api/conexao.php");
+  include_once("../api/conexao.php");
   
   if (session_status() === PHP_SESSION_NONE) {
       session_start();

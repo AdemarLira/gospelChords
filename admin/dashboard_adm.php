@@ -12,10 +12,8 @@ if ($_SESSION['tipo_usuario'] != 'admin') {
     header("Location: ../dashboard.php");
     exit();
 }
-?>
 
-<?php
-  include_once("../api/conexao.php");
+ include_once(__DIR__ . "/../api/conexao.php");
   
    if (!isset($_SESSION['usuario_id'])) {
     header("Location: index.php?erro=naoautorizado");
@@ -25,9 +23,10 @@ if ($_SESSION['tipo_usuario'] != 'admin') {
   $imagemPerfil = !empty($_SESSION['img'])
       ? $_SESSION['img']
       : 'assets/img/perfil/avatar.png';
-
-  include("../includes/header.php");
-  include("../includes/menu.php");
+  
+include(__DIR__ . "/includes/header.php");
+include(__DIR__ . "/includes/menu.php");
+include(__DIR__ . "/includes/footer.php");
 ?>
     
 <!DOCTYPE html>
@@ -37,7 +36,7 @@ if ($_SESSION['tipo_usuario'] != 'admin') {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/x-icon" href="../assets/img/logo_amarela.png">
     <script src="https://kit.fontawesome.com/328073035f.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="../assets/css/dashboard_adm.css">
+    <link rel="stylesheet" href="assets/css/dashboard_adm1.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
   <title>Página inicial</title>
@@ -135,7 +134,7 @@ if ($_SESSION['tipo_usuario'] != 'admin') {
   </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-<script src="js/functions.js"></script>
+<script src="../assets/js/functions.js"></script>
 <script>
     document.addEventListener('DOMContentLoaded', (event) => {
       const checkbox = document.getElementById('checkbox');
@@ -181,6 +180,3 @@ if ($_SESSION['tipo_usuario'] != 'admin') {
 </script>
 </body>
 </html>
-<?php
-include("../includes/footer.php");
-?>
