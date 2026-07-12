@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <div class="container-fluid">
     <a class="navbar-brand" href="dashboard_adm.php">
-      <img src="assets/img/logo_azul.png" height="40">
+      <img src="assets/img/logo_amarela.png" height="40">
     </a>
 
     <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar">
