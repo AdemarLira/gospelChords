@@ -1,74 +1,53 @@
-<html>
-<body>  
- 
-<nav class="navbar navbar-expand-lg custom-navbar" id="painel-navegacao">
-    <div class="container-fluid">
-
-    <a class="navbar-brand" href="dashboard.php">
-      <img src="img/logo_azul.png" height="40">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="dashboard_adm.php">
+      <img src="assets/img/logo_azul.png" height="40">
     </a>
 
     <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar">
       <span class="navbar-toggler-icon"></span>
     </button>
 
-<div class="collapse navbar-collapse" id="navbar">
-
-<!-- TEMA -->
-  <div class="theme-switch-wrapper me-3">
-    <label class="theme-switch">
-      <input type="checkbox" id="checkbox">
-      <div class="slider round"></div>
-    </label>
-  </div>
-
-
-<!-- BUSCA -->
-    <form class="d-flex me-auto" id="pesquisa-musica">
-      <input class="form-control me-2" placeholder="Pesquisar música">
-      <button class="btn btn-outline-success"> <i class="fa-solid fa-magnifying-glass"></i></button>
-    </form>
-  
-    <button class="btn btn-outline-secondary me-3" data-bs-toggle="modal" data-bs-target="#modal-upload">Enviar cifra</button>
-    <button class="btn" id="header-botao-premium" onclick="verificarPlanos()">Premium <i class="bi bi-bookmark-star-fill"></i></button>
-
-      <ul class="navbar-nav align-items-center">
-        <li class="nav-item me-3">
-          <a href="#" id="btn-listas" class="nav-link">Minhas listas</a>
+    <div class="collapse navbar-collapse" id="navbar">
+      <ul class="navbar-nav me-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="dashboard_adm.php"> Dashboard</a>
         </li>
-
-      <li class="nav-item dropdown">
-        <a class="perfil-btn dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-          <img src="<?php echo htmlspecialchars($imagemPerfil); ?>" class="foto-perfil" alt="Perfil">
-        </a>
-
-          <ul class="dropdown-menu dropdown-menu-end shadow">
+        <li class="nav-item">
+          <a class="nav-link" href="alunos.php">Alunos</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="cursos.php">Cursos</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="modulos.php">Módulos</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="aulas.php">Aulas</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="cifras.php">Cifras</a>
+        </li>
+          <li class="nav-item">
+            <a class="nav-link" href="financeiro.php">Financeiro</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="relatorios.php">Relatórios</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="configuracoes.php">Configurações</a>
+          </li>
+      </ul>
+        <ul class="navbar-nav">
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#"> 
+              <img src="<?= htmlspecialchars($imagemPerfil); ?>" class="rounded-circle" width="40" height="40"></a>
+          <ul class="dropdown-menu dropdown-menu-end">
             <li>
-              <a class="dropdown-item" href="meu_perfil.php"> 
-                <i class="bi bi-person"></i>
-                  Meu perfil
-              </a>
-            </li>
+              <a class="dropdown-item" href="meu_perfil.php">Meu Perfil</a>
+          </li>
             <li>
-              <a class="dropdown-item" href="#">
-                <i class="bi bi-star"></i>
-                  Minhas assinaturas
-              </a>
-            </li>
-            <li>
-              <a class="dropdown-item" target="_blank" href="https://wa.me/83998603238">
-                <i class="bi bi-whatsapp"></i>
-                  Pedir cifra
-              </a>
-            </li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-            <li>
-              <a class="dropdown-item text-danger" href="../api/logout.php">
-                <i class="bi bi-box-arrow-right"></i>
-                  Sair
-              </a>
+              <a class="dropdown-item text-danger"href="../api/logout.php"> Sair</a>
             </li>
           </ul>
         </li>
@@ -76,9 +55,3 @@
     </div>
   </div>
 </nav>
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-<script src="js/functions.js"></script>
-
-</body>
-</html>
