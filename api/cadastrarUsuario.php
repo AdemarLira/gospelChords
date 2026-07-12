@@ -85,8 +85,7 @@ try {
     }
 
     // Inserir usuário
-
-
+    $status = 'pendente';
     
     $sql = "INSERT INTO usuarios
     (

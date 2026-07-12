@@ -94,11 +94,27 @@
       <div class="modal-header">
         <h5 class="modal-title">
 
-      <?php 
-        if(isset($_GET['erro']) && $_GET['erro'] == 'logout'){
-            echo "Sessão encerrada";
-          }else{
-            echo "Erro no login";
+        <?php
+        if (isset($_GET['erro'])) {
+
+            switch ($_GET['erro']) {
+
+                case 'logout':
+                    echo "Sessão encerrada";
+                    break;
+
+                case 'pendente':
+                    echo "Cadastro pendente";
+                    break;
+
+                case 'inativo':
+                    echo "Conta inativa";
+                    break;
+
+                default:
+                    echo "Erro no login";
+            }
+
         }
       ?>
 
@@ -107,21 +123,22 @@
       </div>
 
       <div class="modal-body">
-
-
-      <?php if(isset($_GET['erro']) && $_GET['erro'] == 'usuario'): ?>
-        <p>Não existe cadastro com esse e-mail.</p>
-      <?php elseif(isset($_GET['erro']) && $_GET['erro'] == 'senha'): ?>
-        <p>Senha incorreta. Tente novamente.</p>
-
-      <?php elseif(isset($_GET['erro']) && $_GET['erro'] == 'logout'): ?>
-        <br>
-          Já está indo embora? 😄
-        <br>
-          Não esquece de praticar!
-        </p>
-      <?php endif; ?>
-    </div>
+        <?php if(isset($_GET['erro']) && $_GET['erro'] == 'usuario'): ?>
+          <p>Não existe cadastro com esse e-mail.</p>
+        <?php elseif(isset($_GET['erro']) && $_GET['erro'] == 'senha'): ?>
+          <p>Senha incorreta. Tente novamente.</p>
+        <?php elseif(isset($_GET['erro']) && $_GET['erro'] == 'pendente'): ?>
+          <p>Seu cadastro já foi realizado com sucesso! 🎉</p>
+          <p>Agora ele está aguardando aprovação do administrador.
+              Seu acesso será liberado em breve.</p>
+        <?php elseif(isset($_GET['erro']) && $_GET['erro'] == 'inativo'): ?>
+          <p>Sua conta está inativa.</p>
+          <p>Entre em contato com o administrador para obter mais informações.</p>
+        <?php elseif(isset($_GET['erro']) && $_GET['erro'] == 'logout'): ?>
+          <p>Já está indo embora? 😄</p>
+          <p>Não esqueça de praticar!</p> 
+        <?php endif; ?>
+      </div>
 
       <div class="modal-footer">
         <button class="btn btn-secondary" data-bs-dismiss="modal">
