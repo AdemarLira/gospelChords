@@ -9,8 +9,6 @@ if ($_SERVER["REQUEST_METHOD"] !== "POST") {
 mysqli_begin_transaction($conn);
 
 try {
-
-  
     // Dados do formulário
     $nome     = trim($_POST["nome"]);
     $email    = trim($_POST["email"]);
@@ -120,9 +118,7 @@ try {
     );
 
     if (!mysqli_stmt_execute($stmt)) {
-
         throw new Exception(mysqli_error($conn));
-
     }
 
     mysqli_stmt_close($stmt);
@@ -156,16 +152,12 @@ try {
     );
 
     if (!mysqli_stmt_execute($stmt)) {
-
         throw new Exception(mysqli_error($conn));
-
     }
 
     mysqli_stmt_close($stmt);
 
-   
     // Finaliza
-
     mysqli_commit($conn);
 
     echo "<script>
@@ -181,7 +173,6 @@ try {
             alert('".$e->getMessage()."');
             history.back();
           </script>";
-
 }
 
 mysqli_close($conn);

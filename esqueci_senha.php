@@ -11,7 +11,7 @@
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css"
     rel="stylesheet">
-  <link href="assinante/assets/css/esqueciSenha1.css" rel="stylesheet">
+  <link href="assinante/assets/css/esqueciSenha.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
 </head>
 
@@ -67,7 +67,6 @@
 <div class="modal fade show" id="modalSenha" tabindex="-1" style="display:block; background:rgba(0,0,0,0.5);">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
-
       <div class="modal-header">
         <h5 class="modal-title">
           <?php 
@@ -77,7 +76,6 @@
           ?>
         </h5>
       </div>
-
       <div class="modal-body">
         <?php if($_GET['status'] == 'sucesso'): ?>
           <p>Enviamos instruções para redefinir sua senha no seu e-mail.</p>
@@ -90,11 +88,8 @@
 
       <div class="modal-footer">
         <a href="index.php" class="btn btn-primary">Voltar ao login</a>
-        <button class="btn btn-secondary" onclick="document.getElementById('modalSenha').style.display='none'">
-          Fechar
-        </button>
+          <button class="btn btn-secondary" onclick="document.getElementById('modalSenha').style.display='none'">Fechar</button>
       </div>
-
     </div>
   </div>
 </div>

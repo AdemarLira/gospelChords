@@ -6,12 +6,11 @@
 <html lang="pt-br">
 
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Criar conta | Gospel Chords</title>
-<link rel="stylesheet" href="assinante/assets/css/cadastro1.css">
+<link rel="stylesheet" href="assinante/assets/css/cadastro.css">
 </head>
 
 <body>
@@ -22,78 +21,76 @@
         <a href="index.php" class="btn-voltar">Voltar</a>
     </header>
 
-  <div class="cadastro-box">
-    <div class="titulo">
-      <h1>Criar sua conta</h1>
-        <p>Faça parte da comunidade Gospel Chords 🎸</p>
-      </div>
+        <div class="cadastro-box">
+          <div class="titulo">
+            <h1>Criar sua conta</h1>
+              <p>Faça parte da comunidade Gospel Chords 🎸</p>
+          </div>
   
-      <form class="form-cadastro" action="api/cadastrarUsuario.php" method="POST" enctype="multipart/form-data">
-        <div class="campos">
-          <div class="campo">
-            <label>Nome</label>
-            <input type="text" name="nome" placeholder="Digite seu nome" required>
-          </div>
+              <form class="form-cadastro" action="api/cadastrarUsuario.php" method="POST" enctype="multipart/form-data">
+                <div class="campos">
+                  <div class="campo">
+                    <label>Nome</label>
+                    <input type="text" name="nome" placeholder="Digite seu nome" required>
+                  </div>
 
-    <div class="campo">
-      <label>Email</label>
-        <input type="email" name="email" placeholder="Digite seu e-mail" required>
-      </div>
+              <div class="campo">
+                <label>Email</label>
+                  <input type="email" name="email" placeholder="Digite seu e-mail" required>
+                </div>
+              <div class="campo">
+                <label>Senha</label>
+                <input 
+                  type="password"name="senha" placeholder="Crie uma senha" required>
+                </div>
 
-    <div class="campo">
-      <label>Senha</label>
-      <input 
-        type="password"name="senha" placeholder="Crie uma senha" required>
-      </div>
+              <div class="campo">
+                <label>Celular</label>
+                  <input type="tel" id="celular" name="celular" required>
+              </div>
+            </div>
 
-    <div class="campo">
-      <label>Celular</label>
-        <input type="tel" id="celular" name="celular" required>
-    </div>
-  </div>
+            <div class="linha">
+                <div class="campo">
+                  <label>Estado</label>
+                    <select id="estado" name="estado" required>
+                          <option value="">Selecione um estado</option>
+                    </select>
+                  </div>
 
-    <div class="linha">
-          <div class="campo">
-              <label>Estado</label>
-              <select id="estado" name="estado" required>
-                  <option value="">Selecione um estado</option>
-              </select>
-          </div>
+                  <div class="campo" id="campo-cidade" style="display:none;">
+                      <label>Cidade</label>
+                      <select id="cidade" name="cidade" required>
+                          <option value="">Selecione uma cidade</option>
+                      </select>
+                  </div>
+              
+                    <div class="campo foto">
+                      <label>Foto de perfil</label>
+                      <input type="file" name="foto"accept="image/*">
+                    </div>
+                  </div>
 
-          <div class="campo" id="campo-cidade" style="display:none;">
-              <label>Cidade</label>
-              <select id="cidade" name="cidade" required>
-                  <option value="">Selecione uma cidade</option>
-              </select>
-          </div>
-      
-        <div class="campo foto">
-          <label>Foto de perfil</label>
-          <input type="file" name="foto"accept="image/*">
-         </div>
-       </div>
+              <div class="campo">
+              <label>Escolha seu plano</label>
+                <div class="mb-3">
+                  <label class="form-label">Tipo de acesso</label>
 
-      <div class="campo">
-      <label>Escolha seu plano</label>
-        <div class="mb-3">
-          <label class="form-label">Tipo de acesso</label>
-
-          <select name="tipo_usuario" class="form-select" required>
-              <option value="">Selecione</option>
-              <option name="tipo_usuario" value="aluno" >Curso Completo</option>
-              <option name="tipo_usuario" value="assinante">Assinante (R$ 7,00/mês)</option>
-          </select>
-        </div>
-      </div>
-      
-          <div class="acoes">
-              <button type="submit" class="btn-criar">
-                Criar conta
-              </button>
-
-                <a href="index.php" class="btn-cancelar">
-                  Cancelar
-                </a>
+                  <select name="tipo_usuario" class="form-select" required>
+                      <option value="">Selecione</option>
+                      <option name="tipo_usuario" value="aluno" >Curso Completo</option>
+                      <option name="tipo_usuario" value="assinante">Assinante (R$ 7,00/mês)</option>
+                  </select>
+                </div>
+              </div>
+              
+              <div class="acoes">
+                <button type="submit" class="btn-criar">
+                  Criar conta
+                </button>
+                  <a href="index.php" class="btn-cancelar">
+                    Cancelar
+                  </a>
               </div>
             </form>
           </div>
@@ -110,8 +107,7 @@
 
         if (valor.length > 11) {
             valor = valor.substring(0, 11);
-        }
-
+        }s
         if (valor.length > 10) {
             valor = valor.replace(
                 /^(\d{2})(\d{5})(\d{4}).*/,

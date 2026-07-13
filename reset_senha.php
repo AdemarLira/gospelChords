@@ -1,22 +1,22 @@
 <?php
 include('api/conexao.php');
 
-if (!isset($_GET['token'])) {
-    die("Token inválido.");
-}
+  if (!isset($_GET['token'])) {
+      die("Token inválido.");
+  }
 
-$token = $_GET['token'];
+  $token = $_GET['token'];
 
-$sql = "SELECT id FROM usuarios WHERE reset_token = ? AND reset_expira > NOW()";
-$stmt = $conn->prepare($sql);
-$stmt->bind_param("s", $token);
-$stmt->execute();
+  $sql = "SELECT id FROM usuarios WHERE reset_token = ? AND reset_expira > NOW()";
+  $stmt = $conn->prepare($sql);
+  $stmt->bind_param("s", $token);
+  $stmt->execute();
 
-$resultado = $stmt->get_result();
+  $resultado = $stmt->get_result();
 
-if ($resultado->num_rows != 1) {
-    die("Link expirado ou inválido.");
-}
+  if ($resultado->num_rows != 1) {
+      die("Link expirado ou inválido.");
+  }
 ?>
 
 <!DOCTYPE html>
@@ -30,25 +30,16 @@ if ($resultado->num_rows != 1) {
 <body class="bg-dark text-white d-flex justify-content-center align-items-center" style="height:100vh;">
 
 <div class="card p-4" style="width: 350px;">
-
   <h4 class="mb-3 text-center">Criar nova senha</h4>
-
-  <form method="POST" action="api/atualizar_senha.php">
-
-    <input type="hidden" name="token" value="<?php echo htmlspecialchars($token); ?>">
-
-    <div class="mb-3">
-      <label>Nova senha</label>
-      <input type="password" name="senha" class="form-control" required>
-    </div>
-
-    <button class="btn btn-primary w-100">
-      Atualizar senha
-    </button>
-
-  </form>
-
-</div>
+    <form method="POST" action="api/atualizar_senha.php">
+      <input type="hidden" name="token" value="<?php echo htmlspecialchars($token); ?>">
+        <div class="mb-3">
+          <label>Nova senha</label>
+          <input type="password" name="senha" class="form-control" required>
+        </div>
+      <button class="btn btn-primary w-100">Atualizar senha</button>
+    </form>
+  </div>
 
 </body>
 </html>

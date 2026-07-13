@@ -42,7 +42,6 @@
 <div class="pagina">
   <div class="coluna-infos">
     <div class="main_info">
-
       <p style="font-size: 25pt;">
         <strong>Bem-vindo ao Gospel Chord!</strong>
       </p>
@@ -53,10 +52,7 @@
         <div class="box">Cifras</div>
         <div class="box">Tablaturas</div>
       </div>
-
-      <button class="verificar-planos" onclick="verificarPlanos()">
-        Conheça nossos planos
-      </button>
+        <button class="verificar-planos" onclick="verificarPlanos()">Conheça nossos planos</button>
     </div>
   </div>
 
@@ -72,18 +68,16 @@
         <label>Senha</label>
         <input type="password" class="form-control" name="senha" required>
       </div>
-      <button type="submit" class="btn btn-primary w-100">
-        Entrar
-      </button>
-      <div class="text-center mt-3">
-        <a href="esqueci_senha.php">Esqueceu a senha?</a>
-      </div>
-      <div class="text-center mt-2">
-        <a href="cadastrar_usuario.php">Criar conta</a>
-      </div>
-    </form>
+        <button type="submit" class="btn btn-primary w-100">Entrar</button>
+          <div class="text-center mt-3">
+            <a href="esqueci_senha.php">Esqueceu a senha?</a>
+          </div>
+          <div class="text-center mt-2">
+            <a href="cadastrar_usuario.php">Criar conta</a>
+          </div>
+      </form>
+    </div>
   </div>
-</div>
 
 <!--MODAL DE ERRO NO LOGIN________________________________________________________-->
 <div class="modal fade" id="modalErroLogin" tabindex="-1">
@@ -91,31 +85,25 @@
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title">
-
-        <?php
-        if (isset($_GET['erro'])) {
-
-            switch ($_GET['erro']) {
-                case 'logout':
-                    echo "Sessão encerrada";
-                    break;
-                case 'pendente':
-                    echo "Cadastro pendente";
-                    break;
-                case 'inativo':
-                    echo "Conta inativa";
-                    break;
-
-                default:
-                    echo "Erro no login";
+          <?php
+          if (isset($_GET['erro'])) {
+              switch ($_GET['erro']) {
+                  case 'logout':
+                      echo "Sessão encerrada";
+                      break;
+                  case 'pendente':
+                      echo "Cadastro pendente";
+                      break;
+                  case 'inativo':
+                      echo "Conta inativa";
+                      break;
+                  default:
+                      echo "Erro no login";
+              }
             }
-
-        }
-      ?>
-
+          ?>
       </h5>
-        <!-- <button class="btn-close" data-bs-dismiss="modal"></button> -->
-      </div>
+    </div>
 
       <div class="modal-body">
         <?php if(isset($_GET['erro']) && $_GET['erro'] == 'usuario'): ?>
@@ -135,28 +123,24 @@
         <?php endif; ?>
       </div>
 
-      <div class="modal-footer">
-        <button class="btn btn-secondary" data-bs-dismiss="modal">
-            Fechar
-        </button>
+    <div class="modal-footer">
+      <button class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
         <?php if(isset($_GET['erro']) && ($_GET['erro'] == 'usuario' || $_GET['erro'] == 'senha')): ?>
-          <a href="cadastrar_usuario.php" class="btn btn-primary">
-              Criar conta
-          </a>
+          <a href="cadastrar_usuario.php" class="btn btn-primary">Criar conta</a>
+
         <?php elseif(isset($_GET['erro']) && $_GET['erro'] == 'pendente'): ?>
           <?php $email = isset($_GET['email']) ? urlencode($_GET['email']) : ''; 
-          $mensagem = urlencode(
+                $mensagem = urlencode(
             "Olá! Realizei meu cadastro no Gospel Chords.\nMeu e-mail é: {$email}\nGostaria de saber sobre a aprovação da minha conta.");?>
-          <a href="https://wa.me/5583998603238?text=Olá!%20Realizei%20meu%20cadastro%20no%20Gospel%20Chords%20e%20gostaria%20de%20saber%20sobre%20a%20aprovação."
-            target="_blank"
-            class="btn btn-success">
-              <i class="fab fa-whatsapp"></i> Falar no WhatsApp
-          </a>
-        <?php endif; ?>
+                  <a href="https://wa.me/5583998603238?text=Olá!%20Realizei%20meu%20cadastro%20no%20Gospel%20Chords%20e%20gostaria%20de%20saber%20sobre%20a%20aprovação."
+                  target="_blank"
+                  class="btn btn-success">
+                    <i class="fab fa-whatsapp"></i> Falar no WhatsApp</a>
+          <?php endif; ?>
+        </div>
       </div>
     </div>
   </div>
-</div>
 
 <?php if(isset($_GET['erro'])): ?>
 

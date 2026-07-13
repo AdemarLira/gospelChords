@@ -84,16 +84,9 @@ include('conexao.php');
                   <h2>Gospel Chords</h2>
 
                   <p>Recebemos uma solicitação para alterar sua senha.</p>
-                    <p>
-                    Clique abaixo:
-                    </p>
-                  <a href='$link'>
-                  Redefinir minha senha
-                  </a>
-                    <p>
-                    Esse link expira em 1 hora.
-                    </p>
-                  ";
+                    <p>Clique abaixo:/p>
+                  <a href='$link'>Redefinir minha senha</a>
+                    <p>Esse link expira em 1 hora.</p>";
 
                 $mail->send();
 
