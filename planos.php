@@ -11,7 +11,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" rel="stylesheet">
 
-    <link rel="stylesheet" href="assinante/assets/css/planos.css">
+    <link rel="stylesheet" href="assets/css/planos.css">
 </head>
 
 <body>
@@ -61,9 +61,9 @@
 		<div class="card-plano destaque">
 			<span class="tag">Mais Escolhido</span>
 				<h5>Curso Completo</h5>
-					<h2>módulos</h2>
+					<h2>Módulos</h2>
 						<p>Marque o seu nivelamento e evolua no violão com o curso completo de Ademar Lira.</p>
-	''					<ul>
+					<ul>
 								<li><i class="fa-solid fa-check"></i> Curso completo<br> - Mentorias online semanais</li>
 								<li><i class="fa-solid fa-check"></i> Vídeos</li>
 								<li><i class="fa-solid fa-check"></i> Exercícios</li>

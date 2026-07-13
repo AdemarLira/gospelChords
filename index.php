@@ -48,7 +48,7 @@
       <p>Que você possa ser abençoado e abençoar vidas.</p>
       <p>Funcionalidades disponíveis:</p>
 
-      <div class="container">
+      <div class="funcionalidades">
         <div class="box">Cifras</div>
         <div class="box">Tablaturas</div>
       </div>

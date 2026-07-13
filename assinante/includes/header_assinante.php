@@ -20,7 +20,7 @@ $imagemPerfil = !empty($_SESSION['img'])
 
 <link rel="icon" href="../assets/img/logo_amarela.png">
 <script src="https://kit.fontawesome.com/328073035f.js" crossorigin="anonymous"></script>
-<link rel="stylesheet" href="assets/css/dashboard1.css">
+<link rel="stylesheet" href="assets/css/dashboard.css">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
 <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">

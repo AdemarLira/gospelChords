@@ -56,11 +56,15 @@ body{
 }
 #background::after {
     content: '';
-    width: inherit;
-    height: inherit;
     position: fixed;
     inset: 0;
-    background: linear-gradient(109deg, rgba(10, 12, 16, 0.6) 15%, rgba(10, 12, 16, 0.4) 20%, rgba(10, 12, 15, 0.99) 85%);
+    background: linear-gradient(
+        109deg,
+        rgba(10, 12, 16, 0.6) 15%,
+        rgba(10, 12, 16, 0.4) 20%,
+        rgba(10, 12, 15, 0.99) 85%
+    );
+    pointer-events: none;
 }
 .container {
    position: relative;
@@ -156,15 +160,15 @@ body{
     background-color:  rgba(231, 177, 29, 0.521) !important;
 }
 
-.container {
-    display: flex;
-    gap: 10px;
-    max-width: 40%;
-    margin-left: 100px;
-    flex-wrap: wrap;
-    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-    color: rgb(49, 49, 49);
- }
+.funcionalidades{
+    display:flex;
+    gap:10px;
+    max-width:40%;
+    margin-left:100px;
+    flex-wrap:wrap;
+    font-family:Impact, Haettenschweiler,'Arial Narrow Bold',sans-serif;
+    color:#313131;
+}
  
 .box {
     width: 100px;
