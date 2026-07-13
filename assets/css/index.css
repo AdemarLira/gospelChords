@@ -162,14 +162,21 @@ body{
 
 .funcionalidades{
     display:flex;
-    gap:10px;
-    max-width:40%;
-    margin-left:100px;
-    flex-wrap:wrap;
+    gap: 15px;
+    max-width:60%;
+    margin-left:150px;
+    flex-wrap: nowrap;
     font-family:Impact, Haettenschweiler,'Arial Narrow Bold',sans-serif;
     color:#313131;
+    flex-wrap: nowrap; /* Mantém tudo na mesma linha */
 }
- 
+.container {
+    display: flex;
+    gap: 15px;
+    max-width: 60%;
+    margin-left: 100px;
+}
+
 .box {
     width: 100px;
     height: 100px;

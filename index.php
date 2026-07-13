@@ -51,6 +51,7 @@
       <div class="funcionalidades">
         <div class="box">Cifras</div>
         <div class="box">Tablaturas</div>
+        <div class="box">Partituras</div>
       </div>
         <button class="verificar-planos" onclick="verificarPlanos()">Conheça nossos planos</button>
     </div>
