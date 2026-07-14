@@ -161,15 +161,16 @@ body{
 }
 
 .funcionalidades{
-    display:flex;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     gap: 15px;
-    max-width:60%;
-    margin-left:150px;
-    flex-wrap: nowrap;
-    font-family:Impact, Haettenschweiler,'Arial Narrow Bold',sans-serif;
-    color:#313131;
-    flex-wrap: nowrap; /* Mantém tudo na mesma linha */
+    width: 100%;
+    margin: 30px 0;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    color: #313131;
 }
+
 .container {
     display: flex;
     gap: 15px;
