@@ -6,11 +6,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Gospel Chords</title>
 
-  <link rel="icon" type="image/x-icon" href="./assets/logo_amarela.png">
+  <link rel="icon" type="image/x-icon" href="assets/img/logo.png">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
-  <link href="assets/css/index.css" rel="stylesheet">
+  <link href="assets/css/index1.css" rel="stylesheet">
 </head>
 <body>
 

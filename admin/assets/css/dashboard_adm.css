@@ -1,0 +1,177 @@
+body {
+  font-family:Verdana, Geneva, Tahoma, sans-serif;
+  transition: background-color 1.0s, color 0.5s;
+} 
+
+.txt-body{
+  font-family: "Montserrat", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+} 
+
+#dropdown{
+  margin-right: 100px;
+}
+.btn-outline-success {
+  transition: box-shadow 0.3s ease; 
+}
+
+.btn-secondary {
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+}
+
+.nav-link {
+  position: relative;
+  display: inline-block;
+  color: #e6e5df !important;
+  transition: color 0.3s ease;
+}
+
+.nav-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 0;
+  height: 2px;
+  background-color: rgb(231, 177, 29);
+  transition: width 0.3s ease;
+  transition: width 0.5s ease-in-out;
+}
+
+.nav-link:hover::after {
+  width: 100%;
+}
+
+.perfil-btn::after{
+    display: none !important;
+    content: none !important;
+}
+
+.perfil-btn:hover::after{
+    width: 0 !important;
+}
+
+#sair{
+  text-align: right;
+}
+
+.dropdown-item:hover,
+.dropdown-item:focus,
+.dropdown-item:active {
+  background-color: rgba(231, 177, 29, 0.521) !important;
+}  
+
+.card {
+  border-radius: 15px;
+  transition: transform 0.2s;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 20px rgba(243, 239, 239, 0.548);
+}
+.card-title {
+      font-size: clamp(1rem, 2.5vw, 1.5rem);
+    }
+
+    .card-text {
+      font-size: clamp(0.9rem, 2vw, 1.1rem);
+    }
+
+    /* BOTÃO PERFIL */
+
+#dropdown {
+  margin-right: 40px;
+}
+
+
+.perfil-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  padding: 4px;
+  border-radius: 50%;
+  transition: 0.3s ease;
+}
+
+
+.foto-perfil {
+  width: 45px;
+  height: 45px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 3px solid #0d6efd;
+  box-shadow:
+    0 3px 10px rgba(0,0,0,0.35);
+  transition: 0.3s ease;
+}
+
+/* efeito quando passa o mouse */
+.perfil-btn:hover .foto-perfil {
+  transform: scale(1.08);
+  border-color: rgba(231,177,29,0.856);
+  box-shadow:
+    0 0 15px rgba(231,177,29,0.856);
+}
+
+/* remove seta do bootstrap */
+.perfil-btn::after {
+  display:none;
+}
+
+
+/* menu do perfil */
+.dropdown-menu {
+  border-radius:15px;
+  border:none;
+  box-shadow:
+  0 10px 25px rgba(0,0,0,0.25);
+  overflow:hidden;
+}
+
+.dropdown-item {
+  padding:10px 20px;
+  font-family:"Montserrat",sans-serif;
+}
+
+.perfil-btn{
+  display:flex;
+  align-items:center;
+  cursor:pointer;
+  text-decoration:none;
+}
+
+
+.foto-perfil{
+  width:42px;
+  height:42px;
+  border-radius:50%;
+  object-fit:cover;
+  border:2px solid rgba(231,177,29,0.8);
+  transition:0.3s;
+}
+
+.foto-perfil:hover{
+  transform:scale(1.1);
+  box-shadow:0 0 15px rgba(231,177,29,0.8);
+}
+
+
+.dropdown-menu{
+  border-radius:12px;
+  padding:8px;
+}
+
+
+.dropdown-item{
+  border-radius:8px;
+  transition:.3s;
+}
+
+.dropdown-item:hover{
+  background-color:rgba(231,177,29,0.5);
+}

@@ -11,6 +11,7 @@
 
 <title>Criar conta | Gospel Chords</title>
 <link rel="stylesheet" href="assets/css/cadastro.css">
+<link rel="icon" type="image/x-icon" href="assets/img/logo.png">
 </head>
 
 <body>

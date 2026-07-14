@@ -18,37 +18,19 @@
 
     <div class="collapse navbar-collapse" id="navbar">
       <ul class="navbar-nav me-auto">
-        <li class="nav-item">
-          <a class="nav-link" href="dashboard_adm.php"> Dashboard</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="alunos.php">Alunos</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="cursos.php">Cursos</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="modulos.php">Módulos</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="aulas.php">Aulas</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="cifras.php">Cifras</a>
-        </li>
-          <li class="nav-item">
-            <a class="nav-link" href="financeiro.php">Financeiro</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="relatorios.php">Relatórios</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="configuracoes.php">Configurações</a>
-          </li>
+        <li class="nav-item"><a class="nav-link" href="dashboard_adm.php"> Dashboard</a></li>
+        <li class="nav-item"><a class="nav-link" href="alunos.php">Alunos</a></li>
+        <li class="nav-item"><a class="nav-link" href="cursos.php">Cursos</a></li>
+        <li class="nav-item"><a class="nav-link" href="modulos.php">Módulos</a></li>
+        <li class="nav-item"><a class="nav-link" href="aulas.php">Aulas</a></li>
+        <li class="nav-item"><a class="nav-link" href="cifras.php">Cifras</a></li>
+        <li class="nav-item"><a class="nav-link" href="financeiro.php">Financeiro</a></li>
+        <li class="nav-item"><a class="nav-link" href="relatorios.php">Relatórios</a></li>
+        <li class="nav-item"><a class="nav-link" href="configuracoes.php">Configurações</a></li>
       </ul>
         <ul class="navbar-nav">
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#"> 
+            <a class="nav-link dropdown-toggle perfil-btn" data-bs-toggle="dropdown" href="#"> 
               <img src="<?= htmlspecialchars($imagemPerfil); ?>" class="rounded-circle" width="40" height="40"></a>
           <ul class="dropdown-menu dropdown-menu-end">
             <li>
