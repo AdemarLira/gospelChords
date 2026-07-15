@@ -8,6 +8,9 @@ include(__DIR__ . "/includes/tabela_usuarios.php");
 
 //==================== TOTAL ALUNOS ====================
 
+$nomeAluno = $_GET['nome_aluno'] ?? '';
+$statusAluno = $_GET['status_aluno'] ?? '';
+
 $sqlTotalAlunos = "SELECT COUNT(*) AS total
                    FROM usuarios
                    WHERE tipo_usuario='aluno'";
@@ -15,15 +18,36 @@ $sqlTotalAlunos = "SELECT COUNT(*) AS total
 $resultadoTotalAlunos = $conn->query($sqlTotalAlunos);
 $totalAlunos = $resultadoTotalAlunos->fetch_assoc()['total'];
 
+$nomeAssinante = $_GET['nome_assinante'] ?? '';
+$statusAssinante = $_GET['status_assinante'] ?? '';
+
 //==================== LISTA ALUNOS ====================
 
-$sqlAlunos = "SELECT id, nome, email, status, img
+$sqlAlunos = "SELECT
+                nome,
+                celular,
+                estado,
+                cidade,
+                email,
+                status,
+                ultimo_acesso,
+                img
               FROM usuarios
-              WHERE tipo_usuario='aluno'
-              ORDER BY nome";
+              WHERE tipo_usuario='aluno'";
+
+if (!empty($nomeAluno)) {
+    $nomeAluno = $conn->real_escape_string($nomeAluno);
+    $sqlAlunos .= " AND nome LIKE '%$nomeAluno%'";
+}
+
+if (!empty($statusAluno)) {
+    $statusAluno = $conn->real_escape_string($statusAluno);
+    $sqlAlunos .= " AND status = '$statusAluno'";
+}
+
+$sqlAlunos .= " ORDER BY nome";
 
 $resultadoAlunos = $conn->query($sqlAlunos);
-
 //==================== TOTAL ASSINANTES ====================
 
 $sqlTotalAssinantes = "SELECT COUNT(*) AS total
@@ -35,10 +59,31 @@ $totalAssinantes = $resultadoTotalAssinantes->fetch_assoc()['total'];
 
 //==================== LISTA ASSINANTES ====================
 
-$sqlAssinantes = "SELECT id, nome, email, status, img
+$sqlAssinantes = "SELECT
+                    nome,
+                    celular,
+                    estado,
+                    cidade,
+                    email,
+                    status,
+                    ultimo_acesso,
+                    img
                   FROM usuarios
-                  WHERE tipo_usuario='assinante'
-                  ORDER BY nome";
+                  WHERE tipo_usuario='assinante'";
+
+
+if (!empty($nomeAssinante)) {
+    $nomeAssinante = $conn->real_escape_string($nomeAssinante);
+    $sqlAssinantes .= " AND nome LIKE '%$nomeAssinante%'";
+}
+
+if (!empty($statusAssinante)) {
+    $statusAssinante = $conn->real_escape_string($statusAssinante);
+    $sqlAssinantes .= " AND status = '$statusAssinante'";
+}
+
+
+$sqlAssinantes .= " ORDER BY nome";
 
 $resultadoAssinantes = $conn->query($sqlAssinantes);
 ?>
@@ -47,53 +92,120 @@ $resultadoAssinantes = $conn->query($sqlAssinantes);
 	<div class="card shadow">
 		<ul class="nav nav-tabs mb-3" id="usuariosTab" role="tablist">
 
-    <li class="nav-item" role="presentation">
-        <button class="nav-link active"
-                id="alunos-tab"
-                data-bs-toggle="tab"
-                data-bs-target="#alunos"
-                type="button">
-            👨‍🎓 Alunos
-            <span class="badge bg-primary"><?= $totalAlunos ?></span>
-        </button>
-    </li>
+			<li class="nav-item" role="presentation">
+				<button class="nav-link active" id="alunos-tab" data-bs-toggle="tab" data-bs-target="#alunos" type="button">
+						👨‍🎓 Alunos
+					<span class="badge bg-primary"><?= $totalAlunos ?></span>
+				</button>
+			</li>
 
-    <li class="nav-item" role="presentation">
-        <button class="nav-link"
-                id="assinantes-tab"
-                data-bs-toggle="tab"
-                data-bs-target="#assinantes"
-                type="button">
-
-            ⭐ Assinantes
-            <span class="badge bg-success"><?= $totalAssinantes ?></span>
-        </button>
-    </li>
-</ul>	
-
+			<li class="nav-item" role="presentation">
+				<button class="nav-link" id="assinantes-tab" data-bs-toggle="tab" data-bs-target="#assinantes" type="button"> 
+						⭐ Assinantes
+					<span class="badge bg-success"><?= $totalAssinantes ?></span>
+				</button>
+			</li>	
+			</ul>	
+<!-- ================= assinantes ================= -->
 <div class="card-body">
-    <div class="tab-content">
-        <!-- ================= ALUNOS ================= -->
-      <div class="tab-pane fade show active" id="alunos">
-				<div class="row mb-3">
-					<div class="col-md-4">
-							<input class="form-control" placeholder="Pesquisar aluno...">
-					</div>
+  <div class="tab-content"> 
+		<div class="tab-pane fade show active" id="alunos">
+			<form method="GET" class="row g-2 mb-3">
+				<div class="col-md-4">
+					<input type="text" name="nome_aluno" class="form-control" placeholder="Pesquisar aluno..." value="<?= htmlspecialchars($_GET['nome_aluno'] ?? '') ?>">
 				</div>
-			<?php renderTabelaUsuarios($resultadoAlunos); ?>
-		</div>
-        <!-- ================= ASSINANTES ================= -->
-      <div class="tab-pane fade" id="assinantes">
-				<div class="row mb-3">
-					<div class="col-md-4">
-							<input class="form-control" placeholder="Pesquisar assinante...">
-					</div>
-   		 </div>
-    	<?php renderTabelaUsuarios($resultadoAssinantes); ?>
-		</div>
-  </div>
+
+				<div class="col-md-3">
+					<select name="status_aluno" class="form-select">
+						<option value="">Todos os status</option>
+						<option value="ativo" <?= ($_GET['status_aluno'] ?? '') == 'ativo' ? 'selected' : '' ?>>Ativo</option>
+						<option value="pendente" <?= ($_GET['status_aluno'] ?? '') == 'pendente' ? 'selected' : '' ?>>Pendente</option>
+						<option value="suspenso" <?= ($_GET['status_aluno'] ?? '') == 'suspenso' ? 'selected' : '' ?>>Suspenso</option>
+						<option value="expirado" <?= ($_GET['status_aluno'] ?? '') == 'expirado' ? 'selected' : '' ?>>Expirad</option>
+						<option value="cancelado" <?= ($_GET['status_aluno'] ?? '') == 'cancelado' ? 'selected' : '' ?>>Cancelado</option>
+					</select>
+				</div>
+
+				<div class="col-md-2">
+					<button type="submit" class="btn btn-primary w-100">Filtrar</button>
+				</div>
+
+				<div class="col-md-2">
+					<a href="usuarios.php" class="btn btn-secondary w-100">
+							Limpar
+					</a>
+				</div>
+			</form>
+		<?php renderTabelaUsuarios($resultadoAlunos); ?>
 </div>
 
+
+<div class="tab-pane fade" id="assinantes">
+	<form method="GET" class="row g-2 mb-3">
+    <div class="col-md-4">
+        <input type="text" name="nome_assinante" class="form-control" placeholder="Pesquisar assinante..." value="<?= htmlspecialchars($_GET['nome_assinante'] ?? '') ?>">
+    </div>
+
+    <div class="col-md-3">
+        <select name="status_assinante" class="form-select">
+            <option value="">Todos os status</option>
+            <option value="ativo"<?= ($_GET['status_assinante'] ?? '') == 'ativo' ? 'selected' : '' ?>>
+                Ativo
+            </option>
+            <option value="pendente"<?= ($_GET['status_assinante'] ?? '') == 'pendente' ? 'selected' : '' ?>>
+                Pendente
+            </option>
+            <option value="suspenso"<?= ($_GET['status_assinante'] ?? '') == 'suspenso' ? 'selected' : '' ?>>
+                Suspenso
+            </option>
+            <option value="expirado"<?= ($_GET['status_assinante'] ?? '') == 'expirado' ? 'selected' : '' ?>>
+                Expirado
+            </option>
+            <option value="cancelado"<?= ($_GET['status_assinante'] ?? '') == 'cancelado' ? 'selected' : '' ?>>
+    						Cancelado
+            </option>
+        </select>
+    </div>
+
+				<div class="col-md-2">
+					<button type="submit" class="btn btn-primary w-100">
+							Filtrar
+					</button>
+				</div>
+				<div class="col-md-2">
+					<a href="usuarios.php" class="btn btn-secondary w-100">
+							Limpar
+					</a>
+				</div>
+			</form>
+			<?php renderTabelaUsuarios($resultadoAssinantes); ?>
+		</div>
+
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    // Recupera a aba salva
+	let abaSalva = localStorage.getItem('abaUsuarios');
+    if (abaSalva) {
+			let botao = document.querySelector(
+					'button[data-bs-target="' + abaSalva + '"]'
+			);
+			if (botao) {
+					new bootstrap.Tab(botao).show();
+			}
+    }
+    // Sempre que trocar de aba, salva
+    document.querySelectorAll('button[data-bs-toggle="tab"]').forEach(function(tab){
+			tab.addEventListener('shown.bs.tab', function(e){
+				localStorage.setItem(
+						'abaUsuarios',
+						e.target.getAttribute('data-bs-target')
+				);
+			});
+    });
+});
+
+</script>
 <?php include(__DIR__ . "/includes/footer_adm.php");?>
 
 

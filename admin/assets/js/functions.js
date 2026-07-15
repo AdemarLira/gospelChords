@@ -64,3 +64,4 @@ function enviarCifra() {
     alert('Erro ao enviar cifra.');
   });
 }
+

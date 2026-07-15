@@ -92,3 +92,37 @@ COMMIT;
 UPDATE usuarios
 SET status = 'ativo'
 WHERE id = 5;
+
+  
+CREATE TABLE cifras (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nome_musica VARCHAR(150) NOT NULL,
+    autor VARCHAR(150) NOT NULL,
+    versao VARCHAR(100),
+    tipo ENUM('cifra', 'tablatura', 'partitura') DEFAULT 'cifra',
+    arquivo VARCHAR(255) NOT NULL,
+    id_usuario INT NOT NULL,
+    status ENUM('pendente','aprovada','rejeitada') DEFAULT 'pendente',
+    observacao TEXT NULL,
+    data_envio DATETIME DEFAULT CURRENT_TIMESTAMP,
+    data_analise DATETIME NULL,
+
+    CONSTRAINT fk_cifra_usuario
+        FOREIGN KEY (id_usuario)
+        REFERENCES usuarios(id)
+        ON DELETE CASCADE
+);
+
+| Campo          | Função                                          |
+| -------------- | ----------------------------------------------- |
+| `id`           | Identificador da cifra.                         |
+| `nome_musica`  | Nome da música.                                 |
+| `autor`        | Autor ou banda.                                 |
+| `versao`       | Ex.: Original, Acústica, Ao Vivo, Simplificada. |
+| `tipo`         | Tipo do arquivo enviado.                        |
+| `arquivo`      | Nome do arquivo salvo no servidor.              |
+| `id_usuario`   | Usuário que enviou a cifra.                     |
+| `status`       | Situação da análise.                            |
+| `observacao`   | Comentário do administrador caso rejeite.       |
+| `data_envio`   | Data do envio.                                  |
+| `data_analise` | Quando o admin analisou.                        |
