@@ -166,7 +166,7 @@ $resultadoAssinantes = $conn->query($sqlAssinantes);
             </option>
         </select>
     </div>
-
+		
 				<div class="col-md-2">
 					<button type="submit" class="btn btn-primary w-100">
 							Filtrar
