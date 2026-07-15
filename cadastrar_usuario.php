@@ -47,7 +47,7 @@
 
               <div class="campo">
                 <label>Celular</label>
-                  <input type="tel" id="celular" name="celular" required>
+                  <input type="text" name="celular" id="celular" class="form-control" maxlength="15" placeholder="(83) 99999-9999" required>
               </div>
             </div>
 
@@ -192,6 +192,44 @@
         });
     });
   });
+
+
+const campoCelular = document.getElementById('celular');
+
+campoCelular.addEventListener('input', function(){
+
+    let valor = this.value;
+
+    // remove tudo que não for número
+    valor = valor.replace(/\D/g,'');
+
+    // limita a 11 números
+    valor = valor.substring(0,11);
+
+
+    if(valor.length <= 10){
+
+        // telefone fixo
+        valor = valor.replace(
+            /^(\d{2})(\d{4})(\d{0,4})/,
+            '($1) $2-$3'
+        );
+
+    } else {
+
+        // celular
+        valor = valor.replace(
+            /^(\d{2})(\d{5})(\d{0,4})/,
+            '($1) $2-$3'
+        );
+
+    }
+
+
+    this.value = valor;
+
+});
+
 </script>
 </body>
 </html>

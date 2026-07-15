@@ -13,7 +13,7 @@ try {
     $nome     = trim($_POST["nome"]);
     $email    = trim($_POST["email"]);
     $senha    = $_POST["senha"];
-    $celular  = trim($_POST["celular"]);
+    $celular = preg_replace('/\D/', '', $_POST['celular']);
     $cidade   = trim($_POST["cidade"]);
     $estado   = trim($_POST["estado"]);
     $tipoUsuario = trim($_POST["tipo_usuario"]);

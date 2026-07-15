@@ -121,7 +121,7 @@ $resultadoAssinantes = $conn->query($sqlAssinantes);
 						<option value="ativo" <?= ($_GET['status_aluno'] ?? '') == 'ativo' ? 'selected' : '' ?>>Ativo</option>
 						<option value="pendente" <?= ($_GET['status_aluno'] ?? '') == 'pendente' ? 'selected' : '' ?>>Pendente</option>
 						<option value="suspenso" <?= ($_GET['status_aluno'] ?? '') == 'suspenso' ? 'selected' : '' ?>>Suspenso</option>
-						<option value="expirado" <?= ($_GET['status_aluno'] ?? '') == 'expirado' ? 'selected' : '' ?>>Expirad</option>
+						<option value="expirado" <?= ($_GET['status_aluno'] ?? '') == 'expirado' ? 'selected' : '' ?>>Expirado</option>
 						<option value="cancelado" <?= ($_GET['status_aluno'] ?? '') == 'cancelado' ? 'selected' : '' ?>>Cancelado</option>
 					</select>
 				</div>
@@ -203,6 +203,183 @@ document.addEventListener('DOMContentLoaded', function () {
 				);
 			});
     });
+});
+</script> 
+
+
+<div class="modal fade" id="modalEditar" tabindex="-1">
+
+<div class="modal-dialog">
+
+<div class="modal-content">
+
+<form action="editar_usuario.php" method="POST">
+
+<div class="modal-header">
+<h5 class="modal-title">
+Editar Usuário
+</h5>
+
+<button type="button" 
+class="btn-close" 
+data-bs-dismiss="modal">
+</button>
+
+</div>
+
+
+<div class="modal-body">
+
+
+<input type="hidden" name="id" id="editar_id">
+
+
+<div class="mb-3">
+<label>Nome</label>
+<input type="text" 
+class="form-control" 
+name="nome" 
+id="editar_nome">
+</div>
+
+
+<div class="mb-3">
+<label>Email</label>
+<input type="email" 
+class="form-control" 
+name="email" 
+id="editar_email">
+</div>
+
+
+<div class="mb-3">
+<label>Celular</label>
+<input type="text" 
+       name="celular" 
+       id="celular" 
+       class="form-control"
+       maxlength="15"
+       placeholder="(83) 99999-9999">
+</div>
+
+
+<div class="mb-3">
+<label>Cidade</label>
+<input type="text" 
+class="form-control" 
+name="cidade" 
+id="editar_cidade">
+</div>
+
+
+<div class="mb-3">
+<label>Estado</label>
+<input type="text" 
+class="form-control" 
+name="estado" 
+id="editar_estado">
+</div>
+
+
+<div class="mb-3">
+<label>Status</label>
+
+<select class="form-select" 
+name="status" 
+id="editar_status">
+
+<option value="ativo">Ativo</option>
+<option value="pendente">Pendente</option>
+<option value="suspenso">Suspenso</option>
+<option value="suspenso">Expirado</option>
+<option value="cancelado">Cancelado</option>
+
+</select>
+
+</div>
+
+
+</div>
+
+
+<div class="modal-footer">
+
+<button class="btn btn-success">
+Salvar
+</button>
+
+
+<button type="button"
+class="btn btn-secondary"
+data-bs-dismiss="modal">
+Cancelar
+</button>
+
+
+</div>
+
+
+</form>
+
+</div>
+
+</div>
+
+</div>
+
+
+<script> 
+ document.querySelectorAll('.btn-editar').forEach(botao => {
+
+botao.addEventListener('click', function(){
+
+document.getElementById('editar_id').value = this.dataset.id;
+document.getElementById('editar_nome').value = this.dataset.nome;
+document.getElementById('editar_email').value = this.dataset.email;
+document.getElementById('editar_celular').value = this.dataset.celular;
+document.getElementById('editar_cidade').value = this.dataset.cidade;
+document.getElementById('editar_estado').value = this.dataset.estado;
+document.getElementById('editar_status').value = this.dataset.status;
+
+});
+
+});
+
+
+const campoCelular = document.getElementById('celular');
+
+campoCelular.addEventListener('input', function(){
+
+    let valor = this.value;
+
+    // remove tudo que não for número
+    valor = valor.replace(/\D/g,'');
+
+    // limita a 11 números
+    valor = valor.substring(0,11);
+
+
+    if(valor.length <= 10){
+
+        // telefone fixo
+        valor = valor.replace(
+            /^(\d{2})(\d{4})(\d{0,4})/,
+            '($1) $2-$3'
+        );
+
+    } else {
+
+        // celular
+        valor = valor.replace(
+            /^(\d{2})(\d{5})(\d{0,4})/,
+            '($1) $2-$3'
+        );
+
+    }
+
+
+    this.value = valor;
+
 });
 
 </script>
