@@ -23,16 +23,16 @@ $statusAssinante = $_GET['status_assinante'] ?? '';
 
 //==================== LISTA ALUNOS ====================
 
-$sqlAlunos = "SELECT
-                nome,
-                celular,
-                estado,
-                cidade,
-                email,
-                status,
-                ultimo_acesso,
-                img
-              FROM usuarios
+$sqlAlunos = "SELECT 
+								id, 
+								nome, 
+								email, 
+								celular, 
+								cidade, 
+								estado, 
+								status, 
+								tipo_usuario
+							FROM usuarios
               WHERE tipo_usuario='aluno'";
 
 if (!empty($nomeAluno)) {
@@ -59,16 +59,16 @@ $totalAssinantes = $resultadoTotalAssinantes->fetch_assoc()['total'];
 
 //==================== LISTA ASSINANTES ====================
 
-$sqlAssinantes = "SELECT
-                    nome,
-                    celular,
-                    estado,
-                    cidade,
-                    email,
-                    status,
-                    ultimo_acesso,
-                    img
-                  FROM usuarios
+$sqlAssinantes = "SELECT 
+										id, 
+										nome, 
+										email, 
+										celular, 
+										cidade, 
+										estado, 
+										status, 
+										tipo_usuario
+									FROM usuarios
                   WHERE tipo_usuario='assinante'";
 
 
