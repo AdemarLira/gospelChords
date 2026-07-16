@@ -1,3 +1,104 @@
+-- tabela de USUÁRIOS
+CREATE TABLE usuarios (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nome VARCHAR(100) NOT NULL,
+    email VARCHAR(150) NOT NULL UNIQUE,
+    senha VARCHAR(255) NOT NULL,
+    celular VARCHAR(20),
+    status ENUM('pendente','ativo','suspenso','expirado','cancelado'),
+    cidade VARCHAR(100),
+    estado VARCHAR(50),
+    img VARCHAR(255),
+    reset_token VARCHAR(255),
+    reset_expira DATETIME,
+    ultimo_acesso DATETIME,
+
+    tipo_usuario ENUM('admin','usuario') DEFAULT 'usuario',
+
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    updated_at DATETIME DEFAULT CURRENT_TIMESTAMP
+        ON UPDATE CURRENT_TIMESTAMP
+);
+
+
+-- PAGAMENTOS
+CREATE TABLE pagamentos (
+    id_pagamento INT AUTO_INCREMENT PRIMARY KEY,
+    id_assinatura INT NOT NULL,
+    valor DECIMAL(10,2),
+    forma_pagamento ENUM('pix','cartao','boleto'),
+    status ENUM('pendente','pago','estornado','cancelado'),
+    codigo_transacao VARCHAR(255),
+    data_pagamento DATETIME,
+  FOREIGN KEY(id_assinatura)
+  REFERENCES assinaturas(id_assinatura)
+);
+
+
+CREATE TABLE favoritos (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  id_usuario INT,
+  id_cifra INT,
+  data_favorito DATETIME DEFAULT CURRENT_TIMESTAMP,
+
+  FOREIGN KEY(id_usuario)
+  REFERENCES usuarios(id),
+
+  FOREIGN KEY(id_cifra)
+  REFERENCES cifras(id)
+
+);
+
+CREATE TABLE historico_download (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  id_usuario INT,
+  id_cifra INT,
+  data_download DATETIME DEFAULT CURRENT_TIMESTAMP,
+  ip VARCHAR(45),
+
+  FOREIGN KEY(id_usuario)
+  REFERENCES usuarios(id),
+
+  FOREIGN KEY(id_cifra)
+  REFERENCES cifras(id)
+);
+
+CREATE TABLE categorias (
+  id_categoria INT AUTO_INCREMENT PRIMARY KEY,
+  nome VARCHAR(80)
+);
+
+CREATE TABLE cifra_categoria (
+id_cifra INT,
+id_categoria INT,
+
+PRIMARY KEY(id_cifra,id_categoria),
+
+FOREIGN KEY(id_cifra)
+REFERENCES cifras(id),
+
+FOREIGN KEY(id_categoria)
+REFERENCES categorias(id_categoria)
+);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -93,26 +194,35 @@ UPDATE usuarios
 SET status = 'ativo'
 WHERE id = 5;
 
-  
-CREATE TABLE cifras (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    nome_musica VARCHAR(150) NOT NULL,
-    autor VARCHAR(150) NOT NULL,
-    versao VARCHAR(100),
-    tipo ENUM('cifra', 'tablatura', 'partitura') DEFAULT 'cifra',
-    arquivo VARCHAR(255) NOT NULL,
-    id_usuario INT NOT NULL,
-    status ENUM('pendente','aprovada','rejeitada') DEFAULT 'pendente',
-    observacao TEXT NULL,
-    data_envio DATETIME DEFAULT CURRENT_TIMESTAMP,
-    data_analise DATETIME NULL,
+  CREATE TABLE cifras (
+      id INT AUTO_INCREMENT PRIMARY KEY,
 
-    CONSTRAINT fk_cifra_usuario
-        FOREIGN KEY (id_usuario)
-        REFERENCES usuarios(id)
-        ON DELETE CASCADE
-);
+      nome_musica VARCHAR(150) NOT NULL,
+      autor VARCHAR(150) NOT NULL,
+      versao VARCHAR(100),
+      tom VARCHAR(10),
 
+      tipo ENUM('cifra','tablatura','partitura') DEFAULT 'cifra',
+
+      arquivo VARCHAR(255) NOT NULL,
+      tipo_arquivo ENUM('pdf','doc','docx') NOT NULL,
+      tamanho_arquivo INT DEFAULT NULL,
+
+      id_usuario INT NOT NULL,
+
+      status ENUM('pendente','aprovada','rejeitada') DEFAULT 'pendente',
+      observacao TEXT DEFAULT NULL,
+
+      downloads INT DEFAULT 0,
+
+      data_envio DATETIME DEFAULT CURRENT_TIMESTAMP,
+      data_analise DATETIME DEFAULT NULL,
+
+      CONSTRAINT fk_cifra_usuario
+          FOREIGN KEY (id_usuario)
+          REFERENCES usuarios(id)
+          ON DELETE CASCADE
+  );
 | Campo          | Função                                          |
 | -------------- | ----------------------------------------------- |
 | `id`           | Identificador da cifra.                         |

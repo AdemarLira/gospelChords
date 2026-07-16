@@ -77,11 +77,10 @@
                 <div class="mb-3">
                   <label class="form-label">Tipo de acesso</label>
 
-                  <select name="tipo_usuario" class="form-select" required>
-                      <option value="">Selecione</option>
-                      <option name="tipo_usuario" value="aluno" >Curso Completo</option>
-                      <option name="tipo_usuario" value="assinante">Assinante (R$ 7,00/mês)</option>
-                  </select>
+                    <select name="plano">
+                      <option value="1">Curso Completo</option>
+                      <option value="2">Plano Mensal</option>
+                    </select>
                 </div>
               </div>
               

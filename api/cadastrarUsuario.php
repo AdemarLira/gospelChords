@@ -16,21 +16,9 @@ try {
     $celular = preg_replace('/\D/', '', $_POST['celular']);
     $cidade   = trim($_POST["cidade"]);
     $estado   = trim($_POST["estado"]);
-    $tipoUsuario = trim($_POST["tipo_usuario"]);
+    $tipoUsuario = "usuario";
 
-    switch ($tipoUsuario) {
-
-        case "aluno":
-            $plano = 1;
-            break;
-
-        case "assinante":
-            $plano = 2;
-            break;
-
-        default:
-            throw new Exception("Tipo de usuário inválido.");
-        }
+    $plano = (int) $_POST["plano"];
 
      $status = "pendente";
      
@@ -83,39 +71,38 @@ try {
     // Inserir usuário
     $status = 'pendente';
     
-    $sql = "INSERT INTO usuarios
-    (
-        nome,
-        email,
-        senha,
-        celular,
-        cidade,
-        estado,
-        status,
-        tipo_usuario,
-        datahora_cadastro,
-        img
-    )
-    VALUES
-    (
-        ?,?,?,?,?,?,?,?,NOW(),?
-    )";
+  $sql = "INSERT INTO usuarios
+            (
+                nome,
+                email,
+                senha,
+                celular,
+                status,
+                cidade,
+                estado,
+                img,
+                tipo_usuario
+            )
+            VALUES
+            (
+                ?, ?, ?, ?, ?, ?, ?, ?, ?
+            )";
 
     $stmt = mysqli_prepare($conn, $sql);
 
     mysqli_stmt_bind_param(
-        $stmt,
-        "sssssssss",
-        $nome,
-        $email,
-        $senhaHash,
-        $celular,
-        $cidade,
-        $estado,
-        $status,
-        $tipoUsuario,
-        $imagem
-    );
+            $stmt,
+            "sssssssss",
+            $nome,
+            $email,
+            $senhaHash,
+            $celular,
+            $status,
+            $cidade,
+            $estado,
+            $imagem,
+            $tipoUsuario
+        );
 
     if (!mysqli_stmt_execute($stmt)) {
         throw new Exception(mysqli_error($conn));
@@ -127,27 +114,36 @@ try {
     $idUsuario = mysqli_insert_id($conn);
 
     // Criar assinatura
-    $statusAssinatura = "ativa";
+   $statusAssinatura = "pendente";
 
-    $sql = "INSERT INTO assinaturas
-    (
-        id_usuario,
-        id_plano,
-        data_inicio,
-        status
-    )
-    VALUES
-    (
-        ?,?,NOW(),?
-    )";
+        // Enquanto o usuário ainda não pagou
+       $formaPagamento = "nenhum";
+       
+        // Renovação automática ligada por padrão
+        $renovacao = 1;
 
+        $sql = "INSERT INTO assinaturas
+        (
+            id_usuario,
+            id_plano,
+            forma_pagamento,
+            renovacao_automatica,
+            data_inicio,
+            status
+        )
+        VALUES
+        (
+            ?, ?, ?, ?, NOW(), ?
+        )";
     $stmt = mysqli_prepare($conn, $sql);
 
     mysqli_stmt_bind_param(
         $stmt,
-        "iis",
+        "iisis",
         $idUsuario,
         $plano,
+        $formaPagamento,
+        $renovacao,
         $statusAssinatura
     );
 
@@ -169,10 +165,7 @@ try {
 
     mysqli_rollback($conn);
 
-    echo "<script>
-            alert('".$e->getMessage()."');
-            history.back();
-          </script>";
+    die("Erro: " . $e->getMessage());
 }
 
 mysqli_close($conn);

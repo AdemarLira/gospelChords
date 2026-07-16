@@ -18,53 +18,32 @@ include("includes/menu_aluno.php");
   
 
   <!-- MODAL ENVIAR CIFRA -->
-<div class="modal fade" id="modal-upload" tabindex="-1" aria-labelledby="uploadModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        
-        <div class="modal-header">
-          <h5 class="modal-title" id="uploadModalLabel">Enviar Cifra</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
-        </div>
-        
-        <div class="modal-body">
-          <div class="input-group input-group-sm mb-3">
-            <span class="input-group-text" id="inputGroup-sizing-sm">Música</span>
-            <input type="text" class="form-control" id="nome_musica" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
-          </div>
-          <div class="input-group input-group-sm mb-3">
-            <span class="input-group-text" id="inputGroup-sizing-sm">Autor</span>
-            <input type="text" class="form-control" id="autor" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
-          </div>
-          <div class="input-group input-group-sm mb-3">
-            <span class="input-group-text" id="inputGroup-sizing-sm">Versão</span>
-            <input type="text" class="form-control" id="versao" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
-          </div>
-          <div class="form-check">
-            <input class="form-check-input" type="radio" name="radioDefault" id="radioDefault1">
-            <label class="form-check-label" for="radioDefault1">
-              Simplificada
-            </label>
-          </div>
-          <div class="form-check">
-            <input class="form-check-input" type="radio" name="radioDefault" id="radioDefault2" checked>
-            <label class="form-check-label" for="radioDefault2">
-              Padrão
-            </label>
-          </div>
-          <br>
-          <div class="input-group mb-3">
-            <input type="file" class="form-control" id="upload_cifra">
-            <label class="input-group-text" for="inputGroupFile02">Upload</label>
-          </div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-          <button type="button" class="btn btn-primary" onclick="enviarCifra()">Enviar</button>
-        </div>
-      </div>
-    </div>
-  </div>
+<form action="../api/enviar_cifra.php" method="POST" enctype="multipart/form-data">
+
+    <input type="text" name="nome_musica" class="form-control" placeholder="Nome da música" required>
+
+    <input type="text" name="autor" class="form-control" placeholder="Autor" required>
+
+    <input type="text" name="versao" class="form-control" placeholder="Versão">
+
+    <select name="tipo" class="form-select">
+        <option value="cifra">Cifra</option>
+        <option value="tablatura">Tablatura</option>
+        <option value="partitura">Partitura</option>
+    </select>
+
+    <input
+        type="file"
+        name="arquivo"
+        accept=".doc,.docx"
+        class="form-control"
+        required>
+
+    <button class="btn btn-success">
+        Enviar
+    </button>
+
+</form>
 
     <!-- ASSINATURAS -->
     <div id="assinaturas" class="container mt-4" style="display: none;">
