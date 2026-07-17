@@ -76,12 +76,18 @@
               <label>Escolha seu plano</label>
                 <div class="mb-3">
                   <label class="form-label">Tipo de acesso</label>
-
                     <select name="plano">
                       <option value="1">Curso Completo</option>
                       <option value="2">Plano Mensal</option>
                     </select>
                 </div>
+
+                <label class="form-label">Forma de pagamento</label>
+                    <select name="plano">
+                      <option value="1">Pix</option>
+                      <option value="2">Cartão</option>
+                      <option value="2">Boleto</option>
+                    </select>
               </div>
               
               <div class="acoes">
@@ -223,10 +229,7 @@ campoCelular.addEventListener('input', function(){
         );
 
     }
-
-
     this.value = valor;
-
 });
 
 </script>

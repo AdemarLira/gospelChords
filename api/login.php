@@ -10,7 +10,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = $_POST['email'];
     $senha = $_POST['senha'];
 
-    $sql = "SELECT * FROM usuarios WHERE email = ?";
+   $sql = "SELECT 
+            u.*,
+            a.id_plano
+        FROM usuarios u
+        LEFT JOIN assinaturas a ON a.id_usuario = u.id
+        WHERE u.email = ?";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("s", $email);
     $stmt->execute();
@@ -29,8 +34,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 exit();
             }
 
-            if ($usuario['status'] == 'inativo') {
-                header("Location: ../index.php?erro=inativo");
+            if ($usuario['status'] == 'suspenso') {
+                header("Location: ../index.php?erro=suspenso");
                 exit();
             }
 
@@ -39,14 +44,30 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $_SESSION['usuario_email'] = $usuario['email'];
             $_SESSION['img'] = $usuario['img'];
             $_SESSION['tipo_usuario'] = $usuario['tipo_usuario'];
+            $_SESSION['id_plano'] = $usuario['id_plano'];
 
             if ($usuario['tipo_usuario'] == 'admin') {
-                header("Location: ../admin/dashboard_adm.php");
-            } elseif ($usuario['tipo_usuario'] == 'aluno') {
+
+    header("Location: ../admin/dashboard_adm.php");
+    exit();
+
+    }
+
+    if ($usuario['tipo_usuario'] == 'usuario') {
+
+        switch ($usuario['id_plano']) {
+            case 1: // Curso Completo
                 header("Location: ../aluno/dashboard_aluno.php");
-            } elseif ($usuario['tipo_usuario'] == 'assinante') {
+                break;
+            case 2: // Plano Mensal
                 header("Location: ../assinante/dashboard_assinante.php");
-            }
+                break;
+            default:
+                header("Location: ../index.php?erro=plano");
+                break;
+        }
+    exit();
+    }
 
             exit();
 

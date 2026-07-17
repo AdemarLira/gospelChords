@@ -54,7 +54,7 @@ include('conexao.php');
 
     $stmt2->execute();
 
-    $link="http://localhost/dashboard/projetos/gospel_chords-main/reset_senha.php?token=".$token;
+    $link="http://localhost/dashboard/projetos/gospelChords/reset_senha.php?token=".$token;
 
       $mail = new PHPMailer(true);
 
