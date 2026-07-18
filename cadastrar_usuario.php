@@ -119,7 +119,7 @@ if (!$resultPlanos) {
           </div>
         </div>
     </div>
-  <script src="admin/assets/js/functions.js"></script>
+  <script src="assets/js/functions.js"></script>
   
   <script >
  const celular = document.getElementById("celular");
