@@ -37,7 +37,7 @@ C:.
 │           
 ├───api
 │   │   atualizar_senha.php
-│   │   cadastrarUsuario.php
+│   │   cadastrar_usuario.php
 │   │   conexao.php
 │   │   database.sql
 │   │   envioCifra.php

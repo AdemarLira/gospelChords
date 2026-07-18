@@ -12,72 +12,11 @@ if (!isset($_SESSION['usuario_id'])) {
     exit();
 }
 
-// Quantidade total de alunos
-// Alunos
-$totalAlunos = $conn->query("
-SELECT COUNT(*) total
-FROM usuarios
-WHERE tipo_cadastro='aluno'
-")->fetch_assoc()['total'];
-
-// Assinantes
-$totalAssinantes = $conn->query("
-SELECT COUNT(*) total
-FROM usuarios
-WHERE tipo_cadastro='assinante'
-")->fetch_assoc()['total'];
-
-// Cursos
-$totalCursos = $conn->query("
-SELECT COUNT(*) total
-FROM cursos
-")->fetch_assoc()['total'];
-
-// Cifras
-$totalCifras = $conn->query("
-SELECT COUNT(*) total
-FROM cifras
-")->fetch_assoc()['total'];
-
-// tablaturas
-$totalTablaturas = $conn->query("
-SELECT COUNT(*) total
-FROM tablaturas
-")->fetch_assoc()['total'];
-
-// Partituras
-$totalPartituras = $conn->query("
-SELECT COUNT(*) total
-FROM partituras
-")->fetch_assoc()['total'];
-
-// Usuários ativos
-$totalAtivos = $conn->query("
-SELECT COUNT(*) AS total
-FROM usuarios
-WHERE status = 'ativo'
-AND tipo_usuario <> 'admin'
-")->fetch_assoc()['total'];
-
-// Pendentes
-$totalPendentes = $conn->query("
-SELECT COUNT(*) AS total
-FROM usuarios
-WHERE status = 'pendente'
-AND tipo_usuario <> 'admin'
-")->fetch_assoc()['total'];
-
-// Quantidade total de assinantes
-$sqlAssinantes = "SELECT COUNT(*) AS total
-                  FROM usuarios
-                  WHERE tipo_cadastro = 'assinante'";
-$resultadoAssinantes = $conn->query($sqlAssinantes);
-$totalAssinantes = $resultadoAssinantes->fetch_assoc()['total'];
 
 require_once(__DIR__ . "/includes/verifica_admin.php");
+include("includes/dashboard_adm_consultas.php");
 include(__DIR__ . "/includes/header_adm.php");
 include(__DIR__ . "/includes/menu_adm.php");
-
 ?>
 
 <div class="container-fluid mt-4">
@@ -86,77 +25,76 @@ include(__DIR__ . "/includes/menu_adm.php");
 	</h2>
 
 	<div class="row g-4">
-
     <div class="col-lg-3 col-md-6">
-        <div class="card shadow-sm border-0">
-            <div class="card-body text-center">
-                <h5>👨‍🎓 Alunos</h5>
-                <h2><?= $totalAlunos ?></h2>
-            </div>
-        </div>
+			<div class="card shadow-sm border-0">
+				<div class="card-body text-center">
+					<h5>👨‍🎓 Alunos</h5>
+					<h2><?= $totalAlunos ?></h2>
+				</div>
+			</div>
     </div>
 
     <div class="col-lg-3 col-md-6">
-        <div class="card shadow-sm border-0">
-            <div class="card-body text-center">
-                <h5>💳 Assinantes</h5>
-                <h2><?= $totalAssinantes ?></h2>
-            </div>
-        </div>
+			<div class="card shadow-sm border-0">
+				<div class="card-body text-center">
+					<h5>💳 Assinantes</h5>
+					<h2><?= $totalAssinantes ?></h2>
+				</div>
+			</div>
     </div>
 
     <div class="col-lg-3 col-md-6">
-        <div class="card shadow-sm border-0">
-            <div class="card-body text-center">
-                <h5>📚 Cursos</h5>
-                <h2><?= $totalCursos ?></h2>
-            </div>
-        </div>
+			<div class="card shadow-sm border-0">
+				<div class="card-body text-center">
+					<h5>📚 Cursos</h5>
+					<h2><?= $totalCursos ?></h2>
+				</div>
+			</div>
     </div>
 
     <div class="col-lg-3 col-md-6">
-        <div class="card shadow-sm border-0">
-            <div class="card-body text-center">
-                <h5>🎼 Cifras</h5>
-                <h2><?= $totalCifras ?></h2>
-            </div>
-        </div>
+			<div class="card shadow-sm border-0">
+				<div class="card-body text-center">
+					<h5>🎼 Cifras</h5>
+					<h2><?= $totalCifras ?></h2>
+				</div>
+			</div>
     </div>
 
     <div class="col-lg-3 col-md-6">
-        <div class="card shadow-sm border-0">
-            <div class="card-body text-center">
-                <h5>🎸 Tablaturas</h5>
-                <h2><?= $totalTablaturas ?></h2>
-            </div>
-        </div>
+			<div class="card shadow-sm border-0">
+				<div class="card-body text-center">
+					<h5>🎸 Tablaturas</h5>
+					<h2><?= $totalTablaturas ?></h2>
+				</div>
+			</div>
     </div>
 
     <div class="col-lg-3 col-md-6">
-        <div class="card shadow-sm border-0">
-            <div class="card-body text-center">
-                <h5>🎼 Partituras</h5>
-                <h2><?= $totalPartituras ?></h2>
-            </div>
-        </div>
+			<div class="card shadow-sm border-0">
+				<div class="card-body text-center">
+					<h5>🎼 Partituras</h5>
+					<h2><?= $totalPartituras ?></h2>
+				</div>
+			</div>
     </div>
 
     <div class="col-lg-3 col-md-6">
-        <div class="card shadow-sm border-0">
-            <div class="card-body text-center">
-                <h5>✅ Usuários Ativos</h5>
-                <h2><?= $totalAtivos ?></h2>
-            </div>
-        </div>
+			<div class="card shadow-sm border-0">
+				<div class="card-body text-center">
+					<h5>✅ Usuários Ativos</h5>
+					<h2><?= $totalAtivos ?></h2>
+				</div>
+			</div>
     </div>
 
     <div class="col-lg-3 col-md-6">
-        <div class="card shadow-sm border-0">
-            <div class="card-body text-center">
-                <h5>⏳ Pendentes</h5>
-                <h2><?= $totalPendentes ?></h2>
-            </div>
-        </div>
+			<div class="card shadow-sm border-0">
+				<div class="card-body text-center">
+					<h5>⏳ Pendentes</h5>
+					<h2><?= $totalPendentes ?></h2>
+				</div>
+			</div>
     </div>
 
 </div>

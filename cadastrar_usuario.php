@@ -2,8 +2,8 @@
   include_once("api/conexao.php");
 
   $sqlPlanos = "SELECT id, nome FROM planos
-              WHERE status = 'ativo'
-              ORDER BY id";
+                    WHERE status = 'ativo'
+                    ORDER BY id";
 
 $resultPlanos = mysqli_query($conn, $sqlPlanos);
 
@@ -39,7 +39,7 @@ if (!$resultPlanos) {
               <p>Faça parte da comunidade Gospel Chords 🎸</p>
           </div>
   
-              <form class="form-cadastro" action="api/cadastrarUsuario.php" method="POST" enctype="multipart/form-data">
+              <form class="form-cadastro" action="api/cadastrar_usuario.php" method="POST" enctype="multipart/form-data">
                 <div class="campos">
                   <div class="campo">
                     <label>Nome</label>

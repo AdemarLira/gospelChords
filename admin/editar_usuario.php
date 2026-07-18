@@ -6,7 +6,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $id = $_POST['id'];
     $nome = $_POST['nome'];
     $email = $_POST['email'];
-   $celular = preg_replace('/\D/', '', $_POST['celular']);
+    $celular = preg_replace('/\D/', '', $_POST['celular']);
     $cidade = $_POST['cidade'];
     $estado = $_POST['estado'];
     $status = $_POST['status'];
