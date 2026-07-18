@@ -57,22 +57,49 @@ function renderTabelaUsuarios($resultado){
 											'</span>';
 									?>
 							</td>
-                <td>
-                    <button
-											class="btn btn-warning btn-sm btn-editar"
-											data-bs-toggle="modal"
-											data-bs-target="#modalEditar"
-											data-id="<?= $usuario['id'] ?>"
-											data-nome="<?= htmlspecialchars($usuario['nome']) ?>"
-											data-email="<?= htmlspecialchars($usuario['email']) ?>"
-											data-celular="<?= htmlspecialchars($usuario['celular']) ?>"
-											data-cidade="<?= htmlspecialchars($usuario['cidade']) ?>"
-											data-estado="<?= htmlspecialchars($usuario['estado']) ?>"
-											data-status="<?= $usuario['status'] ?>"
-											data-tipo="<?= $usuario['tipo_usuario'] ?>">
-											<i class="fas fa-edit"></i> Editar
-									</button>
-                </td>
+							<td>
+
+							<!-- Botão Editar -->
+							<button
+								class="btn btn-warning btn-sm btn-editar"
+								data-bs-toggle="modal"
+								data-bs-target="#modalEditar"
+								data-id="<?= $usuario['id'] ?>"
+								data-nome="<?= htmlspecialchars($usuario['nome']) ?>"
+								data-email="<?= htmlspecialchars($usuario['email']) ?>"
+								data-celular="<?= htmlspecialchars($usuario['celular']) ?>"
+								data-cidade="<?= htmlspecialchars($usuario['cidade']) ?>"
+								data-estado="<?= htmlspecialchars($usuario['estado']) ?>"
+								data-status="<?= $usuario['status'] ?>"
+								data-tipo="<?= $usuario['tipo_usuario'] ?>">
+
+								<i class="fas fa-edit"></i> Editar
+
+							</button>
+
+							<!-- Botão Excluir -->
+							<form
+								action="excluir_usuario.php"
+								method="POST"
+								style="display:inline-block"
+								onsubmit="return confirm('Deseja realmente excluir este usuário?');">
+
+								<input
+									type="hidden"
+									name="id"
+									value="<?= $usuario['id'] ?>">
+
+								<button
+									type="submit"
+									class="btn btn-danger btn-sm">
+
+									<i class="fas fa-trash"></i> Excluir
+
+								</button>
+
+							</form>
+
+						</td>
             </tr>
         <?php endwhile; ?>
         </tbody>

@@ -39,6 +39,34 @@ SELECT COUNT(*) total
 FROM cifras
 ")->fetch_assoc()['total'];
 
+// tablaturas
+$totalTablaturas = $conn->query("
+SELECT COUNT(*) total
+FROM tablaturas
+")->fetch_assoc()['total'];
+
+// Partituras
+$totalPartituras = $conn->query("
+SELECT COUNT(*) total
+FROM partituras
+")->fetch_assoc()['total'];
+
+// Usuários ativos
+$totalAtivos = $conn->query("
+SELECT COUNT(*) AS total
+FROM usuarios
+WHERE status = 'ativo'
+AND tipo_usuario <> 'admin'
+")->fetch_assoc()['total'];
+
+// Pendentes
+$totalPendentes = $conn->query("
+SELECT COUNT(*) AS total
+FROM usuarios
+WHERE status = 'pendente'
+AND tipo_usuario <> 'admin'
+")->fetch_assoc()['total'];
+
 // Quantidade total de assinantes
 $sqlAssinantes = "SELECT COUNT(*) AS total
                   FROM usuarios
