@@ -23,18 +23,10 @@
 <!-- HEADER SOCIAL __________________________________________________________________________-->
 <div class="header">
   <div class="navigation_social">
-    <a href="https://wa.me/5583998603238" target="_blank">
-      <i class="fab fa-whatsapp"></i>
-    </a>
-    <a href="https://www.instagram.com/ademarlneto" target="_blank">
-      <i class="fab fa-instagram"></i>
-    </a>
-    <a href="https://www.youtube.com/@ademarlneto" target="_blank">
-      <i class="fab fa-youtube"></i>
-    </a>
-     <a href="https://www.tiktok.com/@ademarliraneto" target="_blank">
-      <i class="fab fa-tiktok"></i> 
-    </a>
+    <a href="https://wa.me/5583998603238" target="_blank"><i class="fab fa-whatsapp"></i></a>
+    <a href="https://www.instagram.com/ademarlneto" target="_blank"><i class="fab fa-instagram"></i></a>
+    <a href="https://www.youtube.com/@ademarlneto" target="_blank"><i class="fab fa-youtube"></i></a>
+    <a href="https://www.tiktok.com/@ademarliraneto" target="_blank"><i class="fab fa-tiktok"></i> </a>
   </div>
 </div>
 
@@ -42,9 +34,7 @@
 <div class="pagina">
   <div class="coluna-infos">
     <div class="main_info">
-      <p style="font-size: 25pt;">
-        <strong>Bem-vindo ao Gospel Chord!</strong>
-      </p>
+      <p style="font-size: 25pt;"><strong>Bem-vindo ao Gospel Chord!</strong></p>
       <p>Que você possa ser abençoado e abençoar vidas.</p>
       <p>Funcionalidades disponíveis:</p>
 

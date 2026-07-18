@@ -43,15 +43,14 @@
 							<h5>Plano Mensal</h5>
 							<h2>R$ 7,00</h2>
 								<p class="texto-preco">por mês</p>
-
-									<ul>
-										<li><i class="fa-solid fa-check"></i> Acesso às cifras</li>
-										<li><i class="fa-solid fa-check"></i> Tablaturas</li>
-										<li><i class="fa-solid fa-check"></i> Atualizações semanais</li>
-										<li><i class="fa-solid fa-check"></i> Pesquisa rápida</li>
-										<li><i class="fa-solid fa-check"></i> Favoritos</li>
-										<li><i class="fa-solid fa-check"></i> Lista de músicas limitada</li>
-									</ul>
+								<ul>
+									<li><i class="fa-solid fa-check"></i> Acesso às cifras</li>
+									<li><i class="fa-solid fa-check"></i> Tablaturas</li>
+									<li><i class="fa-solid fa-check"></i> Atualizações semanais</li>
+									<li><i class="fa-solid fa-check"></i> Pesquisa rápida</li>
+									<li><i class="fa-solid fa-check"></i> Favoritos</li>
+									<li><i class="fa-solid fa-check"></i> Lista de músicas limitada</li>
+								</ul>
 							<a href="https://wa.me/5583998603238?text=Olá!%20👋%0A%0AAcabei%20de%20acessar%20o%20Gospel%20Chords%20e%20quero%20assinar%20o%20Plano%20mensal.%20Pode%20me%20passar%20todas%20as%20informações?"
 							target="_blank"
 							class="btn btn-warning w-100 btn-curso">

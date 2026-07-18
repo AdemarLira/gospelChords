@@ -39,22 +39,21 @@ if (!$resultPlanos) {
               <p>Faça parte da comunidade Gospel Chords 🎸</p>
           </div>
   
-              <form class="form-cadastro" action="api/cadastrar_usuario.php" method="POST" enctype="multipart/form-data">
-                <div class="campos">
-                  <div class="campo">
-                    <label>Nome</label>
-                    <input type="text" name="nome" placeholder="Digite seu nome" required>
-                  </div>
+					<form class="form-cadastro" action="api/cadastrar_usuario.php" method="POST" enctype="multipart/form-data">
+						<div class="campos">
 
+							<div class="campo">
+								<label>Nome</label>
+								<input type="text" name="nome" placeholder="Digite seu nome" required>
+							</div>
               <div class="campo">
                 <label>Email</label>
                   <input type="email" name="email" placeholder="Digite seu e-mail" required>
                 </div>
               <div class="campo">
                 <label>Senha</label>
-                <input 
-                  type="password"name="senha" placeholder="Crie uma senha" required>
-                </div>
+                <input type="password"name="senha" placeholder="Crie uma senha" required>
+              </div>
 
               <div class="campo">
                 <label>Celular</label>
@@ -63,25 +62,25 @@ if (!$resultPlanos) {
             </div>
 
             <div class="linha">
-                <div class="campo">
-                  <label>Estado</label>
-                    <select id="estado" name="estado" required>
-                          <option value="">Selecione um estado</option>
-                    </select>
-                  </div>
+							<div class="campo">
+								<label>Estado</label>
+									<select id="estado" name="estado" required>
+										<option value="">Selecione um estado</option>
+									</select>
+								</div>
 
-                  <div class="campo" id="campo-cidade" style="display:none;">
-                      <label>Cidade</label>
-                      <select id="cidade" name="cidade" required>
-                          <option value="">Selecione uma cidade</option>
-                      </select>
-                  </div>
-              
-                    <div class="campo foto">
-                      <label>Foto de perfil</label>
-                      <input type="file" name="foto"accept="image/*">
-                    </div>
-                  </div>
+								<div class="campo" id="campo-cidade" style="display:none;">
+									<label>Cidade</label>
+										<select id="cidade" name="cidade" required>
+											<option value="">Selecione uma cidade</option>
+										</select>
+								</div>
+						
+									<div class="campo foto">
+										<label>Foto de perfil</label>
+											<input type="file" name="foto"accept="image/*">
+									</div>
+								</div>
 
               <div class="campo">
               <label>Escolha seu plano</label>
@@ -101,19 +100,15 @@ if (!$resultPlanos) {
 
                 <label class="form-label">Forma de pagamento</label>
                   <select name="forma_pagamento" class="form-select">
-                      <option value="pix">Pix</option>
-                      <option value="cartao">Cartão</option>
-                      <option value="boleto">Boleto</option>
+										<option value="pix">Pix</option>
+										<option value="cartao">Cartão</option>
+										<option value="boleto">Boleto</option>
                   </select>
               </div>
               
               <div class="acoes">
-                <button type="submit" class="btn-criar">
-                  Criar conta
-                </button>
-                  <a href="index.php" class="btn-cancelar">
-                    Cancelar
-                  </a>
+                <button type="submit" class="btn-criar">Criar conta</button>
+                  <a href="index.php" class="btn-cancelar">Cancelar</a>
               </div>
             </form>
           </div>
@@ -224,27 +219,22 @@ campoCelular.addEventListener('input', function(){
 
     // remove tudo que não for número
     valor = valor.replace(/\D/g,'');
-
+		
     // limita a 11 números
     valor = valor.substring(0,11);
 
-
     if(valor.length <= 10){
-
         // telefone fixo
         valor = valor.replace(
             /^(\d{2})(\d{4})(\d{0,4})/,
             '($1) $2-$3'
         );
-
     } else {
-
         // celular
         valor = valor.replace(
             /^(\d{2})(\d{5})(\d{0,4})/,
             '($1) $2-$3'
         );
-
     }
     this.value = valor;
 });

@@ -24,25 +24,17 @@
   
     <div class="header">
       <div class="navigation_social">
-        <a href="https://wa.me/5583998603238" target="_blank">
-          <i class="fab fa-whatsapp"></i>
-        </a>
-        <a href="https://www.instagram.com/ademarlneto" target="_blank">
-          <i class="fab fa-instagram"></i>
-        </a>
-        <a href="https://www.youtube.com/@ademarlneto" target="_blank">
-          <i class="fab fa-youtube"></i>
-        </a>
-        <a href="https://www.tiktok.com/@ademarliraneto" target="_blank">
-          <i class="fab fa-tiktok"></i> 
-        </a>
+        <a href="https://wa.me/5583998603238" target="_blank"><i class="fab fa-whatsapp"></i></a>
+        <a href="https://www.instagram.com/ademarlneto" target="_blank"><i class="fab fa-instagram"></i></a>
+        <a href="https://www.youtube.com/@ademarlneto" target="_blank"><i class="fab fa-youtube"></i></a>
+        <a href="https://www.tiktok.com/@ademarliraneto" target="_blank"><i class="fab fa-tiktok"></i> </a>
       </div>
     </div>
  <!-- COLUNA DO FORMULÁRIO -->
     <div class="coluna-formulario">
       <form class="form-login" method="POST" action="api/esqueci_senha.php">
         <h3 class="mb-4">Atualizar senha</h3>
-
+        
         <div class="mb-3">
           <label for="email" class="form-label">E-mail</label>
           <input type="email" class="form-control" name="email" placeholder="Digite seu e-mail" required>
