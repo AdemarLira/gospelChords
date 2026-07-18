@@ -23,17 +23,18 @@ $statusAssinante = $_GET['status_assinante'] ?? '';
 
 //==================== LISTA ALUNOS ====================
 
-$sqlAlunos = "SELECT 
-								id, 
-								nome, 
-								email, 
-								celular, 
-								cidade, 
-								estado, 
-								status, 
-								tipo_usuario
-							FROM usuarios
-              WHERE tipo_usuario='aluno'";
+$sqlAlunos = "SELECT
+					id,
+					nome,
+					email,
+					celular,
+					cidade,
+					estado,
+					status,
+					tipo_usuario,
+					img
+				FROM usuarios
+				WHERE tipo_usuario='aluno'";
 
 if (!empty($nomeAluno)) {
     $nomeAluno = $conn->real_escape_string($nomeAluno);
@@ -59,17 +60,18 @@ $totalAssinantes = $resultadoTotalAssinantes->fetch_assoc()['total'];
 
 //==================== LISTA ASSINANTES ====================
 
-$sqlAssinantes = "SELECT 
-										id, 
-										nome, 
-										email, 
-										celular, 
-										cidade, 
-										estado, 
-										status, 
-										tipo_usuario
-									FROM usuarios
-                  WHERE tipo_usuario='assinante'";
+$sqlAssinantes = "SELECT
+						id,
+						nome,
+						email,
+						celular,
+						cidade,
+						estado,
+						status,
+						tipo_usuario,
+						img
+					FROM usuarios
+					WHERE tipo_usuario='assinante'";
 
 
 if (!empty($nomeAssinante)) {
@@ -254,12 +256,13 @@ id="editar_email">
 
 <div class="mb-3">
 <label>Celular</label>
-<input type="text" 
-       name="celular" 
-       id="celular" 
-       class="form-control"
-       maxlength="15"
-       placeholder="(83) 99999-9999">
+<input
+    type="text"
+    name="celular"
+    id="editar_celular"
+    class="form-control"
+    maxlength="15"
+    placeholder="(83) 99999-9999">
 </div>
 
 
@@ -291,7 +294,7 @@ id="editar_status">
 <option value="ativo">Ativo</option>
 <option value="pendente">Pendente</option>
 <option value="suspenso">Suspenso</option>
-<option value="suspenso">Expirado</option>
+<option value="expirado">Expirado</option>
 <option value="cancelado">Cancelado</option>
 
 </select>
@@ -329,24 +332,24 @@ Cancelar
 
 
 <script> 
- document.querySelectorAll('.btn-editar').forEach(botao => {
+	const modal = document.getElementById('modalEditar');
 
-botao.addEventListener('click', function(){
+	modal.addEventListener('show.bs.modal', function(event){
 
-document.getElementById('editar_id').value = this.dataset.id;
-document.getElementById('editar_nome').value = this.dataset.nome;
-document.getElementById('editar_email').value = this.dataset.email;
-document.getElementById('editar_celular').value = this.dataset.celular;
-document.getElementById('editar_cidade').value = this.dataset.cidade;
-document.getElementById('editar_estado').value = this.dataset.estado;
-document.getElementById('editar_status').value = this.dataset.status;
+		const botao = event.relatedTarget;
 
-});
+		document.getElementById('editar_id').value = botao.dataset.id;
+		document.getElementById('editar_nome').value = botao.dataset.nome;
+		document.getElementById('editar_email').value = botao.dataset.email;
+		document.getElementById('editar_celular').value = botao.dataset.celular;
+		document.getElementById('editar_cidade').value = botao.dataset.cidade;
+		document.getElementById('editar_estado').value = botao.dataset.estado;
+		document.getElementById('editar_status').value = botao.dataset.status;
 
-});
+	});
 
 
-const campoCelular = document.getElementById('celular');
+const campoCelular = document.getElementById('editar_celular');
 
 campoCelular.addEventListener('input', function(){
 

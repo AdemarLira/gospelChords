@@ -82,17 +82,25 @@ function renderTabelaUsuarios($resultado){
 <?php
 }
 
-?>
-<script>function formatarCelular($numero){
+
+function formatarCelular($numero){
+
+    $numero = preg_replace('/\D/', '', $numero);
 
     if(strlen($numero)==11){
+        return '('
+            .substr($numero,0,2).') '
+            .substr($numero,2,5).'-'
+            .substr($numero,7,4);
+    }
 
-        return '(' . substr($numero,0,2) . ') '
-        . substr($numero,2,5) . '-'
-        . substr($numero,7,4);
-
+    if(strlen($numero)==10){
+        return '('
+            .substr($numero,0,2).') '
+            .substr($numero,2,4).'-'
+            .substr($numero,6,4);
     }
 
     return $numero;
 }
-</script>
+?>
