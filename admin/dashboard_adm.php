@@ -13,12 +13,36 @@ if (!isset($_SESSION['usuario_id'])) {
 }
 
 // Quantidade total de alunos
-$sqlAlunos = "SELECT COUNT(*) AS total FROM usuarios WHERE tipo_usuario='aluno'";
-$resultadoAlunos = $conn->query($sqlAlunos);
-$totalAlunos = $resultadoAlunos->fetch_assoc()['total'];
+// Alunos
+$totalAlunos = $conn->query("
+SELECT COUNT(*) total
+FROM usuarios
+WHERE tipo_cadastro='aluno'
+")->fetch_assoc()['total'];
+
+// Assinantes
+$totalAssinantes = $conn->query("
+SELECT COUNT(*) total
+FROM usuarios
+WHERE tipo_cadastro='assinante'
+")->fetch_assoc()['total'];
+
+// Cursos
+$totalCursos = $conn->query("
+SELECT COUNT(*) total
+FROM cursos
+")->fetch_assoc()['total'];
+
+// Cifras
+$totalCifras = $conn->query("
+SELECT COUNT(*) total
+FROM cifras
+")->fetch_assoc()['total'];
 
 // Quantidade total de assinantes
-$sqlAssinantes = "SELECT COUNT(*) AS total FROM usuarios WHERE tipo_usuario='assinante'";
+$sqlAssinantes = "SELECT COUNT(*) AS total
+                  FROM usuarios
+                  WHERE tipo_cadastro = 'assinante'";
 $resultadoAssinantes = $conn->query($sqlAssinantes);
 $totalAssinantes = $resultadoAssinantes->fetch_assoc()['total'];
 
@@ -33,43 +57,79 @@ include(__DIR__ . "/includes/menu_adm.php");
 		Dashboard Administrativo
 	</h2>
 
-	<div class="row">
-		<div class="col-md-3">
-			<div class="card shadow-sm">
-				<div class="card-body">
-					<h5>Total de Alunos</h5>
-					<h3><?php echo $totalAlunos; ?></h3>
-				</div>
-			</div>
-		</div>
+	<div class="row g-4">
 
-		<div class="col-md-3">
-			<div class="card shadow-sm">
-				<div class="card-body">
-					<h5>Assinantes</h5>
-					<h3><?php echo $totalAssinantes; ?></h3>
-				</div>
-			</div>
-		</div>
+    <div class="col-lg-3 col-md-6">
+        <div class="card shadow-sm border-0">
+            <div class="card-body text-center">
+                <h5>👨‍🎓 Alunos</h5>
+                <h2><?= $totalAlunos ?></h2>
+            </div>
+        </div>
+    </div>
 
-		<div class="col-md-3">
-			<div class="card shadow-sm">
-				<div class="card-body">
-						<h5>Cursos</h5>
-						<h2>0</h2>
-				</div>
-			</div>
-		</div>
+    <div class="col-lg-3 col-md-6">
+        <div class="card shadow-sm border-0">
+            <div class="card-body text-center">
+                <h5>💳 Assinantes</h5>
+                <h2><?= $totalAssinantes ?></h2>
+            </div>
+        </div>
+    </div>
 
-	<div class="col-md-3">
-		<div class="card shadow-sm">
-			<div class="card-body">
-					<h5>Cifras</h5>
-					<h2>0</h2>
-				</div>
-			</div>
-		</div>
-	</div>
+    <div class="col-lg-3 col-md-6">
+        <div class="card shadow-sm border-0">
+            <div class="card-body text-center">
+                <h5>📚 Cursos</h5>
+                <h2><?= $totalCursos ?></h2>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-3 col-md-6">
+        <div class="card shadow-sm border-0">
+            <div class="card-body text-center">
+                <h5>🎼 Cifras</h5>
+                <h2><?= $totalCifras ?></h2>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-3 col-md-6">
+        <div class="card shadow-sm border-0">
+            <div class="card-body text-center">
+                <h5>🎸 Tablaturas</h5>
+                <h2><?= $totalTablaturas ?></h2>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-3 col-md-6">
+        <div class="card shadow-sm border-0">
+            <div class="card-body text-center">
+                <h5>🎼 Partituras</h5>
+                <h2><?= $totalPartituras ?></h2>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-3 col-md-6">
+        <div class="card shadow-sm border-0">
+            <div class="card-body text-center">
+                <h5>✅ Usuários Ativos</h5>
+                <h2><?= $totalAtivos ?></h2>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-3 col-md-6">
+        <div class="card shadow-sm border-0">
+            <div class="card-body text-center">
+                <h5>⏳ Pendentes</h5>
+                <h2><?= $totalPendentes ?></h2>
+            </div>
+        </div>
+    </div>
+
 </div>
-
 <?php include(__DIR__ . "/includes/footer_adm.php");?>

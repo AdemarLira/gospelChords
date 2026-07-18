@@ -135,7 +135,7 @@ try {
     // Criar assinatura
     // ============================
     $statusAssinatura = "pendente";
-    $formaPagamento = "nenhum";
+    $formaPagamento = $_POST['forma_pagamento'];
     $renovacao = 1;
 
     $sql = "INSERT INTO assinaturas

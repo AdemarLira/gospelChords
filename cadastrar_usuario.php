@@ -1,5 +1,16 @@
 <?php
   include_once("api/conexao.php");
+
+  $sqlPlanos = "SELECT id, nome FROM planos
+              WHERE status = 'ativo'
+              ORDER BY id";
+
+$resultPlanos = mysqli_query($conn, $sqlPlanos);
+
+if (!$resultPlanos) {
+    die("Erro ao carregar os planos: " . mysqli_error($conn));
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -76,18 +87,24 @@
               <label>Escolha seu plano</label>
                 <div class="mb-3">
                   <label class="form-label">Tipo de acesso</label>
-                    <select name="plano">
-                      <option value="1">Curso Completo</option>
-                      <option value="2">Plano Mensal</option>
+                    <select name="plano" class="form-select" required>
+                        <option value="">
+                            Selecione um plano
+                        </option>
+                        <?php while($plano = mysqli_fetch_assoc($resultPlanos)): ?>
+                            <option value="<?= $plano['id'] ?>">
+                                <?= htmlspecialchars($plano['nome']) ?>
+                            </option>
+                        <?php endwhile; ?>
                     </select>
                 </div>
 
                 <label class="form-label">Forma de pagamento</label>
-                    <select name="plano">
-                      <option value="1">Pix</option>
-                      <option value="2">Cartão</option>
-                      <option value="2">Boleto</option>
-                    </select>
+                  <select name="forma_pagamento" class="form-select">
+                      <option value="pix">Pix</option>
+                      <option value="cartao">Cartão</option>
+                      <option value="boleto">Boleto</option>
+                  </select>
               </div>
               
               <div class="acoes">
