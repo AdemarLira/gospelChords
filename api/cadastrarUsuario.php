@@ -9,21 +9,35 @@ if ($_SERVER["REQUEST_METHOD"] !== "POST") {
 mysqli_begin_transaction($conn);
 
 try {
-    // Dados do formulário
-    $nome     = trim($_POST["nome"]);
-    $email    = trim($_POST["email"]);
-    $senha    = $_POST["senha"];
-    $celular = preg_replace('/\D/', '', $_POST['celular']);
-    $cidade   = trim($_POST["cidade"]);
-    $estado   = trim($_POST["estado"]);
-    $tipoUsuario = "usuario";
 
+    // ============================
+    // Dados do formulário
+    // ============================
+    $nome      = trim($_POST["nome"]);
+    $email     = trim($_POST["email"]);
+    $senha     = $_POST["senha"];
+    $celular   = preg_replace('/\D/', '', $_POST["celular"]);
+    $cidade    = trim($_POST["cidade"]);
+    $estado    = trim($_POST["estado"]);
+
+    // Plano escolhido
     $plano = (int) $_POST["plano"];
 
-     $status = "pendente";
-     
-    // Verifica se email existe
+    // Tipo de usuário (permissão)
+    $tipoUsuario = "usuario";
 
+    // Tipo de cadastro (plano)
+    if ($plano == 1) {
+        $tipoCadastro = "aluno";
+    } else {
+        $tipoCadastro = "assinante";
+    }
+
+    $status = "pendente";
+
+    // ============================
+    // Verifica e-mail existente
+    // ============================
     $sql = "SELECT id FROM usuarios WHERE email = ?";
 
     $stmt = mysqli_prepare($conn, $sql);
@@ -33,17 +47,19 @@ try {
     mysqli_stmt_store_result($stmt);
 
     if (mysqli_stmt_num_rows($stmt) > 0) {
-
         throw new Exception("Este e-mail já está cadastrado.");
-
     }
 
     mysqli_stmt_close($stmt);
 
-    // Criptografar senha
+    // ============================
+    // Criptografa senha
+    // ============================
     $senhaHash = password_hash($senha, PASSWORD_DEFAULT);
 
+    // ============================
     // Upload da foto
+    // ============================
     $imagem = "avatar.png";
 
     if (
@@ -62,47 +78,47 @@ try {
         $destino = $diretorio . $novoNome;
 
         if (move_uploaded_file($_FILES["foto"]["tmp_name"], $destino)) {
-
-						// Caminho salvo no banco
-						$imagem = $novoNome;
-				}
+            $imagem = $novoNome;
+        }
     }
 
+    // ============================
     // Inserir usuário
-    $status = 'pendente';
-    
-  $sql = "INSERT INTO usuarios
-            (
-                nome,
-                email,
-                senha,
-                celular,
-                status,
-                cidade,
-                estado,
-                img,
-                tipo_usuario
-            )
-            VALUES
-            (
-                ?, ?, ?, ?, ?, ?, ?, ?, ?
-            )";
+    // ============================
+    $sql = "INSERT INTO usuarios
+    (
+        nome,
+        email,
+        senha,
+        celular,
+        status,
+        cidade,
+        estado,
+        img,
+        tipo_usuario,
+        tipo_cadastro
+    )
+    VALUES
+    (
+        ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
+    )";
 
     $stmt = mysqli_prepare($conn, $sql);
 
     mysqli_stmt_bind_param(
-            $stmt,
-            "sssssssss",
-            $nome,
-            $email,
-            $senhaHash,
-            $celular,
-            $status,
-            $cidade,
-            $estado,
-            $imagem,
-            $tipoUsuario
-        );
+        $stmt,
+        "ssssssssss",
+        $nome,
+        $email,
+        $senhaHash,
+        $celular,
+        $status,
+        $cidade,
+        $estado,
+        $imagem,
+        $tipoUsuario,
+        $tipoCadastro
+    );
 
     if (!mysqli_stmt_execute($stmt)) {
         throw new Exception(mysqli_error($conn));
@@ -110,31 +126,32 @@ try {
 
     mysqli_stmt_close($stmt);
 
+    // ============================
     // ID do usuário criado
+    // ============================
     $idUsuario = mysqli_insert_id($conn);
 
+    // ============================
     // Criar assinatura
-   $statusAssinatura = "pendente";
+    // ============================
+    $statusAssinatura = "pendente";
+    $formaPagamento = "nenhum";
+    $renovacao = 1;
 
-        // Enquanto o usuário ainda não pagou
-       $formaPagamento = "nenhum";
-       
-        // Renovação automática ligada por padrão
-        $renovacao = 1;
+    $sql = "INSERT INTO assinaturas
+    (
+        id_usuario,
+        id_plano,
+        forma_pagamento,
+        renovacao_automatica,
+        data_inicio,
+        status
+    )
+    VALUES
+    (
+        ?, ?, ?, ?, NOW(), ?
+    )";
 
-        $sql = "INSERT INTO assinaturas
-        (
-            id_usuario,
-            id_plano,
-            forma_pagamento,
-            renovacao_automatica,
-            data_inicio,
-            status
-        )
-        VALUES
-        (
-            ?, ?, ?, ?, NOW(), ?
-        )";
     $stmt = mysqli_prepare($conn, $sql);
 
     mysqli_stmt_bind_param(
@@ -153,7 +170,9 @@ try {
 
     mysqli_stmt_close($stmt);
 
-    // Finaliza
+    // ============================
+    // Finaliza transação
+    // ============================
     mysqli_commit($conn);
 
     echo "<script>
@@ -165,7 +184,8 @@ try {
 
     mysqli_rollback($conn);
 
-    die("Erro: " . $e->getMessage());
+    die('Erro: ' . $e->getMessage());
+
 }
 
 mysqli_close($conn);
