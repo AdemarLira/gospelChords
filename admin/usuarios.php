@@ -12,7 +12,7 @@ $statusAluno = $_GET['status_aluno'] ?? '';
 
 $sqlTotalAlunos = "SELECT COUNT(*) AS total
                    FROM usuarios
-                   WHERE tipo_usuario='aluno'";
+                   WHERE tipo_usuario='usuario' and tipo_cadastro='aluno'";
 
 $resultadoTotalAlunos = $conn->query($sqlTotalAlunos);
 $totalAlunos = $resultadoTotalAlunos->fetch_assoc()['total'];
@@ -28,11 +28,14 @@ $sqlAlunos = "SELECT
 								celular,
 								cidade,
 								estado,
-								status,
 								tipo_usuario,
+								tipo_cadastro,
+								status,
+								data_cadastro,
+								ultimo_acesso,
 								img
 							FROM usuarios
-							WHERE tipo_usuario='aluno'";
+							WHERE tipo_cadastro='aluno'";
 
 	if (!empty($nomeAluno)) {
     $nomeAluno = $conn->real_escape_string($nomeAluno);
@@ -50,7 +53,7 @@ $resultadoAlunos = $conn->query($sqlAlunos);
 //==================== TOTAL ASSINANTES ====================
 $sqlTotalAssinantes = "SELECT COUNT(*) AS total
                        FROM usuarios
-                       WHERE tipo_usuario='assinante'";
+                         WHERE tipo_usuario='usuario' and tipo_cadastro='assinante'";
 
 $resultadoTotalAssinantes = $conn->query($sqlTotalAssinantes);
 $totalAssinantes = $resultadoTotalAssinantes->fetch_assoc()['total'];
@@ -67,7 +70,7 @@ $sqlAssinantes = "SELECT
 						tipo_usuario,
 						img
 					FROM usuarios
-					WHERE tipo_usuario='assinante'";
+					WHERE tipo_cadastro='assinante'";
 
 
 	if (!empty($nomeAssinante)) {
@@ -155,14 +158,10 @@ $resultadoAssinantes = $conn->query($sqlAssinantes);
     </div>
 	
 			<div class="col-md-2">
-				<button type="submit" class="btn btn-primary w-100">
-						Filtrar
-				</button>
+				<button type="submit" class="btn btn-primary w-100">Filtrar</button>
 			</div>
 			<div class="col-md-2">
-				<a href="usuarios.php" class="btn btn-secondary w-100">
-						Limpar
-				</a>
+				<a href="usuarios.php" class="btn btn-secondary w-100">Limpar</a>
 			</div>
 		</form>
 		<?php renderTabelaUsuarios($resultadoAssinantes); ?>

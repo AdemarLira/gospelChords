@@ -109,7 +109,8 @@ input:checked + .slider:before {
   width: 45%;
 }
 
-.form-control {
+.form-control,
+.form-select {
   background: rgba(255, 255, 255, 0.05);
   border: 1px solid rgba(255, 255, 255, 0.2);
   backdrop-filter: blur(10px);
@@ -169,7 +170,7 @@ input:checked + .slider:before {
 }
 
 @media (max-width: 992px) {
-  #painel-navegacao .form-control {
+  #painel-navegacao .form-control .form-select{
     font-size: 0.9rem;
   }
 
@@ -366,4 +367,93 @@ input:checked + .slider:before {
 
 .dropdown-item:hover{
   background-color:rgba(231,177,29,0.5);
+}
+
+/* ==========================================
+   MODAL ENVIAR CIFRA
+========================================== */
+
+#modalEnviarCifra .modal-content{
+    border: none;
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow: 0 15px 40px rgba(0,0,0,.15);
+}
+
+#modalEnviarCifra .modal-header{
+    background: #f8f9fa;
+    border-bottom: 1px solid #e9ecef;
+    padding: 18px 25px;
+}
+
+#modalEnviarCifra .modal-title{
+    font-family: "Montserrat", sans-serif;
+    font-weight: 700;
+    color: #0d6efd;
+}
+
+#modalEnviarCifra .modal-body{
+    padding: 30px;
+}
+
+#modalEnviarCifra{
+    font-family: "Montserrat", sans-serif;
+    font-weight: 600;
+    color: #495057;
+    margin-bottom: 6px;
+}
+
+#modalEnviarCifra .form-control,
+#modalEnviarCifra .form-select{
+
+    height: 48px;
+
+    border-radius: 10px;
+
+    border: 1px solid #ced4da;
+
+    background: #fff;
+
+    color: #212529;
+
+    box-shadow: none;
+
+    transition: .2s;
+}
+
+#modalEnviarCifra .form-control:focus,
+#modalEnviarCifra .form-select:focus{
+
+    border-color: #0d6efd;
+
+    box-shadow: 0 0 0 .2rem rgba(13,110,253,.15);
+
+}
+
+#modalEnviarCifra input[type=file]{
+
+    padding: 10px;
+
+    height: auto;
+
+}
+
+#modalEnviarCifra .modal-footer{
+
+    background: #f8f9fa;
+
+    border-top: 1px solid #e9ecef;
+
+    padding: 18px 25px;
+
+}
+
+#modalEnviarCifra .modal-footer .btn{
+
+    min-width: 140px;
+
+    border-radius: 10px;
+
+    font-weight: 600;
+
 }

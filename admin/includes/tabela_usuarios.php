@@ -1,5 +1,6 @@
 <?php
 function renderTabelaUsuarios($resultado){
+	
 ?>
 
 <div class="table-responsive">

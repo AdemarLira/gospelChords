@@ -23,30 +23,31 @@ $totalCifras = $resultadoTotal->fetch_assoc()['total'];
 $sql = "
 SELECT
     cifras.id,
-    cifras.nome_musica,
+    cifras.titulo,
     cifras.autor,
     cifras.versao,
-    cifras.tipo,
+    categorias.nome AS categoria,
     cifras.arquivo,
     cifras.status,
     cifras.data_envio,
-
     usuarios.nome AS usuario
 
 FROM cifras
 
 INNER JOIN usuarios
-ON usuarios.id = cifras.id_usuario
+    ON usuarios.id = cifras.id_usuario
+
+LEFT JOIN categorias
+    ON categorias.id = cifras.id_categoria
 
 WHERE 1=1
 ";
-
 
 if(!empty($nomeMusica)){
 
     $nomeMusica = $conn->real_escape_string($nomeMusica);
 
-    $sql .= " AND nome_musica LIKE '%$nomeMusica%'";
+   $sql .= " AND cifras.titulo LIKE '%$nomeMusica%'";
 
 }
 
@@ -60,9 +61,9 @@ if(!empty($status)){
 
 if(!empty($tipo)){
 
-    $tipo = $conn->real_escape_string($tipo);
+    $tipo = (int)$tipo;
 
-    $sql .= " AND cifras.tipo='$tipo'";
+    $sql .= " AND cifras.id_categoria = $tipo";
 
 }
 
@@ -108,13 +109,13 @@ value="<?= htmlspecialchars($nomeMusica) ?>">
 
 <select name="tipo" class="form-select">
 
-<option value="">Todos os tipos</option>
+    <option value="">Todas as categorias</option>
 
-<option value="cifra">Cifra</option>
+    <option value="1">🎵 Cifra</option>
 
-<option value="tablatura">Tablatura</option>
+    <option value="2">🎸 Tablatura</option>
 
-<option value="partitura">Partitura</option>
+    <option value="3">🎼 Partitura</option>
 
 </select>
 

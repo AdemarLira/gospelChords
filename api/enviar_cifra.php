@@ -7,7 +7,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $musica = trim($_POST['nome_musica']);
     $autor = trim($_POST['autor']);
     $versao = trim($_POST['versao']);
-    $tipo = $_POST['tipo'];
+    $tom = trim($_POST['tom']);
+    $capotraste = trim($_POST['capotraste']);
+    $youtube = trim($_POST['youtube']);
+    $idCategoria = (int) $_POST['id_categoria'];
 
     $id_usuario = $_SESSION['usuario_id'];
 
@@ -35,32 +38,46 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
             $tamanho = $_FILES['arquivo']['size'];
 
-            $sql = "INSERT INTO cifras
-                    (nome_musica, autor, versao, tipo,
-                     arquivo, tipo_arquivo, tamanho_arquivo, id_usuario)
-                    VALUES (?,?,?,?,?,?,?,?)";
+          $sql = "INSERT INTO cifras (
+                    id_categoria,
+                    id_usuario,
+                    titulo,
+                    autor,
+                    versao,
+                    tom,
+                    capotraste,
+                    youtube,
+                    arquivo
+                )
+                VALUES (?,?,?,?,?,?,?,?,?)";
 
-           $stmt = mysqli_prepare($conn, $sql);
+          $stmt = mysqli_prepare($conn, $sql);
 
-            mysqli_stmt_bind_param(
+           mysqli_stmt_bind_param(
                 $stmt,
-                "ssssssii",
+                "iisssssss",
+                $idCategoria,
+                $id_usuario,
                 $musica,
                 $autor,
                 $versao,
-                $tipo,
-                $novoNome,
-                $extensao,
-                $tamanho,
-                $id_usuario
+                $tom,
+                $capotraste,
+                $youtube,
+                $novoNome
             );
 
-            if (mysqli_stmt_close($stmt)) {
+            if (mysqli_stmt_execute($stmt)) {
+
                 echo "Cifra enviada com sucesso!";
+
             } else {
-                echo "Erro ao salvar no banco.";
+
+                echo "Erro: " . mysqli_error($conn);
+
             }
 
+            mysqli_stmt_close($stmt);
         } else {
             echo "Erro ao enviar o arquivo.";
         }

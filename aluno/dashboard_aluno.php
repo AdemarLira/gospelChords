@@ -13,37 +13,11 @@ if (!isset($_SESSION['usuario_id'])) {
 
 include("includes/header_aluno.php");
 include("includes/menu_aluno.php");
+include("includes/modals.php");
 
 ?>
   
-
-  <!-- MODAL ENVIAR CIFRA -->
-<form action="../api/enviar_cifra.php" method="POST" enctype="multipart/form-data">
-
-    <input type="text" name="nome_musica" class="form-control" placeholder="Nome da música" required>
-
-    <input type="text" name="autor" class="form-control" placeholder="Autor" required>
-
-    <input type="text" name="versao" class="form-control" placeholder="Versão">
-
-    <select name="tipo" class="form-select">
-        <option value="cifra">Cifra</option>
-        <option value="tablatura">Tablatura</option>
-        <option value="partitura">Partitura</option>
-    </select>
-
-    <input
-        type="file"
-        name="arquivo"
-        accept=".doc,.docx"
-        class="form-control"
-        required>
-
-    <button class="btn btn-success">
-        Enviar
-    </button>
-
-</form>
+  
 
     <!-- ASSINATURAS -->
     <div id="assinaturas" class="container mt-4" style="display: none;">

@@ -27,7 +27,15 @@
       <button class="btn btn-outline-success"> <i class="fa-solid fa-magnifying-glass"></i></button>
     </form>
   
-    <button class="btn btn-outline-secondary me-3" data-bs-toggle="modal" data-bs-target="#modal-upload">Enviar cifra</button>
+    <button
+    class="btn btn-outline-secondary me-3"
+    data-bs-toggle="modal"
+    data-bs-target="#modalEnviarCifra">
+
+    <i class="fas fa-upload me-1"></i>
+    Enviar Cifra
+
+</button>
     <button class="btn" id="header-botao-premium" onclick="verificarPlanos()">Premium <i class="bi bi-bookmark-star-fill"></i></button>
 
       <ul class="navbar-nav align-items-center">
@@ -74,5 +82,3 @@
     </div>
   </div>
 </nav>
-</body>
-</html>
