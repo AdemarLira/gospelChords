@@ -20,51 +20,42 @@ $resultadoTotal = $conn->query($sqlTotal);
 $totalCifras = $resultadoTotal->fetch_assoc()['total'];
 
 
-$sql = "
-SELECT
-    cifras.id,
-    cifras.titulo,
-    cifras.autor,
-    cifras.versao,
-    categorias.nome AS categoria,
-    cifras.arquivo,
-    cifras.status,
-    cifras.data_envio,
-    usuarios.nome AS usuario
+	$sql = "
+		SELECT
+				cifras.id,
+				cifras.titulo,
+				cifras.autor,
+				cifras.versao,
+				categorias.nome AS categoria,
+				cifras.arquivo,
+				cifras.status,
+				cifras.data_envio,
+				usuarios.nome AS usuario
 
-FROM cifras
+		FROM cifras
 
-INNER JOIN usuarios
-    ON usuarios.id = cifras.id_usuario
+		INNER JOIN usuarios
+				ON usuarios.id = cifras.id_usuario
 
-LEFT JOIN categorias
-    ON categorias.id = cifras.id_categoria
+		LEFT JOIN categorias
+				ON categorias.id = cifras.id_categoria
 
-WHERE 1=1
-";
+		WHERE 1=1
+	";
 
 if(!empty($nomeMusica)){
-
-    $nomeMusica = $conn->real_escape_string($nomeMusica);
-
-   $sql .= " AND cifras.titulo LIKE '%$nomeMusica%'";
-
+  $nomeMusica = $conn->real_escape_string($nomeMusica);
+  $sql .= " AND cifras.titulo LIKE '%$nomeMusica%'";
 }
 
 if(!empty($status)){
-
     $status = $conn->real_escape_string($status);
-
     $sql .= " AND cifras.status='$status'";
-
 }
 
 if(!empty($tipo)){
-
     $tipo = (int)$tipo;
-
     $sql .= " AND cifras.id_categoria = $tipo";
-
 }
 
 $sql .= " ORDER BY data_envio DESC";
@@ -74,90 +65,43 @@ $resultado = $conn->query($sql);
 
 
 <div class="container-fluid mt-4">
+	<div class="card shadow">
+		<div class="card-header">
+			<h4>📄 Gerenciamento de Cifras
+				<span class="badge bg-primary"><?= $totalCifras ?></span>
+			</h4>
+		</div>
 
-<div class="card shadow">
+		<form method="GET" class="row g-2 mb-3">
+			<div class="col-md-4">
+				<input type="text" class="form-control" name="nome_musica" placeholder="Pesquisar música..." value="<?= htmlspecialchars($nomeMusica)?>">
+			</div>
 
-<div class="card-header">
+			<div class="col-md-3">
+				<select name="tipo" class="form-select">
+						<option value="">Todas as categorias</option>
+						<option value="1">🎵 Cifra</option>
+						<option value="2">🎸 Tablatura</option>
+						<option value="3">🎼 Partitura</option>
+				</select>
+			</div>
 
-<h4>
-📄 Gerenciamento de Cifras
+			<div class="col-md-3">
+				<select name="status" class="form-select">
+					<option value="">Todos</option>
+					<option value="pendente">Pendente</option>
+					<option value="aprovada">Aprovada</option>
+					<option value="rejeitada">Rejeitada</option>
+				</select>
+			</div>
 
-<span class="badge bg-primary">
+			<div class="col-md-1">
+				<button class="btn btn-primary w-100">Filtrar</button>
+			</div>
 
-<?= $totalCifras ?>
-
-</span>
-
-</h4>
-
-</div>
-
-<form method="GET" class="row g-2 mb-3">
-
-<div class="col-md-4">
-
-<input
-type="text"
-class="form-control"
-name="nome_musica"
-placeholder="Pesquisar música..."
-value="<?= htmlspecialchars($nomeMusica) ?>">
-
-</div>
-
-<div class="col-md-3">
-
-<select name="tipo" class="form-select">
-
-    <option value="">Todas as categorias</option>
-
-    <option value="1">🎵 Cifra</option>
-
-    <option value="2">🎸 Tablatura</option>
-
-    <option value="3">🎼 Partitura</option>
-
-</select>
-
-</div>
-
-<div class="col-md-3">
-
-<select name="status" class="form-select">
-
-<option value="">Todos</option>
-
-<option value="pendente">Pendente</option>
-
-<option value="aprovada">Aprovada</option>
-
-<option value="rejeitada">Rejeitada</option>
-
-</select>
-
-</div>
-
-<div class="col-md-1">
-
-<button class="btn btn-primary w-100">
-
-Filtrar
-
-</button>
-
-</div>
-
-<div class="col-md-1">
-
-<a href="cifras.php"
-class="btn btn-secondary w-100">
-
-Limpar
-
-</a>
-
-</div>
-
-</form>
+			<div class="col-md-1">
+				<a href="cifras.php" class="btn btn-secondary w-100">Limpar</a>
+			</div>
+		</form>	
 
 <?php renderTabelaCifras($resultado);

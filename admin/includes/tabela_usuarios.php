@@ -28,9 +28,7 @@ function renderTabelaUsuarios($resultado){
             ?>
 
             <tr>
-							<td>
-								<img src="<?= $foto ?>" width="45" height="45" class="rounded-circle" style="object-fit:cover;">
-							</td>
+							<td><img src="<?= $foto ?>" width="45" height="45" class="rounded-circle" style="object-fit:cover;"></td>
 							<td><?= htmlspecialchars($usuario['nome']) ?></td>
 							<td><?= htmlspecialchars($usuario['celular']) ?></td>
 							<td><?= htmlspecialchars($usuario['email']) ?></td>
@@ -59,7 +57,6 @@ function renderTabelaUsuarios($resultado){
 									?>
 							</td>
 							<td>
-
 							<!-- Botão Editar -->
 							<button
 								class="btn btn-warning btn-sm btn-editar"
@@ -75,8 +72,7 @@ function renderTabelaUsuarios($resultado){
 								data-tipo="<?= $usuario['tipo_usuario'] ?>">
 
 								<i class="fas fa-edit"></i> Editar
-
-							</button>
+								</button>
 
 							<!-- Botão Excluir -->
 							<form
@@ -85,22 +81,11 @@ function renderTabelaUsuarios($resultado){
 								style="display:inline-block"
 								onsubmit="return confirm('Deseja realmente excluir este usuário?');">
 
-								<input
-									type="hidden"
-									name="id"
-									value="<?= $usuario['id'] ?>">
-
-								<button
-									type="submit"
-									class="btn btn-danger btn-sm">
-
-									<i class="fas fa-trash"></i> Excluir
-
-								</button>
-
+								<input type="hidden" name="id" value="<?= $usuario['id'] ?>">
+								<button type="submit" class="btn btn-danger btn-sm"> <i class="fas fa-trash"></i> Excluir</button>
 							</form>
 
-						</td>
+							</td>
             </tr>
         <?php endwhile; ?>
         </tbody>
@@ -116,17 +101,17 @@ function formatarCelular($numero){
     $numero = preg_replace('/\D/', '', $numero);
 
     if(strlen($numero)==11){
-        return '('
-            .substr($numero,0,2).') '
-            .substr($numero,2,5).'-'
-            .substr($numero,7,4);
+			return '('
+				.substr($numero,0,2).') '
+				.substr($numero,2,5).'-'
+				.substr($numero,7,4);
     }
 
     if(strlen($numero)==10){
-        return '('
-            .substr($numero,0,2).') '
-            .substr($numero,2,4).'-'
-            .substr($numero,6,4);
+			return '('
+				.substr($numero,0,2).') '
+				.substr($numero,2,4).'-'
+				.substr($numero,6,4);
     }
 
     return $numero;

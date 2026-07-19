@@ -29,7 +29,7 @@ include(__DIR__ . "/includes/menu_adm.php");
 			<div class="card shadow-sm border-0">
 				<div class="card-body text-center">
 					<h5>👨‍🎓 Alunos</h5>
-					<h2><?= $totalAlunos ?></h2>
+					<h2><?=$totalAlunos?></h2>
 				</div>
 			</div>
     </div>

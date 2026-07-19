@@ -25,13 +25,9 @@ function renderTabelaCifras($resultado){
             <tr>
 
                 <td><?= htmlspecialchars($linha['titulo']) ?></td>
-
                 <td><?= htmlspecialchars($linha['autor']) ?></td>
-
                 <td><?= htmlspecialchars($linha['categoria']) ?></td>
-
                 <td><?= htmlspecialchars($linha['usuario']) ?></td>
-
                 <td>
                     <?php
                         $status = strtolower($linha['status']);
@@ -49,7 +45,6 @@ function renderTabelaCifras($resultado){
                 </td>
 
                 <td><?= date('d/m/Y', strtotime($linha['data_envio'])) ?></td>
-
                 <td>
                     <a href="../uploads/cifras/<?= urlencode($linha['arquivo']) ?>"
                        target="_blank"
@@ -59,7 +54,6 @@ function renderTabelaCifras($resultado){
                 </td>
 
                 <td>
-
                     <button class="btn btn-warning btn-sm">
                         <i class="fas fa-edit"></i> Editar
                     </button>
@@ -67,15 +61,10 @@ function renderTabelaCifras($resultado){
                     <button class="btn btn-danger btn-sm">
                         <i class="fas fa-trash"></i> Excluir
                     </button>
-
                 </td>
-
             </tr>
-
         <?php } ?>
-
         </tbody>
-
     </table>
 </div>
 

@@ -28,20 +28,26 @@
         <li class="nav-item"><a class="nav-link" href="relatorios.php">Relatórios</a></li>
         <li class="nav-item"><a class="nav-link" href="configuracoes.php">Configurações</a></li>
       </ul>
+
         <ul class="navbar-nav">
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle perfil-btn" data-bs-toggle="dropdown" href="#"> 
-              <img src="<?= htmlspecialchars($imagemPerfil); ?>" class="rounded-circle" width="40" height="40"></a>
-          <ul class="dropdown-menu dropdown-menu-end">
-            <li>
-              <a class="dropdown-item" href="meu_perfil.php">Meu Perfil</a>
+              <a class="nav-link dropdown-toggle perfil-btn" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <img src="<?= htmlspecialchars($imagemPerfil); ?>" class="rounded-circle" width="40" height="40" alt="Perfil">
+              </a>
+
+              <ul class="dropdown-menu dropdown-menu-end">
+                <li>
+                  <a class="dropdown-item" href="meu_perfil.php">Meu Perfil</a>
+                </li>
+                <li>
+                    <hr class="dropdown-divider">
+                </li>
+                <li>
+                  <a class="dropdown-item text-danger" href="../api/logout.php">Sair</a>
+                </li>
+              </ul>
           </li>
-            <li>
-              <a class="dropdown-item text-danger"href="../api/logout.php"> Sair</a>
-            </li>
-          </ul>
-        </li>
-      </ul>
+        </ul>
+      </div>
     </div>
-  </div>
 </nav>
