@@ -4,11 +4,11 @@ include_once(__DIR__ . "/../../api/conexao.php");
 
 if(session_status() === PHP_SESSION_NONE){
     session_start();
-}
+    }
 
 $imagemPerfil = !empty($_SESSION['img'])
-    ? $_SESSION['img']
-    : 'assets/img/perfil/avatar.png';
+    ? "../assets/img/perfil/" . $_SESSION['img']
+    : "../assets/img/perfil/avatar.png";
 ?>
 
 
