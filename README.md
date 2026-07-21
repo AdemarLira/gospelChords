@@ -2,7 +2,6 @@
 Plataforma de cifras para o público cristão
 
 C:.
-│   assinaturas.php
 │   cadastrar_usuario.php
 │   esqueci_senha.php
 │   index.php
@@ -11,7 +10,6 @@ C:.
 │   reset_senha.php
 │   
 ├───admin
-│   │   alunos.php
 │   │   assinaturas.php
 │   │   aulas.php
 │   │   categorias.php
@@ -20,19 +18,26 @@ C:.
 │   │   cursos.php
 │   │   dashboard_adm.php
 │   │   financeiro.php
-│   │   index.php
+│   │   editar_usuario.php
+│   │   excluir_ususario.php
 │   │   listas.php
 │   │   modulos.php
 │   │   relatorios.php
 │   │   repertorio.php
+│   │   usuarios.php
 │   │   
 │   ├───assets
-│   │       dashboard_adm1.css
-│   │       
+│   └─── css       
+│   │      dashboarrd_adm.css     
+    └─── img  
+    └─── js       
+│   │       functions_adm.js           
 │   └───includes
-│           footer.php
-│           header.php
-│           menu.php
+│           dashboard_adm_consultas.php
+│           footer_adm.php
+│           header_adm.php
+│           menu_adm.php
+│           tabela_cifras.php
 │           verifica_admin.php
 │           
 ├───api
@@ -40,7 +45,7 @@ C:.
 │   │   cadastrar_usuario.php
 │   │   conexao.php
 │   │   database.sql
-│   │   envioCifra.php
+│   │   enviar_cifra.php
 │   │   esqueci_senha.php
 │   │   login.php
 │   │   logout.php
@@ -54,20 +59,23 @@ C:.
 ├───assets
 │   ├───css
 │   │       index.css
-│   │       
+│   │       cadastro.css
+│   │       esqueci_senha.css
+│   │       planos.css
 │   └───img
-│       └───perfil
-│               6a528b99e66f1.png
-│               
+│   │    └───perfil
+│   │            6a528b99e66f1.png
+│   │   
+│   └───js
+│           cadastro.js
+│           functions.js    
 └───assinante
     │   dashboard.php
     │   
     ├───assets
-    │   ├───css
-    │   │       cadastro.css
-    │   │       dashboard1.css
-    │   │       esqueciSenha1.css
-    │   │       planos1.css
+    │   ├───css      
+    │   │       dashboard_assinante.css
+    │   │       
     │   │       
     │   ├───img
     │   │   │   logo.png
@@ -84,13 +92,15 @@ C:.
     │   │           WhatsApp Image 2026-07-09 at 12.25.24.jpeg
     │   │           
     │   ├───js
-    │   │       functions.js
-    │   │       
-    │   └───mp4
-    │           cadastrar.mp4
-    │           violao.mp4
-    │           
+    │   │       functions_assinante.js
+    │          
     └───includes
-            footer.php
-            header.php
-            menu.php -->
+    │       footer_assinante.php
+    │       header_assinante.php
+    │       menu_assinante.php 
+    │
+    └───uploads
+            footer_assinante.php
+            header_assinante.php
+            menu_assinante.php -->
+            -->
