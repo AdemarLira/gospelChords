@@ -45,7 +45,7 @@
 
       <li class="nav-item dropdown">
         <a class="perfil-btn dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-          <img src="<?php echo htmlspecialchars($imagemPerfil); ?>" class="foto-perfil" alt="Perfil">
+         <img src="<?= htmlspecialchars($imagemPerfil); ?>" class="foto-perfil" alt="Perfil">
         </a>
 
           <ul class="dropdown-menu dropdown-menu-end shadow">

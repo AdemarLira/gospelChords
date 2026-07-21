@@ -24,27 +24,18 @@ CREATE TABLE usuarios (
 
     reset_token VARCHAR(255),
     reset_expira DATETIME,
-
     ultimo_acesso DATETIME,
-
     data_cadastro TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 -- PLANOS
 CREATE TABLE planos(
-
 id INT AUTO_INCREMENT PRIMARY KEY,
-
 nome VARCHAR(100),
-
 descricao TEXT,
-
 valor DECIMAL(10,2),
-
 periodicidade ENUM('mensal','anual'),
-
 status ENUM('ativo','inativo') DEFAULT 'ativo'
-
 );
 
 -- ASSINATURAS

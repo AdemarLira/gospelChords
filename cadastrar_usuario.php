@@ -21,7 +21,7 @@ if (!$resultPlanos) {
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Criar conta | Gospel Chords</title>
-<link rel="stylesheet" href="assets/css/cadastro.css">
+<link rel="stylesheet" href="assets/css/cadastro1.css">
 <link rel="icon" type="image/x-icon" href="assets/img/logo.png">
 </head>
 
@@ -85,11 +85,9 @@ if (!$resultPlanos) {
               <div class="campo">
               <label>Escolha seu plano</label>
                 <div class="mb-3">
-                  <label class="form-label">Tipo de acesso</label>
-                    <select name="plano" class="form-select" required>
-                        <option value="">
-                            Selecione um plano
-                        </option>
+									<label class="form-label">Tipo de acesso</label>
+									<select name="plano" class="form-select" required>
+										<option value="">Selecione um plano</option>
                         <?php while($plano = mysqli_fetch_assoc($resultPlanos)): ?>
                             <option value="<?= $plano['id'] ?>">
                                 <?= htmlspecialchars($plano['nome']) ?>
@@ -114,131 +112,7 @@ if (!$resultPlanos) {
           </div>
         </div>
     </div>
-  <script src="assets/js/functions.js"></script>
-  
-  <script >
- const celular = document.getElementById("celular");
-
-    celular.addEventListener("input", function () {
-
-        let valor = this.value.replace(/\D/g, "");
-
-        if (valor.length > 11) {
-            valor = valor.substring(0, 11);
-        }s
-        if (valor.length > 10) {
-            valor = valor.replace(
-                /^(\d{2})(\d{5})(\d{4}).*/,
-                "($1) $2-$3"
-            );
-        } else if (valor.length > 6) {
-            valor = valor.replace(
-                /^(\d{2})(\d{4})(\d+).*/,
-                "($1) $2-$3"
-            );
-        } else if (valor.length > 2) {
-            valor = valor.replace(
-                /^(\d{2})(\d+)/,
-                "($1) $2"
-            );
-        } else {
-            valor = valor.replace(
-                /^(\d*)/,
-                "($1"
-            );
-        }
-        this.value = valor;
-    });
-
-    const estado = document.getElementById("estado");
-    const cidade = document.getElementById("cidade");
-    const campoCidade = document.getElementById("campo-cidade");
-   
-    document.addEventListener("DOMContentLoaded", function () {
-
-    // Carrega os estados
-    fetch("https://servicodados.ibge.gov.br/api/v1/localidades/estados")
-        .then(response => response.json())
-        .then(estados => {
-
-            estados.sort((a, b) => a.nome.localeCompare(b.nome));
-            estado.innerHTML = '<option value="">Selecione um estado</option>';
-            estados.forEach(item => {
-
-            estado.innerHTML += `
-                <option value="${item.sigla}">
-                    ${item.nome}
-                </option>`;
-            });
-          })
-
-        .catch(error => {
-            console.error("Erro ao carregar estados:", error);
-            estado.innerHTML =
-                '<option value="">Erro ao carregar os estados</option>';
-        });
-
-    // Quando escolher um estado
-    estado.addEventListener("change", function () {
-
-    const uf = this.value;
-
-    if (uf === "") {
-        campoCidade.style.display = "none";
-        cidade.innerHTML = '<option value="">Selecione uma cidade</option>';
-        return;
-    }
-
-    fetch(`https://servicodados.ibge.gov.br/api/v1/localidades/estados/${uf}/municipios`)
-        .then(response => response.json())
-        .then(cidades => {
-
-            cidade.innerHTML = '<option value="">Selecione uma cidade</option>';
-
-            cidades.forEach(item => {
-                cidade.innerHTML += `
-                    <option value="${item.nome}">
-                        ${item.nome}
-                    </option>`;
-            });
-            // Exibe o campo Cidade
-            campoCidade.style.display = "block";
-        })
-        .catch(error => {
-            console.error(error);
-        });
-    });
-  });
-
-
-const campoCelular = document.getElementById('celular');
-
-campoCelular.addEventListener('input', function(){
-
-    let valor = this.value;
-
-    // remove tudo que não for número
-    valor = valor.replace(/\D/g,'');
-		
-    // limita a 11 números
-    valor = valor.substring(0,11);
-
-    if(valor.length <= 10){
-        // telefone fixo
-        valor = valor.replace(
-            /^(\d{2})(\d{4})(\d{0,4})/,
-            '($1) $2-$3'
-        );
-    } else {
-        // celular
-        valor = valor.replace(
-            /^(\d{2})(\d{5})(\d{0,4})/,
-            '($1) $2-$3'
-        );
-    }
-    this.value = valor;
-});
-
-</script>
+  <script src="assets/js/functions.js"></script> 
+  <script src="assets/js/cadastro.js"></script>
 </body>
 </html>

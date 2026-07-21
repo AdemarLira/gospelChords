@@ -72,7 +72,7 @@ function renderTabelaUsuarios($resultado){
 								data-tipo="<?= $usuario['tipo_usuario'] ?>">
 
 								<i class="fas fa-edit"></i> Editar
-								</button>
+							</button>
 
 							<!-- Botão Excluir -->
 							<form

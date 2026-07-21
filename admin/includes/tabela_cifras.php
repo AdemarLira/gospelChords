@@ -49,7 +49,7 @@ function renderTabelaCifras($resultado){
                     <a href="../uploads/cifras/<?= urlencode($linha['arquivo']) ?>"
                        target="_blank"
                        class="btn btn-primary btn-sm">
-                        Abrir
+                        Downlaod
                     </a>
                 </td>
 
