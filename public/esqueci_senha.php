@@ -18,7 +18,7 @@
 <body>
   <div id="background">
     <video loop autoplay muted>
-      <source src="assets/mp4/violao.mp4" type="video/mp4">
+     <source src="assets/mp4/violao.mp4" type="video/mp4">
     </video>
   </div>
   
@@ -32,7 +32,7 @@
     </div>
  <!-- COLUNA DO FORMULÁRIO -->
     <div class="coluna-formulario">
-      <form class="form-login" method="POST" action="api/esqueci_senha.php">
+      <form class="form-login" method="POST" action="api/auth/esqueci_senha.php">
         <h3 class="mb-4">Atualizar senha</h3>
         
         <div class="mb-3">
@@ -47,13 +47,16 @@
     </div>
   </div>
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-  <script>
-    AOS.init({
-      once: true
-    });
-  </script>
-  <script src="assets/js/functions.js"></script>
-  <?php if(isset($_GET['status'])): ?>
+
+    <script>
+      AOS.init({
+        once: true
+      });
+    </script>
+
+    <script src="assets/js/functions.js"></script>
+
+    <?php if(isset($_GET['status'])): ?>
 
 <!-- Modal Bootstrap -->
 <div class="modal fade show" id="modalSenha" tabindex="-1" style="display:block; background:rgba(0,0,0,0.5);">

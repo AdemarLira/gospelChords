@@ -10,7 +10,7 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
-  <link href="assets/css/index1.css" rel="stylesheet">
+  <link href="assets/css/index.css" rel="stylesheet">
 </head>
 <body>
 
@@ -49,7 +49,7 @@
 
   <!-- LOGIN _______________________________________________________________________-->
   <div class="coluna-formulario">
-    <form class="form-login" action="api/login.php" method="POST">
+    <form class="form-login" action="api/auth/login.php" method="POST">
       <h3 class="mb-4">Login</h3>
       <div class="mb-3">
         <label>E-mail</label>
@@ -87,6 +87,9 @@
                       break;
                   case 'inativo':
                       echo "Conta inativa";
+                      break;
+                  case 'suspenso':
+                      echo "Conta suspensa";
                       break;
                   default:
                       echo "Erro no login";
