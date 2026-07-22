@@ -1,9 +1,8 @@
 <?php
-include("api/conexao.php");
 
-if (!isset($_GET['token']) || empty($_GET['token'])) {
-	die("Token inválido.");
-}
+require_once __DIR__ . '/../app/config/config.php';
+
+require_once __DIR__ . '/../app/views/auth/reset_senha.php';
 
 $token = $_GET['token'];
 

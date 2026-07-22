@@ -1,3 +1,10 @@
+<?php
+
+require_once __DIR__ . '/../app/config/config.php';
+
+require_once __DIR__ . '/../app/views/auth/reset_senha.php';
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -32,7 +39,7 @@
     </div>
  <!-- COLUNA DO FORMULÁRIO -->
     <div class="coluna-formulario">
-      <form class="form-login" method="POST" action="api/auth/esqueci_senha.php">
+      <form action="<?= BASE_URL ?>/api/auth/recuperar_senha.php" method="POST">
         <h3 class="mb-4">Atualizar senha</h3>
         
         <div class="mb-3">

@@ -1,114 +1,116 @@
-<?php
+<!DOCTYPE html>
+<html lang="pt-br">
 
-require 'PHPMailer/src/PHPMailer.php';
-require 'PHPMailer/src/SMTP.php';
-require 'PHPMailer/src/Exception.php';
+<head>
 
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\Exception;
+    <meta charset="UTF-8">
 
-include('conexao.php');
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
+    <title>Recuperar senha - Gospel Chords</title>
 
-    if ($_SERVER["REQUEST_METHOD"] == "POST") {
-     $email = $_POST['email'];
-     $sql = "SELECT id FROM usuarios WHERE email = ?";
-     $stmt = $conn->prepare($sql);
+    <link
+        rel="icon"
+        type="image/x-icon"
+        href="<?= BASE_URL ?>/assets/img/logo.png"
+    >
 
-      if(!$stmt){
-      die("Erro SELECT: ".$conn->error);
-      }
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+    >
 
-      $stmt->bind_param("s",$email);
-      $stmt->execute();
+    <link
+        rel="stylesheet"
+        href="<?= BASE_URL ?>/assets/css/esqueci_senha.css"
+    >
 
-      $resultado = $stmt->get_result();
+</head>
 
-      if($resultado->num_rows == 1){
+<body>
 
+<div id="background">
 
-      $usuario = $resultado->fetch_assoc();
+    <video
+        loop
+        autoplay
+        muted
+    >
 
+        <source
+            src="<?= BASE_URL ?>/assets/mp4/violao.mp4"
+            type="video/mp4"
+        >
 
+    </video>
 
-      $token = bin2hex(random_bytes(32));
+</div>
 
-      $expira = date(
-      "Y-m-d H:i:s",
-      strtotime("+1 hour")
-      );
+<div class="container vh-100 d-flex justify-content-center align-items-center">
 
-        $sqlUpdate="
-        UPDATE usuarios 
-        SET reset_token=?, reset_expira=? 
-        WHERE id=?";
+    <div
+        class="card shadow p-4"
+        style="max-width:450px;width:100%;"
+    >
 
-        $stmt2=$conn->prepare($sqlUpdate);
+        <h3 class="text-center mb-4">
+            Recuperar senha
+        </h3>
 
-        $stmt2->bind_param(
-        "ssi",
-        $token,
-        $expira,
-        $usuario['id']
-        );
+        <p class="text-muted text-center">
+            Informe seu e-mail para receber
+            o link de redefinição da senha.
+        </p>
 
-    $stmt2->execute();
+        <form
+            action="<?= BASE_URL ?>/api/auth/recuperar_senha.php"
+            method="POST"
+        >
 
-    $link="http://localhost/dashboard/projetos/gospelChords/reset_senha.php?token=".$token;
+            <div class="mb-3">
 
-      $mail = new PHPMailer(true);
+                <label
+                    for="email"
+                    class="form-label"
+                >
+                    E-mail
+                </label>
 
-        try{
+                <input
+                    type="email"
+                    class="form-control"
+                    id="email"
+                    name="email"
+                    placeholder="Digite seu e-mail"
+                    required
+                >
 
-          $mail->isSMTP();
-          $mail->Host = 'smtp-relay.brevo.com';
-          $mail->SMTPAuth = true;
+            </div>
 
-            /*força método compatível com Brevo*/
-            $mail->AuthType = 'LOGIN';
+            <button
+                type="submit"
+                class="btn btn-primary w-100"
+            >
+                Enviar link de recuperação
+            </button>
 
-            $mail->Username = 'aff885001@smtp-brevo.com';
-            $mail->Password = 'bskrNRYeFpN2sho';
+        </form>
 
-            $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-            $mail->Port = 587;
+        <div class="text-center mt-3">
 
-            $mail->setFrom('ademarliraneto@gmail.com', 'Gospel Chords');
-            $mail->addAddress($email);  
+            <a href="<?= BASE_URL ?>/index.php">
+                Voltar ao login
+            </a>
 
-            $mail->isHTML(true);
+        </div>
 
-                  $mail->Subject="Recupere sua senha da plataforma Gospel Chords de Ademar Lira";
+    </div>
 
-                  $mail->Body="
-                  <h2>Gospel Chords</h2>
+</div>
 
-                  <p>Recebemos uma solicitação para alterar sua senha.</p>
-                    <p>Clique abaixo:/p>
-                  <a href='$link'>Redefinir minha senha</a>
-                    <p>Esse link expira em 1 hora.</p>";
+</body>
 
-                $mail->send();
-
-                header(
-                "Location: ../esqueci_senha.php?status=sucesso"
-                );
-
-            exit();
-
-          }catch(Exception $e){
-
-        echo "ERRO PHPMailer: ";
-        echo $mail->ErrorInfo;
-
-        exit();
-
-        }
-      }else{
-
-      header("Location: ../esqueci_senha.php?status=nao_encontrado");
-
-      exit();
-    }
-  }
-?>
+</html>

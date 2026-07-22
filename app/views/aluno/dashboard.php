@@ -1,19 +1,8 @@
 <?php
 
-#include_once("../api/conexao.php");
-
-require_once __DIR__ . '/../../app/config/config.php';
-
-if (session_status() === PHP_SESSION_NONE) {
-    session_start();
-}
-
-
-include("includes/header_aluno.php");
-
-include("includes/menu_aluno.php");
-include("includes/modals.php");
-
+require_once __DIR__ . '/../layouts/header.php';
+require_once __DIR__ . '/../layouts/menu_aluno.php';
+require_once __DIR__ . '/../layouts/modals.php';
 ?>
   
   
@@ -56,4 +45,6 @@ include("includes/modals.php");
     </div>
   </div>
 
-<?php include(__DIR__ . "/includes/footer_aluno.php");?>
+<?php
+require_once __DIR__ . '/../layouts/footer_aluno.php';
+?>

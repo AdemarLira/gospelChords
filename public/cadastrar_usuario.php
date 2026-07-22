@@ -1,5 +1,5 @@
 <?php
-  include_once("api/conexao.php");
+  require_once __DIR__ . '/../app/config/database.php';
 
   $sqlPlanos = "SELECT id, nome FROM planos
                     WHERE status = 'ativo'

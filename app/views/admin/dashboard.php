@@ -1,12 +1,5 @@
 <?php
 
-require_once __DIR__ . '/../app/config/database.php';
-require_once '../app/middleware/Admin.php';
-require_once '../app/controllers/DashboardController.php';
-
-$controller = new DashboardController($conn);
-
-$dados = $controller->index();
 
 $totalAlunos = $dados['totalAlunos'];
 $totalAssinantes = $dados['totalAssinantes'];
@@ -17,8 +10,9 @@ $totalPartituras = $dados['totalPartituras'];
 $totalAtivos = $dados['totalAtivos'];
 $totalPendentes = $dados['totalPendentes'];
 
-require_once 'includes/header.php';
-require_once 'includes/menu.php';
+require_once __DIR__ . '/../layouts/header.php';
+require_once __DIR__ . '/../layouts/menu_adm.php';
+
 ?>
 
 <div class="container-fluid mt-4">
@@ -100,4 +94,7 @@ require_once 'includes/menu.php';
     </div>
 
 </div>
-<?php require_once 'includes/footer.php'; ?>
+<?php
+
+require_once __DIR__ . '/../layouts/footer.php';
+?>

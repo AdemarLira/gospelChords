@@ -1,7 +1,5 @@
 <?php
 
-include_once("../api/conexao.php");
-
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
@@ -10,9 +8,6 @@ if (!isset($_SESSION['usuario_id'])) {
     header("Location: index.php?erro=naoautorizado");
     exit();
 }
-
-include("includes/header_assinante.php");
-include("includes/menu_assinante.php");
 
 ?>
 <!-- ==========================
@@ -61,6 +56,3 @@ include("includes/menu_assinante.php");
       </div>
     </div>
 
-<?php
-  include("includes/footer_assinante.php");
-?> 
