@@ -1,6 +1,5 @@
 <?php
 
-
 $totalAlunos = $dados['totalAlunos'];
 $totalAssinantes = $dados['totalAssinantes'];
 $totalCursos = $dados['totalCursos'];

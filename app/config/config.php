@@ -1,3 +1,3 @@
 <?php
 
-define('BASE_URL', '/dashboard/projetos/gospelChords/public');
+define('BASE_URL', 'http://localhost:8080');

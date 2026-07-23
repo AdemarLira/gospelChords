@@ -1,0 +1,49 @@
+services:
+
+  app:
+    build:
+      context: .
+      dockerfile: docker/php/dockerfile
+
+    container_name: gospel_chords_app
+
+    depends_on:
+      db:
+        condition: service_started
+
+    ports:
+      - "8080:80"
+
+    volumes:
+      - .:/var/www/html
+
+    networks:
+      - gospelchords_network
+
+  db:
+    image: mysql:8.0
+
+    container_name: gospel_chords_db
+
+    restart: unless-stopped
+
+    environment:
+      MYSQL_DATABASE: gospel_chords
+      MYSQL_USER: gospel_user
+      MYSQL_PASSWORD: gospel_password
+      MYSQL_ROOT_PASSWORD: root
+
+    ports:
+      - "3307:3306"
+
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+    networks:
+      - gospelchords_network
+
+networks:
+  gospelchords_network:
+
+volumes:
+  mysql_data:

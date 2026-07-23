@@ -20,4 +20,4 @@ if ($_SESSION['tipo_usuario'] !== 'admin') {
     );
 
     exit();
-}
+}   

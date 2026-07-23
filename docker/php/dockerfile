@@ -1,0 +1,29 @@
+FROM php:8.2-apache
+
+# Instala dependências necessárias
+RUN apt-get update \
+    && apt-get install -y \
+        libzip-dev \
+        unzip \
+        git \
+    && docker-php-ext-install \
+        mysqli \
+        pdo \
+        pdo_mysql \
+        zip \
+    && rm -rf /var/lib/apt/lists/*
+
+# Ativa o mod_rewrite do Apache
+RUN a2enmod rewrite
+
+# Define o diretório de trabalho
+WORKDIR /var/www/html
+
+# Instala o Composer
+COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
+
+# Copia a configuração personalizada do Apache
+COPY docker/php/apache/apache.conf /etc/apache2/sites-available/000-default.conf
+
+# Inicia o Apache
+CMD ["apache2-foreground"]

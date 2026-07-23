@@ -1,15 +1,17 @@
 <?php
 
-$servidor = "localhost";
-$usuario  = "root";
-$senha    = "";
+$servidor = "db";
+$usuario  = "gospel_user";
+$senha    = "gospel_password";
 $dbName   = "gospel_chords";
+$porta    = 3306;
 
 $conn = new mysqli(
     $servidor,
     $usuario,
     $senha,
-    $dbName
+    $dbName,
+    $porta
 );
 
 if ($conn->connect_error) {
