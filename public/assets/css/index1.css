@@ -1,0 +1,642 @@
+/* =========================================================
+   CONFIGURAÇÕES GERAIS
+========================================================= */
+* {
+	box-sizing: border-box;
+}
+
+html {
+	width: 100%;
+	min-height: 100%;
+}
+
+body {
+	width: 100%;
+	min-height: 100vh;
+	margin: 0;
+	padding: 0;
+	overflow-x: hidden;
+	background-color: #0a0c0f;
+}
+
+/* =========================================================
+   BACKGROUND
+========================================================= */
+#background {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100vh;
+	z-index: -1;
+	overflow: hidden;
+	background-color: #0a0c0f;
+}
+
+#background video {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+
+/* CAMADA ESCURA SOBRE O VÍDEO */
+#background::after {
+	content: "";
+	position: absolute;
+	inset: 0;
+	background:
+			linear-gradient(109deg,
+					rgba(10, 12, 16, 0.6) 15%,
+					rgba(10, 12, 16, 0.4) 20%,
+					rgba(10, 12, 15, 0.99) 85%);
+	pointer-events: none;
+}
+
+/* =========================================================
+   HEADER / REDES SOCIAIS
+========================================================= */
+.header {
+	position: absolute;
+	top: 20px;
+	right: 30px;
+	z-index: 1000;
+}
+.navigation_social {
+	display: flex;
+	align-items: center;
+	gap: 18px;
+}
+.navigation_social a {
+	color: #fff;
+	text-decoration: none;
+	font-size: 28px;
+	transition: transform 0.3s ease, color 0.3s ease;
+}
+/* EFEITO HOVER DAS REDES SOCIAIS */
+.navigation_social a:hover {
+	color: rgba(231, 177, 29, 0.8);
+	transform: scale(1.15);
+}
+
+/* =========================================================
+   PÁGINA PRINCIPAL
+========================================================= */
+.pagina {
+	position: relative;
+	z-index: 2;
+	width: 100%;
+	min-height: 100vh;
+	padding: 100px 5% 50px;
+	display: flex;
+	align-items: center;
+}
+
+/* =========================================================
+   COLUNA DE INFORMAÇÕES
+========================================================= */
+.coluna-infos {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.main_info {
+	width: 100%;
+	max-width: 700px;
+}
+
+/* =========================================================
+   TÍTULO PRINCIPAL
+========================================================= */
+.main_info h1 {
+	color: #fff;
+	font-size: clamp(2rem, 4vw, 3.2rem);
+	line-height: 1.2;
+	margin-bottom: 25px;
+}
+
+/* =========================================================
+   TEXTOS
+========================================================= */
+.main_info p {
+	color: azure;
+	font-size: clamp(1rem, 1.5vw, 1.2rem);
+	line-height: 1.6;
+	margin: 15px 0;
+	text-align: left;
+}
+
+/* =========================================================
+   FUNCIONALIDADES
+========================================================= */
+.funcionalidades {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 15px;
+	width: 100%;
+	padding: 20px 0;
+	font-family:Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+	color: #313131;
+}
+
+/* =========================================================
+   CARDS
+========================================================= */
+.box {
+	width: 100px;
+	height: 100px;
+	background-color:rgba(187, 195, 197, 0.417);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+	border-radius: 6px;
+	opacity: 0;
+	animation: fadeIn 1.5s forwards;
+	transition: transform 0.4s ease;
+}
+/* EFEITO HOVER DOS CARDS */
+.box:hover {
+	transform: scale(1.15);
+}
+
+
+/* =========================================================
+   ANIMAÇÃO INDIVIDUAL DOS CARDS
+========================================================= */
+.box:nth-child(1) {
+	animation-delay: 0.5s;
+}
+.box:nth-child(2) {
+	animation-delay: 1s;
+}
+.box:nth-child(3) {
+	animation-delay: 1.5s;
+}
+
+/* =========================================================
+   ANIMAÇÃO FADE IN
+========================================================= */
+@keyframes fadeIn {
+    to {
+			opacity: 1;
+    }
+}
+
+/* =========================================================
+   BOTÃO CONHEÇA NOSSOS PLANOS
+========================================================= */
+.verificar-planos {
+    display: block;
+    width: auto;
+    min-width: 220px;
+    min-height: 45px;
+    padding: 10px 20px;
+    margin-top: 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: #4A89E4;
+    color: whitesmoke;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+/* HOVER DO BOTÃO */
+.verificar-planos:hover,
+.verificar-planos:focus,
+.verificar-planos:active {
+	background-color: rgba( 231, 177, 29, 0.8) !important;
+	transform: translateY(-2px);
+}
+
+
+/* =========================================================
+   FORMULÁRIO DE LOGIN
+========================================================= */
+.coluna-formulario {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+.form-login {
+	width: 100%;
+	max-width: 400px;
+	padding: 30px;
+	background:rgba(255, 255, 255, 0.1);
+	border-radius: 10px;
+	color: white;
+	backdrop-filter: blur(5px);
+	-webkit-backdrop-filter: blur(5px);
+}
+
+
+/* =========================================================
+   TÍTULO DO FORMULÁRIO
+========================================================= */
+.form-login h2,
+.form-login h3 {
+	color: #fff;
+	text-align: center;
+	margin-bottom: 25px;
+}
+
+
+/* =========================================================
+   LABELS
+========================================================= */
+.form-login label {
+	color: #fff;
+	font-weight: 500;
+}
+
+
+/* =========================================================
+   CAMPOS
+========================================================= */
+.form-login .form-control {
+	width: 100%;
+	min-height: 45px;
+}
+
+
+/* =========================================================
+   BOTÃO ENTRAR
+========================================================= */
+.form-login .btn {
+    width: 100%;
+    min-height: 45px;
+}
+
+
+/* =========================================================
+   LINKS DO FORMULÁRIO
+========================================================= */
+.form-login a {
+	color: #fff;
+	text-decoration: none;
+	transition: color 0.3s ease;
+}
+.form-login a:hover,
+.form-login a:focus {
+	color:rgba(231, 177, 29, 0.8) !important;
+}
+/* =========================================================
+   BOTÃO ENTRAR
+========================================================= */
+#botaoEntrar {
+	background-color: #4A89E4;
+	border-color: #4A89E4;
+}
+#botaoEntrar:hover,
+#botaoEntrar:focus,
+#botaoEntrar:active {
+	background-color:rgba( 231, 177, 29, 0.8) !important;
+	border-color:rgba(231, 177, 29, 0.8) !important;
+}
+
+
+/* =========================================================
+   LINKS ANTIGOS
+========================================================= */
+.links {
+	text-align: right;
+}
+
+#esqueci-senha:hover,
+#esqueci-senha:focus,
+#esqueci-senha:active,
+
+#cadastrar:hover,
+#cadastrar:focus,
+#cadastrar:active {
+    color:rgba(231, 177, 29, 0.8) !important;
+}
+
+
+/* =========================================================
+   TABLETS E TELAS INTERMEDIÁRIAS
+   Até 991.98px
+========================================================= */
+@media (max-width: 991.98px) {
+    /* -----------------------------------------------------
+       PÁGINA
+    ----------------------------------------------------- */
+    .pagina {
+			padding-top: 110px;
+			padding-bottom: 50px;
+    }
+    /* -----------------------------------------------------
+       INFORMAÇÕES
+    ----------------------------------------------------- */
+    .main_info {
+			text-align: center;
+    }
+    .main_info p {
+			text-align: center;
+    }
+    /* -----------------------------------------------------
+       FUNCIONALIDADES
+    ----------------------------------------------------- */
+    .funcionalidades {
+			justify-content: center;
+    }
+    /* -----------------------------------------------------
+       BOTÃO PLANOS
+    ----------------------------------------------------- */
+    .verificar-planos {
+			margin-left: auto;
+			margin-right: auto;
+    }
+    /* -----------------------------------------------------
+       FORMULÁRIO
+    ----------------------------------------------------- */
+    .form-login {
+			max-width: 450px;
+    }
+}
+
+
+/* =========================================================
+   CELULARES
+   Até 767.98px
+========================================================= */
+@media (max-width: 767.98px) {
+    /* -----------------------------------------------------
+       HEADER / REDES SOCIAIS
+    ----------------------------------------------------- */
+    .header {
+			position: relative;
+			top: auto;
+			right: auto;
+			width: 100%;
+			padding: 15px 20px;
+			display: flex;
+			justify-content: center;
+    }
+    .navigation_social {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			gap: 20px;
+    }
+    .navigation_social a {
+			font-size: 24px;
+    }
+    /* -----------------------------------------------------
+       PÁGINA PRINCIPAL
+    ----------------------------------------------------- */
+    .pagina {
+			width: 100%;
+			min-height: auto;
+			padding: 30px 20px 50px;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+    }
+    /* -----------------------------------------------------
+       COLUNA DE INFORMAÇÕES
+    ----------------------------------------------------- */
+    .coluna-infos {
+			width: 100%;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			text-align: center;
+    }
+    /* -----------------------------------------------------
+       CONTEÚDO PRINCIPAL
+    ----------------------------------------------------- */
+    .main_info {
+			width: 100%;
+			max-width: 500px;
+			margin: 0 auto;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			text-align: center;
+    }
+
+    /* -----------------------------------------------------
+       TÍTULO
+    ----------------------------------------------------- */
+    .main_info h1 {
+			width: 100%;
+			font-size: 2rem;
+			line-height: 1.25;
+			text-align: center;
+    }
+
+    /* -----------------------------------------------------
+       TEXTOS
+    ----------------------------------------------------- */
+    .main_info p {
+			width: 100%;
+			font-size: 1rem;
+			line-height: 1.5;
+			margin: 15px 0;
+			text-align: center;
+    }
+
+    /* -----------------------------------------------------
+       FUNCIONALIDADES / CARDS
+    ----------------------------------------------------- */
+    .funcionalidades {
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+        padding:
+            20px
+            0;
+    }
+    /* -----------------------------------------------------
+       CARDS
+    ----------------------------------------------------- */
+    .box {
+			width: 85px;
+			height: 85px;
+			font-size: 0.9rem;
+    }
+    /* Mantém o efeito dos cards */
+    .box:hover {
+			transform: scale(1.25);
+    }
+    /* -----------------------------------------------------
+       BOTÃO CONHEÇA NOSSOS PLANOS
+    ----------------------------------------------------- */
+    .verificar-planos {
+			display: block;
+			width: 100%;
+			max-width: 300px;
+			margin: 20px auto 0;
+    }
+    /* -----------------------------------------------------
+       COLUNA DO FORMULÁRIO
+    ----------------------------------------------------- */
+    .coluna-formulario {
+			width: 100%;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			text-align: center;
+    }
+    /* -----------------------------------------------------
+       FORMULÁRIO DE LOGIN
+    ----------------------------------------------------- */
+    .form-login {
+			width: 100%;
+			max-width: 400px;
+			margin:0 auto;
+			padding: 25px 20px;
+			text-align: left;
+    }
+}
+
+
+/* =========================================================
+   CELULARES PEQUENOS
+   Até 575.98px
+========================================================= */
+@media (max-width: 575.98px) {
+    /* -----------------------------------------------------
+       PÁGINA
+    ----------------------------------------------------- */
+    .pagina {
+			padding-left: 15px;
+			padding-right: 15px;
+    }
+    /* -----------------------------------------------------
+       TÍTULO
+    ----------------------------------------------------- */
+    .main_info h1 {
+			font-size: 1.8rem;
+			text-align: center;
+    }
+    /* -----------------------------------------------------
+       TEXTOS
+    ----------------------------------------------------- */
+    .main_info p {
+			font-size: 1rem;
+			text-align: center;
+    }
+    /* -----------------------------------------------------
+       FUNCIONALIDADES
+    ----------------------------------------------------- */
+    .funcionalidades {
+			gap: 8px;
+			justify-content: center;
+    }
+    /* -----------------------------------------------------
+       CARDS
+    ----------------------------------------------------- */
+    .box {
+			width: 80px;
+			height: 80px;
+			font-size: 0.85rem;
+    }
+    /* Mantém o efeito hover */
+    .box:hover {
+        transform: scale(1.2);
+    }
+    /* -----------------------------------------------------
+       BOTÃO PLANOS
+    ----------------------------------------------------- */
+    .verificar-planos {
+			width: 100%;
+			max-width: 300px;
+			margin-left: auto;
+			margin-right: auto;
+    }
+    /* -----------------------------------------------------
+       LOGIN
+    ----------------------------------------------------- */
+    .form-login {
+			width: 100%;
+			max-width: 400px;
+			padding:20px 15px;
+			margin: 0 auto;
+    }
+    /* -----------------------------------------------------
+       REDES SOCIAIS
+    ----------------------------------------------------- */
+    .navigation_social {
+			gap: 15px;
+    }
+    .navigation_social a {
+			font-size: 22px;
+    }
+}
+
+
+
+/* =========================================================
+   CELULARES MUITO PEQUENOS
+   Até 360px
+========================================================= */
+@media (max-width: 360px) {
+    /* -----------------------------------------------------
+       PÁGINA
+    ----------------------------------------------------- */
+    .pagina {
+			padding-left: 10px;
+			padding-right: 10px;
+    }
+    /* -----------------------------------------------------
+       TÍTULO
+    ----------------------------------------------------- */
+    .main_info h1 {
+			font-size: 1.6rem;
+    }
+
+    /* -----------------------------------------------------
+       TEXTOS
+    ----------------------------------------------------- */
+    .main_info p {
+			font-size: 0.95rem;
+    }
+    /* -----------------------------------------------------
+       CARDS
+    ----------------------------------------------------- */
+    .box {
+			width: 75px;
+			height: 75px;
+			font-size: 0.8rem;
+    }
+
+    .box:hover {
+			transform: scale(1.15);
+    }
+    /* -----------------------------------------------------
+       BOTÃO
+    ----------------------------------------------------- */
+    .verificar-planos {
+			width: 100%;
+			max-width: 280px;
+			font-size: 14px;
+    }
+    /* -----------------------------------------------------
+       LOGIN
+    ----------------------------------------------------- */
+    .form-login {
+			width: 100%;
+			padding:18px 12px;
+    }
+    /* -----------------------------------------------------
+       REDES SOCIAIS
+    ----------------------------------------------------- */
+    .navigation_social {
+			gap: 12px;
+    }
+
+    .navigation_social a {
+			font-size: 21px;
+    }
+}

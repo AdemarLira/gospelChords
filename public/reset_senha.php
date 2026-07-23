@@ -2,7 +2,6 @@
 
 require_once __DIR__ . '/../app/config/config.php';
 
-require_once __DIR__ . '/../app/views/auth/reset_senha.php';
 
 $token = $_GET['token'];
 

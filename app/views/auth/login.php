@@ -6,17 +6,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Gospel Chords</title>
 
-  <link rel="icon" type="image/x-icon" href="assets/img/logo.png">
+  <link rel="icon" type="image/png" href="assets/img/logo.png">
+  <link rel="shortcut icon" type="image/png" href="assets/img/logo.png">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
-  <link href="assets/css/index.css" rel="stylesheet">
+  <link href="assets/css/index1.css" rel="stylesheet">
 </head>
 <body>
 
 <!-- BACKGROUND _____________________________________________________________________________-->
 <div id="background">
-  <video loop autoplay muted>
+  <video autoplay muted loop playsinline>
     <source src="assets/mp4/violao.mp4" type="video/mp4">
   </video>
 </div>
@@ -31,44 +32,146 @@
 </div>
 
 <!-- CONTEÚDO PRINCIPAL -->
-<div class="pagina">
-  <div class="coluna-infos">
-    <div class="main_info">
-      <p style="font-size: 25pt;"><strong>Bem-vindo ao Gospel Chord!</strong></p>
-      <p>Que você possa ser abençoado e abençoar vidas.</p>
-      <p>Funcionalidades disponíveis:</p>
+<main class="container-fluid pagina">
 
-      <div class="funcionalidades">
-        <div class="box">Cifras</div>
-        <div class="box">Tablaturas</div>
-        <div class="box">Partituras</div>
-      </div>
-        <button class="verificar-planos" onclick="verificarPlanos()">Conheça nossos planos</button>
-    </div>
-  </div>
+    <div class="row w-100 align-items-center justify-content-center g-5">
 
-  <!-- LOGIN _______________________________________________________________________-->
-  <div class="coluna-formulario">
-    <form class="form-login" action="api/auth/login.php" method="POST">
-      <h3 class="mb-4">Login</h3>
-      <div class="mb-3">
-        <label>E-mail</label>
-        <input type="email" class="form-control" name="email" value="<?= isset($_GET['email']) ? htmlspecialchars($_GET['email']) : '' ?>" required>
-      </div>
-      <div class="mb-3">
-        <label>Senha</label>
-        <input type="password" class="form-control" name="senha" required>
-      </div>
-        <button type="submit" class="btn btn-primary w-100">Entrar</button>
-          <div class="text-center mt-3">
-            <a href="esqueci_senha.php">Esqueceu a senha?</a>
-          </div>
-          <div class="text-center mt-2">
-            <a href="cadastrar_usuario.php">Criar conta</a>
-          </div>
-      </form>
+        <!-- INFORMAÇÕES -->
+        <div class="col-12 col-lg-6 coluna-infos">
+
+            <section class="main_info">
+
+                <h1>
+                    Bem-vindo ao Gospel Chords!
+                </h1>
+
+                <p>
+                    Que você possa ser abençoado e abençoar vidas.
+                </p>
+
+                <p>
+                    Funcionalidades disponíveis:
+                </p>
+
+                <div class="funcionalidades">
+
+                    <div class="box">
+                        Cifras
+                    </div>
+
+                    <div class="box">
+                        Tablaturas
+                    </div>
+
+                    <div class="box">
+                        Partituras
+                    </div>
+
+                </div>
+
+                <button
+                    type="button"
+                    class="verificar-planos"
+                    onclick="verificarPlanos()">
+
+                    Conheça nossos planos
+
+                </button>
+
+            </section>
+
+        </div>
+
+
+        <!-- LOGIN -->
+        <div class="col-12 col-md-8 col-lg-5 col-xl-4 coluna-formulario">
+
+            <form
+                class="form-login"
+                action="api/auth/login.php"
+                method="POST">
+
+                <h3 class="mb-4">
+                    Login
+                </h3>
+
+
+                <div class="mb-3">
+
+                    <label
+                        for="email"
+                        class="form-label">
+
+                        E-mail
+
+                    </label>
+
+                    <input
+                        type="email"
+                        id="email"
+                        class="form-control"
+                        name="email"
+                        value="<?= isset($_GET['email']) ? htmlspecialchars($_GET['email']) : '' ?>"
+                        autocomplete="email"
+                        required>
+
+                </div>
+
+
+                <div class="mb-3">
+
+                    <label
+                        for="senha"
+                        class="form-label">
+
+                        Senha
+
+                    </label>
+
+                    <input
+                        type="password"
+                        id="senha"
+                        class="form-control"
+                        name="senha"
+                        autocomplete="current-password"
+                        required>
+
+                </div>
+
+
+                <button
+                    type="submit"
+                    class="btn btn-primary w-100">
+
+                    Entrar
+
+                </button>
+
+
+                <div class="text-center mt-3">
+
+                    <a href="esqueci_senha.php">
+                        Esqueceu a senha?
+                    </a>
+
+                </div>
+
+
+                <div class="text-center mt-2">
+
+                    <a href="cadastrar_usuario.php">
+                        Criar conta
+                    </a>
+
+                </div>
+
+            </form>
+
+        </div>
+
     </div>
-  </div>
+
+</main>
 
 <!--MODAL DE ERRO NO LOGIN________________________________________________________-->
 <div class="modal fade" id="modalErroLogin" tabindex="-1">
@@ -126,10 +229,11 @@
           <?php $email = isset($_GET['email']) ? urlencode($_GET['email']) : ''; 
                 $mensagem = urlencode(
             "Olá! Realizei meu cadastro no Gospel Chords.\nMeu e-mail é: {$email}\nGostaria de saber sobre a aprovação da minha conta.");?>
-                  <a href="https://wa.me/5583998603238?text=Olá!%20Realizei%20meu%20cadastro%20no%20Gospel%20Chords%20e%20gostaria%20de%20saber%20sobre%20a%20aprovação."
-                  target="_blank"
-                  class="btn btn-success">
-                    <i class="fab fa-whatsapp"></i> Falar no WhatsApp</a>
+                 <a href="https://wa.me/5583998603238?text=<?= $mensagem ?>"target="_blank" class="btn btn-success">
+                    <i class="fab fa-whatsapp"></i>
+                    Falar no WhatsApp
+                  </a>
+               
           <?php endif; ?>
         </div>
       </div>

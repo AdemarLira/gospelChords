@@ -2,7 +2,6 @@
 
 require_once __DIR__ . '/../app/config/config.php';
 
-require_once __DIR__ . '/../app/views/auth/reset_senha.php';
 ?>
 
 <!DOCTYPE html>
@@ -37,21 +36,33 @@ require_once __DIR__ . '/../app/views/auth/reset_senha.php';
         <a href="https://www.tiktok.com/@ademarliraneto" target="_blank"><i class="fab fa-tiktok"></i> </a>
       </div>
     </div>
+
  <!-- COLUNA DO FORMULÁRIO -->
     <div class="coluna-formulario">
-      <form action="<?= BASE_URL ?>/api/auth/recuperar_senha.php" method="POST">
-        <h3 class="mb-4">Atualizar senha</h3>
-        
-        <div class="mb-3">
-          <label for="email" class="form-label">E-mail</label>
-          <input type="email" class="form-control" name="email" placeholder="Digite seu e-mail" required>
-        </div>
+      <form 
+          class="form-recuperar-senha"
+          action="<?= BASE_URL ?>/api/auth/recuperar_senha.php" 
+          method="POST"
+      >
+          <h3 class="mb-4">Recuperar senha</h3>
 
-        <button type="submit" class="btn btn-primary w-100">
-          Enviar
-        </button>
-      </form>
-    </div>
+          <div class="mb-3">
+              <label for="email" class="form-label">E-mail</label>
+
+              <input 
+                  type="email" 
+                  class="form-control" 
+                  name="email" 
+                  id="email"
+                  placeholder="Digite seu e-mail" 
+                  required
+              >
+          </div>
+
+          <button type="submit" class="btn btn-primary w-100">Enviar</button>
+    </form>
+  </div>
+</div>
   </div>
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 
