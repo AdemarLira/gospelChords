@@ -1,13 +1,17 @@
 <?php
 
-$totalAlunos = $dados['totalAlunos'];
-$totalAssinantes = $dados['totalAssinantes'];
-$totalCursos = $dados['totalCursos'];
-$totalCifras = $dados['totalCifras'];
-$totalTablaturas = $dados['totalTablaturas'];
-$totalPartituras = $dados['totalPartituras'];
-$totalAtivos = $dados['totalAtivos'];
-$totalPendentes = $dados['totalPendentes'];
+$totalAlunos = $dados['totalAlunos'] ?? 0;
+$totalAssinantes = $dados['totalAssinantes'] ?? 0;
+$totalCursos = $dados['totalCursos'] ?? 0;
+$totalCifras = $dados['totalCifras'] ?? 0;
+$totalTablaturas = $dados['totalTablaturas'] ?? 0;
+$totalPartituras = $dados['totalPartituras'] ?? 0;
+$totalAtivos = $dados['totalAtivos'] ?? 0;
+$totalPendentes = $dados['totalPendentes'] ?? 0;
+
+require_once __DIR__ . '/../layouts/header.php';
+require_once __DIR__ . '/../layouts/menu_adm.php';
+
 
 require_once __DIR__ . '/../layouts/header.php';
 require_once __DIR__ . '/../layouts/menu_adm.php';
@@ -95,5 +99,5 @@ require_once __DIR__ . '/../layouts/menu_adm.php';
 </div>
 <?php
 
-require_once __DIR__ . '/../layouts/footer.php';
+require_once __DIR__ . '/../layouts/footer_adm.php';
 ?>

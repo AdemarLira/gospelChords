@@ -18,7 +18,7 @@
 
     <div class="collapse navbar-collapse" id="navbar">
       <ul class="navbar-nav me-auto">
-        <li class="nav-item"><a class="nav-link" href="dashboard_adm.php"> Dashboard</a></li>
+        <li class="nav-item"><a class="nav-link" href="admin.php"> Dashboard</a></li>
         <li class="nav-item"><a class="nav-link" href="usuarios.php">Usuários</a></li>
         <li class="nav-item"><a class="nav-link" href="cursos.php">Cursos</a></li>
         <li class="nav-item"><a class="nav-link" href="modulos.php">Módulos</a></li>

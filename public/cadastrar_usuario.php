@@ -83,26 +83,29 @@ if (!$resultPlanos) {
 								</div>
 
               <div class="campo">
-              <label>Escolha seu plano</label>
-                <div class="mb-3">
-									<label class="form-label">Tipo de acesso</label>
-									<select name="plano" class="form-select" required>
-										<option value="">Selecione um plano</option>
-                        <?php while($plano = mysqli_fetch_assoc($resultPlanos)): ?>
-                            <option value="<?= $plano['id'] ?>">
-                                <?= htmlspecialchars($plano['nome']) ?>
-                            </option>
-                        <?php endwhile; ?>
-                    </select>
-                </div>
+                <label for="plano">Escolha seu plano</label>
 
-                <label class="form-label">Forma de pagamento</label>
-                  <select name="forma_pagamento" class="form-select">
-										<option value="pix">Pix</option>
-										<option value="cartao">Cartão</option>
-										<option value="boleto">Boleto</option>
-                  </select>
-              </div>
+                <select name="plano" id="plano" class="form-select" required>
+                    <option value="">Selecione um plano</option>
+
+                    <?php while ($plano = mysqli_fetch_assoc($resultPlanos)): ?>
+                        <option value="<?= (int) $plano['id'] ?>">
+                            <?= htmlspecialchars($plano['nome']) ?>
+                        </option>
+                    <?php endwhile; ?>
+                </select>
+             </div>
+
+            <div class="campo">
+                <label for="forma_pagamento">Forma de pagamento</label>
+
+                <select name="forma_pagamento" id="forma_pagamento" class="form-select" required>
+                    <option value="">Selecione uma forma de pagamento</option>
+                    <option value="pix">Pix</option>
+                    <option value="cartao">Cartão</option>
+                    <option value="boleto">Boleto</option>
+                </select>
+            </div>
               
               <div class="acoes">
                 <button type="submit" class="btn-criar">Criar conta</button>

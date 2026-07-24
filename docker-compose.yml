@@ -20,6 +20,7 @@ services:
     networks:
       - gospelchords_network
 
+
   db:
     image: mysql:8.0
 
@@ -42,8 +43,31 @@ services:
     networks:
       - gospelchords_network
 
+
+  phpmyadmin:
+    image: phpmyadmin:latest
+
+    container_name: gospel_chords_phpmyadmin
+
+    restart: unless-stopped
+
+    depends_on:
+      - db
+
+    environment:
+      PMA_HOST: db
+      PMA_PORT: 3306
+
+    ports:
+      - "8081:80"
+
+    networks:
+      - gospelchords_network
+
+
 networks:
   gospelchords_network:
+
 
 volumes:
   mysql_data:

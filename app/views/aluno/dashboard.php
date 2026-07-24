@@ -1,10 +1,8 @@
 <?php
-
-require_once __DIR__ . '/../layouts/header.php';
-require_once __DIR__ . '/../layouts/menu_aluno.php';
-require_once __DIR__ . '/../layouts/modals.php';
+  require_once __DIR__ . '/../layouts/aluno/header_aluno.php';
+  require_once __DIR__ . '/../layouts/aluno/menu_aluno.php';
+  require_once __DIR__ . '/../layouts/aluno/modals.php';
 ?>
-  
   
 
     <!-- ASSINATURAS -->
@@ -46,5 +44,5 @@ require_once __DIR__ . '/../layouts/modals.php';
   </div>
 
 <?php
-require_once __DIR__ . '/../layouts/footer_aluno.php';
+require_once __DIR__ . '/../layouts/aluno/footer_aluno.php';
 ?>
