@@ -43,7 +43,7 @@
                     <hr class="dropdown-divider">
                 </li>
                 <li>
-                  <a class="dropdown-item text-danger" href="../api/logout.php">Sair</a>
+                  <a class="dropdown-item text-danger" href="/logout.php">Sair</a>
                 </li>
               </ul>
           </li>
