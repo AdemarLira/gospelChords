@@ -79,6 +79,291 @@ class AuthService
 
     /*
     |--------------------------------------------------------------------------
+    | CADASTRO DE USUÁRIO
+    |--------------------------------------------------------------------------
+    */
+
+    public function cadastrar(array $dados): array
+    {
+        try {
+
+            /*
+             * Validação básica
+             */
+
+            if (
+                empty($dados['nome']) ||
+                empty($dados['email']) ||
+                empty($dados['senha']) ||
+                empty($dados['celular']) ||
+                empty($dados['cidade']) ||
+                empty($dados['estado']) ||
+                empty($dados['plano'])
+            ) {
+                return [
+                    'sucesso' => false,
+                    'erro' => 'campos_obrigatorios'
+                ];
+            }
+
+
+            /*
+             * Validação do e-mail
+             */
+
+            if (!filter_var(
+                $dados['email'],
+                FILTER_VALIDATE_EMAIL
+            )) {
+                return [
+                    'sucesso' => false,
+                    'erro' => 'email_invalido'
+                ];
+            }
+
+
+            /*
+             * Validação da senha
+             */
+
+            if (strlen($dados['senha']) < 8) {
+                return [
+                    'sucesso' => false,
+                    'erro' => 'senha_curta'
+                ];
+            }
+
+
+            /*
+             * Verifica se o e-mail
+             * já está cadastrado
+             */
+
+            $usuarioExistente =
+                $this->usuarioModel
+                    ->buscarPorEmail(
+                        $dados['email']
+                    );
+
+            if ($usuarioExistente !== null) {
+
+                return [
+                    'sucesso' => false,
+                    'erro' => 'email_existente'
+                ];
+            }
+
+
+            /*
+             * Define o tipo de cadastro
+             *
+             * Plano 1 = Aluno
+             * Plano 2 = Assinante
+             */
+
+            $idPlano = (int) $dados['plano'];
+
+            if ($idPlano === 1) {
+
+                $tipoCadastro = 'aluno';
+
+            } elseif ($idPlano === 2) {
+
+                $tipoCadastro = 'assinante';
+
+            } else {
+
+                return [
+                    'sucesso' => false,
+                    'erro' => 'plano_invalido'
+                ];
+            }
+
+
+            /*
+             * Cria hash seguro da senha
+             */
+
+            $senhaHash = password_hash(
+                $dados['senha'],
+                PASSWORD_DEFAULT
+            );
+
+
+            /*
+             * Upload da foto
+             */
+
+            $nomeFoto = null;
+
+            if (
+                isset($dados['foto']) &&
+                $dados['foto']['error']
+                === UPLOAD_ERR_OK
+            ) {
+
+                $extensao = strtolower(
+                    pathinfo(
+                        $dados['foto']['name'],
+                        PATHINFO_EXTENSION
+                    )
+                );
+
+                $extensoesPermitidas = [
+                    'jpg',
+                    'jpeg',
+                    'png',
+                    'gif',
+                    'webp'
+                ];
+
+                if (
+                    !in_array(
+                        $extensao,
+                        $extensoesPermitidas,
+                        true
+                    )
+                ) {
+
+                    return [
+                        'sucesso' => false,
+                        'erro' => 'foto_invalida'
+                    ];
+                }
+
+
+                /*
+                 * Cria nome único
+                 */
+
+                $nomeFoto =
+                    uniqid(
+                        'perfil_',
+                        true
+                    )
+                    . '.'
+                    . $extensao;
+
+
+                /*
+                 * Diretório físico
+                 *
+                 * Projeto:
+                 *
+                 * /public/assets/img/perfil/
+                 */
+
+                $diretorio =
+                    __DIR__
+                    . '/../../public/assets/img/perfil/';
+
+
+                /*
+                 * Cria a pasta caso
+                 * ela ainda não exista
+                 */
+
+                if (!is_dir($diretorio)) {
+
+                    if (!mkdir(
+                        $diretorio,
+                        0775,
+                        true
+                    )) {
+
+                        return [
+                            'sucesso' => false,
+                            'erro' => 'diretorio_foto'
+                        ];
+                    }
+                }
+
+
+                /*
+                 * Move a foto
+                 */
+
+                $upload =
+                    move_uploaded_file(
+                        $dados['foto']['tmp_name'],
+                        $diretorio . $nomeFoto
+                    );
+
+                if (!$upload) {
+
+                    return [
+                        'sucesso' => false,
+                        'erro' => 'upload_foto'
+                    ];
+                }
+            }
+
+
+            /*
+             * Cria o usuário
+             */
+
+            $idUsuario =
+                $this->usuarioModel
+                    ->criar([
+
+                        'nome' =>
+                            $dados['nome'],
+
+                        'email' =>
+                            $dados['email'],
+
+                        'senha' =>
+                            $senhaHash,
+
+                        'celular' =>
+                            $dados['celular'],
+
+                        'cidade' =>
+                            $dados['cidade'],
+
+                        'estado' =>
+                            $dados['estado'],
+
+                        'img' =>
+                            $nomeFoto,
+
+                        'tipo_usuario' =>
+                            'usuario',
+
+                        'tipo_cadastro' =>
+                            $tipoCadastro,
+
+                        'status' =>
+                            'ativo'
+                    ]);
+
+
+            /*
+             * Cadastro realizado
+             */
+
+            return [
+                'sucesso' => true,
+                'id_usuario' => $idUsuario,
+                'id_plano' => $idPlano,
+                'tipo_cadastro' =>
+                    $tipoCadastro
+            ];
+
+
+        } catch (Exception $e) {
+
+            return [
+                'sucesso' => false,
+                'erro' => $e->getMessage()
+            ];
+        }
+    }
+
+
+    /*
+    |--------------------------------------------------------------------------
     | RECUPERAÇÃO DE SENHA
     |--------------------------------------------------------------------------
     */
@@ -104,9 +389,6 @@ class AuthService
 
         /*
          * Gera o token original.
-         *
-         * Esse token será enviado
-         * no link do e-mail.
          */
 
         $token = bin2hex(
@@ -114,8 +396,7 @@ class AuthService
         );
 
         /*
-         * Apenas o hash do token
-         * será armazenado no banco.
+         * Armazena somente o hash.
          */
 
         $tokenHash = hash(
@@ -133,15 +414,16 @@ class AuthService
         );
 
         /*
-         * Salva o token no banco.
+         * Salva o token.
          */
 
-        $salvou = $this->usuarioModel
-            ->salvarTokenRecuperacao(
-                (int) $usuario['id'],
-                $tokenHash,
-                $expira
-            );
+        $salvou =
+            $this->usuarioModel
+                ->salvarTokenRecuperacao(
+                    (int) $usuario['id'],
+                    $tokenHash,
+                    $expira
+                );
 
         if (!$salvou) {
 
@@ -152,11 +434,11 @@ class AuthService
         }
 
         /*
-         * Monta o link que será
-         * enviado para o usuário.
+         * Link de recuperação.
          */
 
-        $link = BASE_URL
+        $link =
+            BASE_URL
             . '/reset-senha.php?token='
             . urlencode($token);
 
@@ -164,12 +446,13 @@ class AuthService
          * Envia o e-mail.
          */
 
-        $enviado = $this->emailService
-            ->enviarEmailRecuperacao(
-                $usuario['email'],
-                $usuario['nome'],
-                $link
-            );
+        $enviado =
+            $this->emailService
+                ->enviarEmailRecuperacao(
+                    $usuario['email'],
+                    $usuario['nome'],
+                    $link
+                );
 
         if (!$enviado) {
 
@@ -205,8 +488,7 @@ class AuthService
         }
 
         /*
-         * Gera o hash do token recebido
-         * para comparar com o banco.
+         * Hash do token recebido.
          */
 
         $tokenHash = hash(
@@ -215,12 +497,14 @@ class AuthService
         );
 
         /*
-         * Procura o usuário pelo token
-         * e verifica se ainda está válido.
+         * Busca usuário.
          */
 
-        $usuario = $this->usuarioModel
-            ->buscarPorToken($tokenHash);
+        $usuario =
+            $this->usuarioModel
+                ->buscarPorToken(
+                    $tokenHash
+                );
 
         if ($usuario === null) {
 
@@ -231,24 +515,25 @@ class AuthService
         }
 
         /*
-         * Cria o hash da nova senha.
+         * Cria novo hash da senha.
          */
 
-        $senhaHash = password_hash(
-            $senha,
-            PASSWORD_DEFAULT
-        );
+        $senhaHash =
+            password_hash(
+                $senha,
+                PASSWORD_DEFAULT
+            );
 
         /*
-         * Atualiza a senha e invalida
-         * o token de recuperação.
+         * Atualiza senha.
          */
 
-        $atualizou = $this->usuarioModel
-            ->atualizarSenha(
-                (int) $usuario['id'],
-                $senhaHash
-            );
+        $atualizou =
+            $this->usuarioModel
+                ->atualizarSenha(
+                    (int) $usuario['id'],
+                    $senhaHash
+                );
 
         if (!$atualizou) {
 

@@ -1,12 +1,16 @@
 <?php
 
+if (!defined('BASE_URL')) {
+    require_once __DIR__ . '/../../config/config.php';
+}
+
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
 $imagemPerfil = !empty($_SESSION['img'])
-    ? BASE_URL . '/uploads/perfil/' . $_SESSION['img']
-    : BASE_URL . '/assets/img/avatar.png';
+    ? '/assets/img/perfil/' . $_SESSION['img']
+    : '/assets/img/perfil/avatar.png';
 
 ?>
 
@@ -83,7 +87,7 @@ $imagemPerfil = !empty($_SESSION['img'])
                         aria-expanded="false">
 
                         <img
-                            src="<?= htmlspecialchars($imagemPerfil); ?>"
+                            src="<?= htmlspecialchars($imagemPerfil) ?>"
                             class="foto-perfil"
                             alt="Perfil"
                         >

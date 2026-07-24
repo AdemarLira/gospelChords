@@ -39,7 +39,7 @@ if (!$resultPlanos) {
               <p>Faça parte da comunidade Gospel Chords 🎸</p>
           </div>
   
-					<form class="form-cadastro" action="api/cadastrar_usuario.php" method="POST" enctype="multipart/form-data">
+					<form class="form-cadastro" action="/cadastrar.php" method="POST" enctype="multipart/form-data">
 						<div class="campos">
 
 							<div class="campo">
