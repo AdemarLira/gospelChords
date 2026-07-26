@@ -24,6 +24,14 @@ class AuthController
             );
     }
 
+    public function cadastrar(
+        array $dados
+    ): array {
+
+        return $this->authService
+            ->cadastrar($dados);
+    }
+
     public function solicitarRecuperacao(
         string $email
     ): array {

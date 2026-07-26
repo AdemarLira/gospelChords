@@ -13,17 +13,27 @@ RUN apt-get update \
         zip \
     && rm -rf /var/lib/apt/lists/*
 
-# Ativa o mod_rewrite do Apache
+# Ativa o mod_rewrite
 RUN a2enmod rewrite
 
-# Define o diretório de trabalho
+# Define diretório de trabalho
 WORKDIR /var/www/html
 
-# Instala o Composer
+# Instala Composer
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
-# Copia a configuração personalizada do Apache
-COPY docker/php/apache/apache.conf /etc/apache2/sites-available/000-default.conf
+# Copia arquivos do Composer
+COPY composer.json composer.lock* ./
 
-# Inicia o Apache
+# Instala dependências PHP
+RUN composer install \
+    --no-interaction \
+    --prefer-dist \
+    --optimize-autoloader
+
+# Copia configuração personalizada do Apache
+COPY docker/php/apache/apache.conf \
+    /etc/apache2/sites-available/000-default.conf
+
+# Inicia Apache
 CMD ["apache2-foreground"]

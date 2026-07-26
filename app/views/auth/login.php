@@ -240,6 +240,42 @@
     </div>
   </div>
 
+  <?php if (isset($_GET['cadastro']) && $_GET['cadastro'] === 'sucesso'): ?>
+
+<div class="modal fade" id="modalCadastroSucesso" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">
+                    Cadastro realizado! 🎉
+                </h5>
+            </div>
+
+            <div class="modal-body text-center">
+                <p>
+                   Sua conta foi criada com sucesso!
+                </p>
+                <p>
+                    Agora você já pode fazer login no Gospel Chords.
+                </p>
+             </div>
+            <div class="modal-footer">
+                <button
+                    type="button"
+                    class="btn btn-primary"
+                    data-bs-dismiss="modal">
+
+                    Fazer login
+
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<?php endif; ?>
+
+
 <?php if(isset($_GET['erro'])): ?>
 
 <script>
@@ -252,6 +288,32 @@
 <?php endif; ?>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <script src="assets/js/functions.js"></script>
+<script>
 
+document.addEventListener("DOMContentLoaded", function () {
+
+    const modalCadastro =
+        document.getElementById("modalCadastroSucesso");
+
+    if (modalCadastro) {
+        const modal =
+            new bootstrap.Modal(modalCadastro);
+
+        modal.show();
+        // Remove o parâmetro cadastro=sucesso da URL
+        const url =
+            new URL(window.location.href);
+
+        url.searchParams.delete('cadastro');
+
+        window.history.replaceState(
+            {},
+            document.title,
+            url.pathname + url.search
+        );
+    }
+});
+
+</script>
 </body>
 </html>

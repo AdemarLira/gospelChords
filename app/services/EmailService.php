@@ -17,27 +17,41 @@ class EmailService
 
         try {
 
+            // ==================================================
+            // Configuração SMTP
+            // ==================================================
+
             $mail->isSMTP();
 
-            $mail->Host = 'smtp-relay.brevo.com';
+            $mail->Host =
+                $_ENV['BREVO_SMTP_HOST'];
 
             $mail->SMTPAuth = true;
 
             $mail->AuthType = 'LOGIN';
 
-            $mail->Username = 'SEU_USUARIO_SMTP';
+            $mail->Username =
+                $_ENV['BREVO_SMTP_USERNAME'];
 
-            $mail->Password = 'SUA_SENHA_SMTP';
+            $mail->Password =
+                $_ENV['BREVO_SMTP_PASSWORD'];
 
-            $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+            $mail->SMTPSecure =
+                PHPMailer::ENCRYPTION_STARTTLS;
 
-            $mail->Port = 587;
+            $mail->Port =
+                (int) $_ENV['BREVO_SMTP_PORT'];
+
+
+            // ==================================================
+            // Configuração do e-mail
+            // ==================================================
 
             $mail->CharSet = 'UTF-8';
 
             $mail->setFrom(
-                'ademarliraneto@gmail.com',
-                'Gospel Chords'
+                $_ENV['MAIL_FROM'],
+                $_ENV['MAIL_FROM_NAME']
             );
 
             $mail->addAddress(
@@ -45,14 +59,20 @@ class EmailService
                 $nome
             );
 
+
+            // ==================================================
+            // Conteúdo do e-mail
+            // ==================================================
+
             $mail->isHTML(true);
 
             $mail->Subject =
                 'Recuperação de senha - Gospel Chords';
 
+
             $mail->Body = "
                 <div style='font-family: Arial, sans-serif;'>
-                    
+
                     <h2>Gospel Chords</h2>
 
                     <p>Olá, {$nome}!</p>
@@ -68,7 +88,7 @@ class EmailService
                     </p>
 
                     <p>
-                        <a 
+                        <a
                             href='{$link}'
                             style='
                                 display:inline-block;
@@ -95,6 +115,11 @@ class EmailService
                 </div>
             ";
 
+
+            // ==================================================
+            // Versão texto
+            // ==================================================
+
             $mail->AltBody = "
                 Olá, {$nome}!
 
@@ -108,15 +133,25 @@ class EmailService
                 Este link é válido por 1 hora.
             ";
 
+
+            // ==================================================
+            // Envia o e-mail
+            // ==================================================
+
             return $mail->send();
+
 
         } catch (Exception $e) {
 
             error_log(
-                "Erro ao enviar e-mail: " . $mail->ErrorInfo
+                'Erro ao enviar e-mail: '
+                . $mail->ErrorInfo
             );
 
-            return false;
+            throw new Exception(
+                'Erro PHPMailer: '
+                . $mail->ErrorInfo
+            );
         }
     }
 }

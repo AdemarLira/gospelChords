@@ -165,11 +165,11 @@ class AuthService
 
             if ($idPlano === 1) {
 
-                $tipoCadastro = 'aluno';
+                $tipoCadastro = 'assinante';
 
             } elseif ($idPlano === 2) {
 
-                $tipoCadastro = 'assinante';
+                $tipoCadastro = 'aluno';
 
             } else {
 
@@ -335,7 +335,7 @@ class AuthService
                             $tipoCadastro,
 
                         'status' =>
-                            'ativo'
+                            'pendente'
                     ]);
 
 
