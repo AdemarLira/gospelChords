@@ -21,7 +21,7 @@ if (!$resultPlanos) {
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Criar conta | Gospel Chords</title>
-<link rel="stylesheet" href="assets/css/cadastro.css">
+<link rel="stylesheet" href="assets/css/cadastro1.css">
 <link rel="icon" type="image/x-icon" href="assets/img/logo.png">
 </head>
 

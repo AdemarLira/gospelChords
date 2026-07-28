@@ -13,7 +13,7 @@ body{
 	overflow-x:hidden;
 }
 
-/* LOGO FUNDO */
+/* LOGO FUNDO */	
 
 .background-logo{
 	position:fixed;
@@ -22,7 +22,7 @@ body{
 	transform:translate(-50%,-50%);
 	width:700px;
 	height:700px;
-	background:url("img/logo_amarela.png") center no-repeat;
+	background:url("../img/logo_amarela.png") center no-repeat;
 	background-size:contain;
 	opacity:.035;
 	z-index:0;

@@ -127,14 +127,16 @@ $imagemPerfil = !empty($_SESSION['img'])
                         </li>
 
                         <li>
-                            <a
-                                class="dropdown-item text-danger"
-                                href="../api/auth/logout.php">
+                          <li>
+                                <a
+                                    class="dropdown-item text-danger"
+                                    href="<?= BASE_URL ?>/logout.php">
 
-                                <i class="bi bi-box-arrow-right"></i>
-                                Sair
+                                    <i class="bi bi-box-arrow-right"></i>
+                                    Sair
 
-                            </a>
+                                </a>
+                            </li>
                         </li>
 
                     </ul>
