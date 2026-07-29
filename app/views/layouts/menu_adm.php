@@ -1,15 +1,14 @@
 <?php
-  if (!empty($_SESSION['img']) && file_exists("../assets/img/perfil/" . $_SESSION['img'])) {
-      $imagemPerfil = "../assets/img/perfil/" . $_SESSION['img'];
-  } else {
-      $imagemPerfil = "../assets/img/images.jpg";
-  }
+
+require_once __DIR__ . '/../../helpers/perfilHelper.php';
+
+$imagemPerfil = obterImagemPerfil();
 ?>
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <div class="container-fluid">
     <a class="navbar-brand" href="dashboard_adm.php">
-      <img src="assets/img/logo_amarela.png" height="40">
+     <img src="<?= BASE_URL ?>/assets/img/logo_amarela.png" height="40" alt="Logo Gospel Chords">
     </a>
 
     <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar">
@@ -43,7 +42,7 @@
                     <hr class="dropdown-divider">
                 </li>
                 <li>
-                  <a class="dropdown-item text-danger" href="/logout.php">Sair</a>
+                  <a class="dropdown-item text-danger" href="<?= BASE_URL ?>/logout.php">Sair</a>
                 </li>
               </ul>
           </li>

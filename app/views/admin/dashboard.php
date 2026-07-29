@@ -11,11 +11,6 @@ $totalPendentes = $dados['totalPendentes'] ?? 0;
 
 require_once __DIR__ . '/../layouts/header.php';
 require_once __DIR__ . '/../layouts/menu_adm.php';
-
-
-require_once __DIR__ . '/../layouts/header.php';
-require_once __DIR__ . '/../layouts/menu_adm.php';
-
 ?>
 
 <div class="container-fluid mt-4">
