@@ -1,113 +1,96 @@
 <?php
 
-class Dashboard
-{
+class Dashboard{
+	
     private mysqli $conn;
 
-    public function __construct(mysqli $conn)
-    {
-        $this->conn = $conn;
-    }
+    public function __construct(mysqli $conn){
+			$this->conn = $conn;
+		}
 
-    public function totalAlunos(): int
-    {
+    public function totalAlunos(): int{
         $sql = "
             SELECT COUNT(*) AS total
             FROM usuarios
-            WHERE tipo_cadastro = 'aluno'
-        ";
+            WHERE tipo_cadastro = 'aluno'";
 
         return $this->conn
             ->query($sql)
             ->fetch_assoc()['total'];
     }
 
-    public function totalAssinantes(): int
-    {
+    public function totalAssinantes(): int{
         $sql = "
             SELECT COUNT(*) AS total
             FROM usuarios
-            WHERE tipo_cadastro = 'assinante'
-        ";
+            WHERE tipo_cadastro = 'assinante'";
 
         return $this->conn
             ->query($sql)
             ->fetch_assoc()['total'];
     }
 
-    public function totalCursos(): int
-    {
+    public function totalCursos(): int{
         $sql = "
             SELECT COUNT(*) AS total
-            FROM cursos
-        ";
+            FROM cursos";
 
         return $this->conn
             ->query($sql)
             ->fetch_assoc()['total'];
     }
 
-    public function totalCifras(): int
-    {
+    public function totalCifras(): int{
         $sql = "
             SELECT COUNT(*) AS total
-            FROM cifras
-        ";
+            FROM cifras";
 
         return $this->conn
             ->query($sql)
             ->fetch_assoc()['total'];
     }
 
-    public function totalTablaturas(): int
-    {
+    public function totalTablaturas(): int{
         $sql = "
             SELECT COUNT(*) AS total
-            FROM tablaturas
-        ";
+            FROM tablaturas";
 
         return $this->conn
             ->query($sql)
             ->fetch_assoc()['total'];
     }
 
-    public function totalPartituras(): int
-    {
+    public function totalPartituras(): int{
         $sql = "
             SELECT COUNT(*) AS total
-            FROM partituras
-        ";
+            FROM partituras";
 
         return $this->conn
             ->query($sql)
             ->fetch_assoc()['total'];
     }
 
-    public function totalAtivos(): int
-    {
+    public function totalAtivos(): int{
         $sql = "
             SELECT COUNT(*) AS total
             FROM usuarios
             WHERE status = 'ativo'
-            AND tipo_usuario <> 'admin'
-        ";
+            AND tipo_usuario <> 'admin'";
 
         return $this->conn
             ->query($sql)
             ->fetch_assoc()['total'];
     }
 
-    public function totalPendentes(): int
-    {
-        $sql = "
-            SELECT COUNT(*) AS total
-            FROM usuarios
-            WHERE status = 'pendente'
-            AND tipo_usuario <> 'admin'
-        ";
+    public function totalPendentes(): int{
+			$sql = "
+					SELECT COUNT(*) AS total
+					FROM usuarios
+					WHERE status = 'pendente'
+					AND tipo_usuario <> 'admin'";
 
-        return $this->conn
-            ->query($sql)
-            ->fetch_assoc()['total'];
+			return $this->conn
+					->query($sql)
+					->fetch_assoc()['total'];
     }
 }

@@ -9,8 +9,7 @@ class AuthService
     private Usuario $usuarioModel;
     private EmailService $emailService;
 
-    public function __construct(mysqli $conn)
-    {
+    public function __construct(mysqli $conn){
         $this->usuarioModel = new Usuario($conn);
         $this->emailService = new EmailService();
     }
@@ -20,7 +19,6 @@ class AuthService
     | LOGIN
     |--------------------------------------------------------------------------
     */
-
     public function autenticar(
         string $email,
         string $senha
@@ -82,9 +80,7 @@ class AuthService
     | CADASTRO DE USUÁRIO
     |--------------------------------------------------------------------------
     */
-
-    public function cadastrar(array $dados): array
-    {
+    public function cadastrar(array $dados): array{
         try {
 
             /*
@@ -106,11 +102,9 @@ class AuthService
                 ];
             }
 
-
             /*
              * Validação do e-mail
              */
-
             if (!filter_var(
                 $dados['email'],
                 FILTER_VALIDATE_EMAIL
@@ -125,7 +119,6 @@ class AuthService
             /*
              * Validação da senha
              */
-
             if (strlen($dados['senha']) < 8) {
                 return [
                     'sucesso' => false,
@@ -133,12 +126,10 @@ class AuthService
                 ];
             }
 
-
             /*
              * Verifica se o e-mail
              * já está cadastrado
              */
-
             $usuarioExistente =
                 $this->usuarioModel
                     ->buscarPorEmail(
@@ -146,7 +137,6 @@ class AuthService
                     );
 
             if ($usuarioExistente !== null) {
-
                 return [
                     'sucesso' => false,
                     'erro' => 'email_existente'
@@ -164,31 +154,23 @@ class AuthService
             $idPlano = (int) $dados['plano'];
 
             if ($idPlano === 1) {
-
                 $tipoCadastro = 'assinante';
-
             } elseif ($idPlano === 2) {
-
                 $tipoCadastro = 'aluno';
-
             } else {
-
                 return [
                     'sucesso' => false,
                     'erro' => 'plano_invalido'
                 ];
             }
 
-
             /*
              * Cria hash seguro da senha
              */
-
             $senhaHash = password_hash(
                 $dados['senha'],
                 PASSWORD_DEFAULT
             );
-
 
             /*
              * Upload da foto
@@ -196,11 +178,7 @@ class AuthService
 
             $nomeFoto = null;
 
-            if (
-                isset($dados['foto']) &&
-                $dados['foto']['error']
-                === UPLOAD_ERR_OK
-            ) {
+            if (isset($dados['foto']) && $dados['foto']['error'] === UPLOAD_ERR_OK) {
 
                 $extensao = strtolower(
                     pathinfo(
@@ -217,25 +195,21 @@ class AuthService
                     'webp'
                 ];
 
-                if (
-                    !in_array(
+                if (!in_array(
                         $extensao,
                         $extensoesPermitidas,
                         true
                     )
                 ) {
-
                     return [
                         'sucesso' => false,
                         'erro' => 'foto_invalida'
                     ];
                 }
 
-
                 /*
                  * Cria nome único
                  */
-
                 $nomeFoto =
                     uniqid(
                         'perfil_',
@@ -244,14 +218,6 @@ class AuthService
                     . '.'
                     . $extensao;
 
-
-                /*
-                 * Diretório físico
-                 *
-                 * Projeto:
-                 *
-                 * /public/assets/img/perfil/
-                 */
 
                 $diretorio =
                     __DIR__
@@ -262,7 +228,6 @@ class AuthService
                  * Cria a pasta caso
                  * ela ainda não exista
                  */
-
                 if (!is_dir($diretorio)) {
 
                     if (!mkdir(
@@ -282,7 +247,6 @@ class AuthService
                 /*
                  * Move a foto
                  */
-
                 $upload =
                     move_uploaded_file(
                         $dados['foto']['tmp_name'],
@@ -290,7 +254,6 @@ class AuthService
                     );
 
                 if (!$upload) {
-
                     return [
                         'sucesso' => false,
                         'erro' => 'upload_foto'
@@ -302,42 +265,30 @@ class AuthService
             /*
              * Cria o usuário
              */
-
             $idUsuario =
                 $this->usuarioModel
                     ->criar([
-
                         'nome' =>
                             $dados['nome'],
-
                         'email' =>
                             $dados['email'],
-
                         'senha' =>
                             $senhaHash,
-
                         'celular' =>
                             $dados['celular'],
-
                         'cidade' =>
                             $dados['cidade'],
-
                         'estado' =>
                             $dados['estado'],
-
                         'img' =>
                             $nomeFoto,
-
                         'tipo_usuario' =>
                             'usuario',
-
                         'tipo_cadastro' =>
                             $tipoCadastro,
-
                         'status' =>
                             'pendente'
                     ]);
-
 
             /*
              * Cadastro realizado
@@ -367,10 +318,7 @@ class AuthService
     | RECUPERAÇÃO DE SENHA
     |--------------------------------------------------------------------------
     */
-
-    public function solicitarRecuperacao(
-        string $email
-    ): array {
+    public function solicitarRecuperacao(string $email): array {
 
         $usuario = $this->usuarioModel
             ->buscarPorEmail($email);
@@ -379,40 +327,31 @@ class AuthService
          * Por segurança, não informamos
          * se o e-mail existe ou não.
          */
-
         if ($usuario === null) {
-
-            return [
+          	return [
                 'sucesso' => true
             ];
         }
-
         /*
          * Gera o token original.
          */
-
         $token = bin2hex(
             random_bytes(32)
         );
-
         /*
          * Armazena somente o hash.
          */
-
         $tokenHash = hash(
             'sha256',
             $token
         );
-
         /*
          * Token válido por 1 hora.
          */
-
         $expira = date(
             'Y-m-d H:i:s',
             strtotime('+1 hour')
         );
-
         /*
          * Salva o token.
          */
@@ -426,7 +365,6 @@ class AuthService
                 );
 
         if (!$salvou) {
-
             return [
                 'sucesso' => false,
                 'erro' => 'token'
@@ -436,7 +374,6 @@ class AuthService
         /*
          * Link de recuperação.
          */
-
         $link =
             BASE_URL
             . '/reset-senha.php?token='
@@ -445,7 +382,6 @@ class AuthService
         /*
          * Envia o e-mail.
          */
-
         $enviado =
             $this->emailService
                 ->enviarEmailRecuperacao(
@@ -455,13 +391,11 @@ class AuthService
                 );
 
         if (!$enviado) {
-
             return [
                 'sucesso' => false,
                 'erro' => 'email'
             ];
         }
-
         return [
             'sucesso' => true
         ];
@@ -473,14 +407,8 @@ class AuthService
     | REDEFINIR SENHA
     |--------------------------------------------------------------------------
     */
-
-    public function redefinirSenha(
-        string $token,
-        string $senha
-    ): array {
-
+    public function redefinirSenha(string $token, string $senha): array {
         if ($token === '') {
-
             return [
                 'sucesso' => false,
                 'erro' => 'token'
@@ -490,7 +418,6 @@ class AuthService
         /*
          * Hash do token recebido.
          */
-
         $tokenHash = hash(
             'sha256',
             $token
@@ -499,7 +426,6 @@ class AuthService
         /*
          * Busca usuário.
          */
-
         $usuario =
             $this->usuarioModel
                 ->buscarPorToken(
@@ -507,7 +433,6 @@ class AuthService
                 );
 
         if ($usuario === null) {
-
             return [
                 'sucesso' => false,
                 'erro' => 'token_expirado'
@@ -517,7 +442,6 @@ class AuthService
         /*
          * Cria novo hash da senha.
          */
-
         $senhaHash =
             password_hash(
                 $senha,
@@ -527,7 +451,6 @@ class AuthService
         /*
          * Atualiza senha.
          */
-
         $atualizou =
             $this->usuarioModel
                 ->atualizarSenha(
@@ -536,7 +459,6 @@ class AuthService
                 );
 
         if (!$atualizou) {
-
             return [
                 'sucesso' => false,
                 'erro' => 'atualizacao'
@@ -554,10 +476,7 @@ class AuthService
     | CRIAR SESSÃO
     |--------------------------------------------------------------------------
     */
-
-    private function criarSessao(
-        array $usuario
-    ): void {
+    private function criarSessao(array $usuario): void {
 
         if (
             session_status()
@@ -570,19 +489,14 @@ class AuthService
 
         $_SESSION['usuario_id']
             = $usuario['id'];
-
         $_SESSION['usuario_email']
             = $usuario['email'];
-
         $_SESSION['img']
             = $usuario['img'];
-
         $_SESSION['tipo_usuario']
             = $usuario['tipo_usuario'];
-
         $_SESSION['tipo_cadastro']
             = $usuario['tipo_cadastro'];
-
         $_SESSION['id_plano']
             = $usuario['id_plano']
             ?? null;
@@ -594,68 +508,28 @@ class AuthService
     | REDIRECIONAMENTO
     |--------------------------------------------------------------------------
     */
-
-    private function obterRedirecionamento(
-        array $usuario
-    ): string {
+    private function obterRedirecionamento(array $usuario): string {
 
         /*
          * ADMIN
          */
-
-        if (
-            $usuario['tipo_usuario']
-            === 'admin'
-        ) {
-
-            return BASE_URL
-                . '/admin.php';
+        if ($usuario['tipo_usuario'] === 'admin') {
+            return BASE_URL . '/admin.php';
         }
 
 
         /*
          * USUÁRIO
          */
-
-        if (
-            $usuario['tipo_usuario']
-            === 'usuario'
-        ) {
-
-            /*
-             * ALUNO
-             */
-
-            if (
-                $usuario['tipo_cadastro']
-                === 'aluno'
-            ) {
-
-                return BASE_URL
-                    . '/aluno.php';
+        if ($usuario['tipo_usuario'] === 'usuario') {
+            if ($usuario['tipo_cadastro'] === 'aluno') {
+                return BASE_URL  . '/aluno.php';
             }
-
-
-            /*
-             * ASSINANTE
-             */
-
             if (
                 $usuario['tipo_cadastro']
                 === 'assinante'
-            ) {
-
-                return BASE_URL
-                    . '/assinante.php';
-            }
+            ) {return BASE_URL . '/assinante.php';}
         }
-
-
-        /*
-         * PLANO INVÁLIDO
-         */
-
-        return BASE_URL
-            . '/index.php?erro=plano';
+        return BASE_URL . '/index.php?erro=plano';
     }
 }

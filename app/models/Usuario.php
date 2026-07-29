@@ -1,11 +1,10 @@
 <?php
 
-class Usuario
-{
+class Usuario{
+
     private mysqli $conn;
 
-    public function __construct(mysqli $conn)
-    {
+    public function __construct(mysqli $conn){
         $this->conn = $conn;
     }
 
@@ -15,7 +14,6 @@ class Usuario
     | BUSCAR USUÁRIO POR E-MAIL
     |--------------------------------------------------------------------------
     */
-
     public function buscarPorEmail(
         string $email
     ): ?array {
@@ -43,7 +41,6 @@ class Usuario
                 ->prepare($sql);
 
         if (!$stmt) {
-
             throw new Exception(
                 "Erro ao preparar consulta de usuário: "
                 . $this->conn->error
@@ -60,14 +57,9 @@ class Usuario
         $resultado =
             $stmt->get_result();
 
-        if (
-            $resultado->num_rows
-            === 0
-        ) {
-
+        if ($resultado->num_rows === 0) {
             return null;
         }
-
         return $resultado
             ->fetch_assoc();
     }
@@ -78,7 +70,6 @@ class Usuario
     | CRIAR USUÁRIO
     |--------------------------------------------------------------------------
     */
-
     public function criar(
         array $dados
     ): int {
@@ -126,50 +117,32 @@ class Usuario
             "ssssssssss",
 
             $dados['nome'],
-
             $dados['email'],
-
             $dados['senha'],
-
             $dados['celular'],
-
             $dados['cidade'],
-
             $dados['estado'],
-
             $dados['img'],
-
             $dados['tipo_usuario'],
-
             $dados['tipo_cadastro'],
-
             $dados['status']
         );
 
-
         if (!$stmt->execute()) {
-
             /*
              * E-mail duplicado
              */
-
-            if (
-                $stmt->errno
-                === 1062
-            ) {
-
+            if ($stmt->errno === 1062) {
                 throw new Exception(
                     "Este e-mail já está cadastrado."
                 );
             }
-
 
             throw new Exception(
                 "Erro ao cadastrar usuário: "
                 . $stmt->error
             );
         }
-
 
         return $this->conn
             ->insert_id;
@@ -181,7 +154,6 @@ class Usuario
     | SALVAR TOKEN DE RECUPERAÇÃO
     |--------------------------------------------------------------------------
     */
-
     public function salvarTokenRecuperacao(
         int $idUsuario,
         string $tokenHash,
@@ -224,7 +196,6 @@ class Usuario
     | BUSCAR USUÁRIO POR TOKEN
     |--------------------------------------------------------------------------
     */
-
     public function buscarPorToken(
         string $tokenHash
     ): ?array {
@@ -261,11 +232,7 @@ class Usuario
         $resultado =
             $stmt->get_result();
 
-        if (
-            $resultado->num_rows
-            === 0
-        ) {
-
+        if ($resultado->num_rows === 0) {
             return null;
         }
 
@@ -279,7 +246,6 @@ class Usuario
     | ATUALIZAR SENHA
     |--------------------------------------------------------------------------
     */
-
     public function atualizarSenha(
         int $idUsuario,
         string $senhaHash
@@ -299,7 +265,6 @@ class Usuario
                 ->prepare($sql);
 
         if (!$stmt) {
-
             throw new Exception(
                 "Erro ao preparar atualização da senha: "
                 . $this->conn->error
@@ -345,12 +310,11 @@ class Usuario
                 . $this->conn->error
             );
         }
-
+				
         $stmt->bind_param(
             "i",
             $idUsuario
         );
-
         return $stmt->execute();
     }
 }

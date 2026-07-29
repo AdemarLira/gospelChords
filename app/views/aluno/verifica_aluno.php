@@ -3,15 +3,14 @@
 session_start();
 
 	if (!isset($_SESSION['usuario_id'])) {
-
-    header("Location: ../index.php");
+			header("Location: ../index.php");
     exit();
 	}	
 
 	if ($_SESSION['tipo_usuario'] != 'assinante') {
-        header("Location: ../index.php");
-        exit();
-    }
+				header("Location: ../index.php");
+			exit();
+		}
 
 	require_once(__DIR__ . "/../../api/conexao.php");
 
