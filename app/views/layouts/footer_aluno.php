@@ -15,8 +15,7 @@
               body.classList.add('light-mode');
           }
       });
-
-    body.classList.add('light-mode');})
+    })
 
 
     // ALTERNACIA no conteudo do body
