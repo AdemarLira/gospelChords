@@ -11,11 +11,7 @@ if (!isset($_SESSION['usuario_id'])) {
     exit();
 }
 
-if (
-    $_SESSION['tipo_usuario'] !== 'usuario'
-    ||
-    $_SESSION['tipo_cadastro'] !== 'aluno'
-) {
+if ($_SESSION['tipo_usuario'] !== 'usuario' || $_SESSION['tipo_cadastro'] !== 'aluno') {
     header(
         'Location: ' . BASE_URL . '/index.php?erro=naoautorizado'
     );

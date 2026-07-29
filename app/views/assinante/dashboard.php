@@ -1,58 +1,67 @@
 <?php
 
-if (session_status() === PHP_SESSION_NONE) {
-    session_start();
-}
-
-if (!isset($_SESSION['usuario_id'])) {
-    header("Location: index.php?erro=naoautorizado");
-    exit();
-}
+require_once __DIR__ . '/../layouts/header_assinante.php';
+require_once __DIR__ . '/../layouts/menu_assinante.php';
+require_once __DIR__ . '/../layouts/modals.php';
 
 ?>
-<!-- ==========================
-        CONTEÚDO DA PÁGINA
-=========================== -->
-
-<!-- MODAL ENVIAR CIFRA -->
-
-<div class="modal fade" id="modal-upload" tabindex="-1">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Enviar Cifra</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-          </div>
-          <div class="modal-body">
-                <!-- seus campos continuam aqui -->
-           </div>
-        </div>
-    </div>
-</div>
 
 <!-- ASSINATURAS -->
-<div id="assinaturas" class="container mt-4" style="display:none">
-  <h2 class="mb-4">Assinaturas</h2>
-    <div class="card">
-      <div class="card-body">
-        <h5>Plano Free</h5>
-        <p>Recursos disponíveis:</p>
-        <strong>R$0,00</strong>
+<div id="assinaturas" class="container mt-4" style="display: none;">
+    <h2 class="mb-4">Assinaturas</h2>
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+        <div class="col">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h5 class="card-title">
+                        Free
+                    </h5>
+                    <p class="card-text">
+                        Recursos disponíveis:
+                    </p>
+                    <p class="card-text">
+                        <small class="text-muted">
+                            R$ 0,00
+                        </small>
+                    </p>
+                </div>
+                <div class="card-footer d-flex justify-content-between"></div>
+            </div>
+        </div>
     </div>
-  </div>
 </div>
 
 <!-- LISTAS -->
-  <div id="listas-musicas" class="container mt-4" style="display:none">
-    <h2 class="txt-body">Minhas listas</h2>
-      <div class="card">
-        <div class="card-body">
-          <h5>Nome da Lista</h5>
-          <p>Autor:</p>
-          <small>
-          Versão: Simplificada
-          </small>
-        </div>
-      </div>
-    </div>
+<div id="listas-musicas" class="container mt-4" style="display: none;">
+    <h2 class="txt-body">
+        Minhas listas
+    </h2>
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+        <div class="col">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h5 class="card-title">
+                        Nome da Lista
+                    </h5>
+                    <p class="card-text">
+                        Autor:
+                    </p>
+                    <p class="card-text">
+                        <small class="text-muted">
+                            Versão: Simplificada
+                        </small>
+                    </p>
+                </div>
 
+                <div class="card-footer d-flex justify-content-between">
+                    <a href="#" class="btn btn-sm btn-outline-primary">Ver Cifras</a>
+                    <button class="btn btn-sm btn-outline-danger">Excluir</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<?php
+require_once __DIR__ . '/../layouts/footer_assinante.php';
+?>

@@ -12,16 +12,21 @@ $imagemPerfil = !empty($_SESSION['img'])
     ? '/assets/img/perfil/' . $_SESSION['img']
     : '/assets/img/perfil/avatar.png';
 
+
+$dashboard = match ($_SESSION['tipo_cadastro']) {
+    'aluno' => BASE_URL . '/aluno.php',
+    'assinante' => BASE_URL . '/assinante.php',
+    default => BASE_URL . '/admin.php',
+};
 ?>
+
 
 <nav class="navbar navbar-expand-lg custom-navbar" id="painel-navegacao">
     <div class="container-fluid">
 
-        <a class="navbar-brand" href="dashboard_aluno.php">
-            <img src="<?= BASE_URL ?>/assets/img/logo_azul.png"
-                 height="40"
-                 alt="Logo Gospel Chords">
-        </a>
+    	<a class="navbar-brand" href="<?= $dashboard ?>">
+				<img src="<?= BASE_URL ?>/assets/img/logo_azul.png" height="40" alt="Logo Gospel Chords">
+			</a>	
 
         <button class="navbar-toggler"
                 data-bs-toggle="collapse"
@@ -49,103 +54,65 @@ $imagemPerfil = !empty($_SESSION['img'])
                 </button>
             </form>
 
-            <button
-                class="btn btn-outline-secondary me-3"
-                data-bs-toggle="modal"
-                data-bs-target="#modalEnviarCifra">
-
+            <button class="btn btn-outline-secondary me-3" data-bs-toggle="modal" data-bs-target="#modalEnviarCifra">
                 <i class="fas fa-upload me-1"></i>
-                Enviar Cifra
-
+               		Enviar Cifra
             </button>
 
-            <button
-                class="btn"
-                id="header-botao-premium"
-                onclick="verificarPlanos()">
-
+            <button class="btn" id="header-botao-premium" onclick="verificarPlanos()">
                 Premium
                 <i class="bi bi-bookmark-star-fill"></i>
-
             </button>
 
             <ul class="navbar-nav align-items-center">
-
-                <li class="nav-item me-3">
-                    <a href="#" id="btn-listas" class="nav-link">
-                        Minhas listas
-                    </a>
-                </li>
+							<li class="nav-item me-3">
+									<a href="#" id="btn-listas" class="nav-link">
+											Minhas listas
+									</a>
+							</li>
 
                 <li class="nav-item dropdown">
-
-                    <a
-                        class="perfil-btn dropdown-toggle"
-                        href="#"
-                        role="button"
-                        data-bs-toggle="dropdown"
-                        aria-expanded="false">
-
-                        <img
-                            src="<?= htmlspecialchars($imagemPerfil) ?>"
-                            class="foto-perfil"
-                            alt="Perfil"
-                        >
-
-                    </a>
+									<a class="perfil-btn dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+										<img src="<?= htmlspecialchars($imagemPerfil) ?>" class="foto-perfil" alt="Perfil">
+									</a>
 
                     <ul class="dropdown-menu dropdown-menu-end shadow">
+											<li>
+												<a class="dropdown-item" href="meu_perfil.php">
+													<i class="bi bi-person"></i>
+													Meu perfil
+												</a>
+											</li>
+
+											<li>
+												<a class="dropdown-item" href="#">
+													<i class="bi bi-star"></i>
+														Minhas assinaturas
+												</a>
+											</li>
 
                         <li>
-                            <a class="dropdown-item" href="meu_perfil.php">
-                                <i class="bi bi-person"></i>
-                                Meu perfil
-                            </a>
+													<a class="dropdown-item" target="_blank" href="https://wa.me/83998603238">
+														<i class="bi bi-whatsapp"></i>
+															Pedir cifra
+													</a>
                         </li>
 
                         <li>
-                            <a class="dropdown-item" href="#">
-                                <i class="bi bi-star"></i>
-                                Minhas assinaturas
-                            </a>
-                        </li>
-
-                        <li>
-                            <a
-                                class="dropdown-item"
-                                target="_blank"
-                                href="https://wa.me/83998603238">
-
-                                <i class="bi bi-whatsapp"></i>
-                                Pedir cifra
-
-                            </a>
-                        </li>
-
-                        <li>
-                            <hr class="dropdown-divider">
+													<hr class="dropdown-divider">
                         </li>
 
                         <li>
                           <li>
-                                <a
-                                    class="dropdown-item text-danger"
-                                    href="<?= BASE_URL ?>/logout.php">
-
-                                    <i class="bi bi-box-arrow-right"></i>
-                                    Sair
-
-                                </a>
-                            </li>
+														<a class="dropdown-item text-danger" href="<?= BASE_URL ?>/logout.php">
+															<i class="bi bi-box-arrow-right"></i>
+																Sair
+														</a>
+													</li>
                         </li>
-
                     </ul>
-
                 </li>
-
             </ul>
-
         </div>
-
     </div>
 </nav>
