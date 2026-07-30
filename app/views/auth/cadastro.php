@@ -47,9 +47,16 @@ try {
     mysqli_stmt_store_result($stmt);
 
     if (mysqli_stmt_num_rows($stmt) > 0) {
-        throw new Exception("Este e-mail já está cadastrado.");
-    }
 
+        mysqli_stmt_close($stmt);
+        mysqli_rollback($conn);
+
+        header(
+            "Location: ../cadastrar_usuario.php?erro=email&email=" . urlencode($email)
+        );
+        exit;
+
+    }
     mysqli_stmt_close($stmt);
 
     // ============================

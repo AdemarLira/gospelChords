@@ -21,7 +21,8 @@ if (!$resultPlanos) {
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Criar conta | Gospel Chords</title>
-<link rel="stylesheet" href="assets/css/cadastro1.css">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/cadastro.css">
 <link rel="icon" type="image/x-icon" href="assets/img/logo.png">
 </head>
 
@@ -115,6 +116,89 @@ if (!$resultPlanos) {
           </div>
         </div>
     </div>
+
+<?php if (isset($_GET['erro']) && $_GET['erro'] === 'email_existente'): ?>
+
+<div class="modal fade" id="modalEmailExistente" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">
+                    E-mail já cadastrado
+                </h5>
+
+                <button
+                    type="button"
+                    class="btn-close"
+                    data-bs-dismiss="modal"
+                    aria-label="Fechar">
+                </button>
+
+            </div>
+
+            <div class="modal-body">
+
+                <p>
+                    Já existe uma conta cadastrada com este e-mail.
+                </p>
+
+                <p>
+                    Utilize outro endereço de e-mail ou faça login
+                    para acessar sua conta.
+                </p>
+
+            </div>
+
+            <div class="modal-footer">
+
+                <a
+                    href="index.php"
+                    class="btn btn-primary">
+
+                    Fazer login
+
+                </a>
+
+                <button
+                    type="button"
+                    class="btn btn-secondary"
+                    data-bs-dismiss="modal">
+
+                    Usar outro e-mail
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    const elementoModal =
+        document.getElementById("modalEmailExistente");
+
+    if (elementoModal) {
+
+        const modal =
+            new bootstrap.Modal(elementoModal);
+
+        modal.show();
+
+    }
+
+});
+
+</script>
+
+<?php endif; ?>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <script src="assets/js/functions.js"></script> 
   <script src="assets/js/cadastro.js"></script>
 </body>

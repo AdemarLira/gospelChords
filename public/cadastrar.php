@@ -5,10 +5,11 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
 require_once __DIR__ . '/../app/config/database.php';
+require_once __DIR__ . '/../app/config/config.php';
 require_once __DIR__ . '/../app/controllers/AuthController.php';
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-    header('Location: cadastro.php');
+    header('Location: ' . BASE_URL . '/cadastrar_usuario.php');
     exit;
 }
 
@@ -16,11 +17,8 @@ try {
 
     $dados = [
         'nome' => trim($_POST['nome'] ?? ''),
-
         'email' => trim($_POST['email'] ?? ''),
-
         'senha' => $_POST['senha'] ?? '',
-
         'celular' => preg_replace(
             '/\D/',
             '',
@@ -28,13 +26,9 @@ try {
         ),
 
         'cidade' => trim($_POST['cidade'] ?? ''),
-
         'estado' => trim($_POST['estado'] ?? ''),
-
         'plano' => $_POST['plano'] ?? '',
-
         'foto' => $_FILES['foto'] ?? null,
-
         'forma_pagamento' =>
             $_POST['forma_pagamento'] ?? ''
     ];
@@ -42,13 +36,10 @@ try {
 
     $authController = new AuthController($conn);
 
-
     $resultado =
         $authController->cadastrar($dados);
 
-
     if ($resultado['sucesso'] === true) {
-
         header(
             'Location: index.php?cadastro=sucesso'
         );
@@ -56,23 +47,18 @@ try {
         exit;
     }
 
-
     $erro = urlencode(
         $resultado['erro'] ?? 'erro_desconhecido'
     );
 
-
-    header(
-        'Location: cadastro.php?erro=' . $erro
+        header(
+        'Location: ' . BASE_URL . '/cadastrar_usuario.php?erro=' . $erro
     );
-
     exit;
-
 
 } catch (Throwable $e) {
 
     echo '<h1>Erro ao realizar cadastro</h1>';
-
     echo '<p>';
     echo htmlspecialchars(
         $e->getMessage()
