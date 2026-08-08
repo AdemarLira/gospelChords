@@ -152,11 +152,17 @@ REFERENCES modulos(id)
 -- CATEGORIAS       
 CREATE TABLE categorias(
 
-id INT AUTO_INCREMENT PRIMARY KEY,
+    id INT AUTO_INCREMENT PRIMARY KEY,
 
-nome VARCHAR(100)
+    nome VARCHAR(100)
 
-);
+    );
+
+INSERT INTO categorias (id, nome)
+    VALUES
+    (1, 'Cifra'),
+    (2, 'Tablatura'),
+    (3, 'Partitura');
 
 -- CIFRAS
 CREATE TABLE cifras(

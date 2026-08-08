@@ -1,6 +1,6 @@
 <?php
 session_start();
-include_once('conexao.php');
+require_once __DIR__ . '/../../app/config/database.php';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
